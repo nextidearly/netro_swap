@@ -58,7 +58,7 @@ const Airdrop = () => {
             </Grid>
 
             <Grid mt={2}>
-              <Typography>To join this airdrop you'll need:</Typography>
+              <Typography>To join this airdrop you will need:</Typography>
               <Typography className='label' mt={1}>
                 Wallet address:
               </Typography>
