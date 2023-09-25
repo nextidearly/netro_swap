@@ -72,7 +72,6 @@ const SwapPage = () => {
     } else {
       setBalanceError(false);
     }
-
     if (value < 0) {
       setSellBalance("");
       setBuyBalance("");
