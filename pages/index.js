@@ -22,7 +22,6 @@ import ABI from "../environment/ERC20_ABI.json";
 import Header from "../components/Header/Header";
 import SlippageModal from "../components/Slippage/SlippageModal";
 import { PROTOCOLS } from "../environment/config";
-import defaultImg from "../assets/erc20.png";
 import {
   get_protocols,
   get_router,
