@@ -387,7 +387,6 @@ const SwapPage = () => {
       (chain.id === 1 ||
         chain.id === 137 ||
         chain.id === 10 ||
-        chain.id === 7777777 ||
         chain.id === 8453 ||
         chain.id === 42161);
 
@@ -527,6 +526,7 @@ const SwapPage = () => {
                         value={buyBalance}
                         placeholder="0.0000000"
                         className="input-box"
+                        disabled={true}
                       />
                     </Grid>
                     <Grid className="balance-text">
