@@ -16,28 +16,26 @@ import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import { useSnackbar } from "notistack";
 import { useAccount, useNetwork } from "wagmi";
 import { ethers } from "ethers";
-import { setTradeFrom, setTradeTo, initTradeInfo } from "../../redux/actions";
-import TokenListModal from "../../components/TokenListModal";
-import ABI from "../../environment/ERC20_ABI.json";
-import Header from "../../components/Header/Header";
-import SlippageModal from "../../components/Slippage/SlippageModal";
-import { PROTOCOLS } from "../../environment/config";
-import "./styles.scss";
-import defaultImg from "../../assets/erc20.png";
+import { setTradeFrom, setTradeTo, initTradeInfo } from "../redux/actions";
+import TokenListModal from "../components/TokenListModal";
+import ABI from "../environment/ERC20_ABI.json";
+import Header from "../components/Header/Header";
+import SlippageModal from "../components/Slippage/SlippageModal";
+import { PROTOCOLS } from "../environment/config";
+import defaultImg from "../assets/erc20.png";
+import {
+  get_protocols,
+  get_router,
+  quote,
+  swap,
+  token_list,
+} from "@/utils/api";
 
 const SwapPage = () => {
   const dispatch = useDispatch();
   let tradeInfo = useSelector((RootState) => RootState.trade);
   const { address, isConnected } = useAccount();
   const { chain } = useNetwork();
-
-  const correctNetwork =
-    chain &&
-    (chain.id === 324 ||
-      chain.id === 42161 ||
-      chain.id === 10 ||
-      chain.id === 56 ||
-      chain.id === 8453);
 
   const { enqueueSnackbar } = useSnackbar();
   const [tokenList, setTokenList] = useState([]);
@@ -54,7 +52,6 @@ const SwapPage = () => {
   const [unknownPrice, setUnknownPrice] = useState(false);
   const [liquidityError, setLiquidityError] = useState(false);
   const [estimatedGas, setEstimatedGas] = useState(0);
-  const [router, setRouter] = useState(null);
   const [loading, setLoading] = useState(false);
   const [txData, setTxData] = useState(null);
   const [loadingTx, setLoadingTx] = useState(false);
@@ -62,6 +59,8 @@ const SwapPage = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [pathResults, setPathResults] = useState(null);
   const [protocols, setProtocols] = useState([]);
+  const [correctNetwork, setCorrectNetwork] = useState(false);
+  const [router, setRouter] = useState(null);
 
   const showModal = (key) => {
     setModalKey(key);
@@ -109,10 +108,15 @@ const SwapPage = () => {
 
   const getRouter = async () => {
     if (!chain) return;
-    const API_URL = `https://api.1inch.io/v5.0/${chain.id}/approve/spender`;
-    const response = await fetch(API_URL);
-    const { address } = await response.json();
-    setRouter(address);
+    const response = await get_router(chain.id);
+    if (response.status !== 429) {
+      const { address } = await response.json();
+      setRouter(address);
+    } else {
+      setTimeout(() => {
+        getRouter();
+      }, 100);
+    }
   };
 
   const getQuote = async () => {
@@ -127,85 +131,99 @@ const SwapPage = () => {
       tradeInfo.from.decimals
     );
 
-    const quoteAPI = `https://api.1inch.io/v5.0/${chain.id}/swap?fromTokenAddress=${fromTokenAddress}&toTokenAddress=${toTokenAddress}&amount=${amount}&fromAddress=${address}&slippage=1`;
+    const response = await swap(
+      fromTokenAddress,
+      toTokenAddress,
+      amount,
+      chain.id,
+      address
+    );
 
-    const response = await fetch(quoteAPI);
-    const quoteData = await response.json();
-    setLoading(false);
-    if (quoteData.statusCode === 400) {
-      setErrorMsg(quoteData.description);
-      if (quoteData.meta && quoteData.meta[1].type === "allowance")
-        setallowanceError(true);
-      // setLiquidityError(true)
-      // setUnknownPrice(true)
-      setBuyBalance(0);
-      setEstimatedGas(0);
+    if (response.status === 429) {
+      getQuote();
     } else {
-      setLiquidityError(false);
-      setUnknownPrice(false);
-      const toTokenAmount = ethers.utils.formatUnits(
-        quoteData.toTokenAmount,
-        quoteData.toToken.decimals
-      );
-      setTxData(quoteData.tx);
-      setBuyBalance(toTokenAmount);
-      setEstimatedGas(quoteData.tx.gas);
+      const quoteData = await response.json();
+      setLoading(false);
+      if (quoteData.statusCode === 400) {
+        setErrorMsg(quoteData.description);
+        if (quoteData.meta && quoteData?.meta[1]?.type === "allowance")
+          setallowanceError(true);
+        setBuyBalance(0);
+        setEstimatedGas(0);
+      } else {
+        setLiquidityError(false);
+        setUnknownPrice(false);
+        const toTokenAmount = ethers.utils.formatUnits(
+          quoteData.toAmount,
+          quoteData.toToken.decimals
+        );
+        setTxData(quoteData.tx);
+        setBuyBalance(toTokenAmount);
+        setEstimatedGas(quoteData.tx.gas);
+      }
     }
-    // https://api.1inch.io/v5.0/1/quote?
-    // const pathAPI = `https://pathfinder.1inch.io/v1.4/chain/${
-    const pathAPI = `https://api.1inch.io/v5.0/${chain.id}/quote?fromTokenAddress=${fromTokenAddress}&toTokenAddress=${toTokenAddress}&amount=${amount}`;
 
-    // const pathAPIv2 = `https://api.dexscreener.com/latest/dex/tokens/${fromTokenAddress},${toTokenAddress}`;
-    const pathResponse = await fetch(pathAPI);
-    const pathResults = await pathResponse.json();
-    console.log("pathResults: ");
-    console.log(pathResults);
-    const bestProtocol = protocols.filter(
-      (protocol) => protocol.id === pathResults.protocols[0][0][0].name
-    );
-    let paths = [];
-    if (bestProtocol.length > 0) {
-      const pathResult = {
-        id: bestProtocol[0].id,
-        img: bestProtocol[0].img,
-        img_color: bestProtocol[0].img_color,
-        title: bestProtocol[0].title,
-        toTokenAmount: pathResults.toTokenAmount,
-      };
-      paths.push(pathResult);
-    }
-    const res = await fetch(
-      `https://api.llama.fi/overview/dexs/${
-        PROTOCOLS[chain ? chain.id : tradeInfo.chainId]
-      }`
-    );
-    const result = await res.json();
-    const dexList = result.protocols.sort((a, b) => {
-      return a.change_1d - b.change_1d;
-    });
-    dexList.slice(0, 3).forEach((element, index) => {
-      console.log(element);
-      const pathResult = {
-        id: element.defillamaId,
-        img: element.logo,
-        img_color: "red",
-        title: element.displayName,
-        toTokenAmount: pathResults.toTokenAmount,
-      };
-      paths.push(pathResult);
-    });
-    setPathResults(paths);
+    setTimeout(async () => {
+      const pathResponse = await quote(
+        fromTokenAddress,
+        toTokenAddress,
+        amount,
+        chain.id
+      );
+
+      if (!pathResponse.ok) return;
+
+      const pathResults = await pathResponse.json();
+
+      const bestProtocol = protocols.filter(
+        (protocol) => protocol.id === pathResults.protocols[0][0][0].name
+      );
+      let paths = [];
+      if (bestProtocol.length > 0) {
+        const pathResult = {
+          id: bestProtocol[0].id,
+          img: bestProtocol[0].img,
+          img_color: bestProtocol[0].img_color,
+          title: bestProtocol[0].title,
+          toTokenAmount: pathResults.toAmount,
+        };
+        paths.push(pathResult);
+      }
+      const res = await fetch(
+        `https://api.llama.fi/overview/dexs/${
+          PROTOCOLS[chain ? chain.id : tradeInfo.chainId]
+        }`
+      );
+      const result = await res.json();
+      const dexList = result.protocols.sort((a, b) => {
+        return a.change_1d - b.change_1d;
+      });
+      dexList.slice(0, 3).forEach((element, index) => {
+        const pathResult = {
+          id: element.defillamaId,
+          img: element.logo,
+          img_color: "red",
+          title: element.displayName,
+          toTokenAmount: pathResults.toAmount,
+        };
+        paths.push(pathResult);
+      });
+      setPathResults(paths);
+    }, 500);
   };
 
   const getProtocols = async () => {
-    const protocolAPI = `https://api.1inch.io/v5.0/${chain.id}/liquidity-sources`;
-    const protocolResponse = await fetch(protocolAPI);
-    const protocolList = await protocolResponse.json();
-    setProtocols(protocolList.protocols);
+    const protocolResponse = await get_protocols(chain.id);
+    if (protocolResponse.status !== 429) {
+      const protocolList = await protocolResponse.json();
+      setProtocols(protocolList.protocols);
+    }
   };
+
   const addDefaultImg = (e) => {
-    e.target.src = defaultImg;
+    e.target.src = "/default.png";
   };
+
   const getBalance = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const balance = await provider.getBalance(address);
@@ -219,7 +237,6 @@ const SwapPage = () => {
     if (
       tradeInfo.from.address !== "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
     ) {
-      console.log(tradeInfo.from.address);
       const contractFrom = new ethers.Contract(
         tradeInfo.from.address,
         ABI,
@@ -330,23 +347,18 @@ const SwapPage = () => {
       setLoadingTx(false);
     }
   };
-  // get token list by chainId from 1inch
-  const getTokenList = async (chainId) => {
-    console.log('running')
-    const API_URL = `https://api.1inch.dev/token/v1.2/8453?provider=1inch&country=US`;
-    const response = await fetch(API_URL, {
-      headers: {
-        accept: "application/json",
-        Authorization: "Bearer P58AYYSXh1rkbluNFDCOQpVzBoRowEyU",
-      },
-    });
-    const { tokens } = await response.json();
-    setTokenList(tokens);
-  };
 
-  useEffect(() => {
-    getProtocols();
-  }, []);
+  const getTokenList = async (chainId) => {
+    const res = await token_list(chainId);
+    if (res.status !== 429) {
+      const response = await res.json();
+      setTokenList(response.tokens);
+    } else {
+      setTimeout(() => {
+        getTokenList(chainId);
+      }, 100);
+    }
+  };
 
   useEffect(() => {
     if (correctNetwork) {
@@ -372,23 +384,40 @@ const SwapPage = () => {
   }, [balanceFrom]);
 
   useEffect(() => {
-    if (correctNetwork) {
-      // initTradeState(chain.id);
-      getTokenList(chain.id);
-      // setpairResult([]);
-      // setBalanceFrom(0);
-      // setBalanceTo(0);
-      // setBalance(0);
-      // setSellBalance("");
-      // setBuyBalance("");
+    const network =
+      chain &&
+      (chain.id === 1 ||
+        chain.id === 137 ||
+        chain.id === 10 ||
+        chain.id === 7777777 ||
+        chain.id === 8453 ||
+        chain.id === 42161);
+
+    if (network) {
+      getProtocols();
+      setTimeout(() => {
+        getRouter(chain.id);
+      }, 100);
+      setTimeout(() => {
+        getTokenList(chain.id);
+      }, 300);
+      setCorrectNetwork(network);
+      initTradeState(chain.id);
+      setpairResult([]);
+      setBalanceFrom(0);
+      setBalanceTo(0);
+      setBalance(0);
+      setSellBalance("");
+      setBuyBalance("");
+    } else {
+      setCorrectNetwork(false);
     }
-    // getRouter();
   }, [chain]);
 
   const initTradeState = (chainID) => {
     dispatch(initTradeInfo(chainID));
   };
-  console.log(pathResults);
+
   return (
     <>
       <Grid className={modalOpen || slippageModalOpen ? "blur-background" : ""}>
@@ -469,6 +498,7 @@ const SwapPage = () => {
                     <SwapCallsOutlinedIcon onClick={changeOrder} />
                   </div>
                 </Grid>
+
                 <Grid item>
                   <Box className="token-box">
                     <Grid container alignItems={"center"}>
@@ -499,7 +529,6 @@ const SwapPage = () => {
                         value={buyBalance}
                         placeholder="0.0000000"
                         className="input-box"
-                        disabled={!correctNetwork}
                       />
                     </Grid>
                     <Grid className="balance-text">
@@ -527,7 +556,7 @@ const SwapPage = () => {
                   )}
                   {errorMsg && (
                     <Typography className="unknown-price" textAlign={"right"}>
-                      errorMsg <WarningAmberIcon></WarningAmberIcon>
+                      {errorMsg} <WarningAmberIcon></WarningAmberIcon>
                     </Typography>
                   )}
                   <Typography className="exchange-rate" textAlign={"right"}>
@@ -588,16 +617,22 @@ const SwapPage = () => {
                               )}
                             </>
                           ) : (
-                            <Button variant="contained" disabled fullWidth>
-                              Connect Wallet
-                            </Button>
+                            <>
+                              <Button
+                                variant="contained"
+                                fullWidth
+                                disabled={true}
+                              >
+                                SWAP
+                              </Button>
+                            </>
                           )}
                         </>
                       )}
                     </>
                   )}
                 </Grid>
-                {pathResults && pathResults.length > 0 ? (
+                {pathResults && pathResults.length > 0 && tradeInfo.to && (
                   <Grid className="exchanges">
                     <Typography variant="h6">Exchanges:</Typography>
 
@@ -627,18 +662,22 @@ const SwapPage = () => {
                               {element.title}
                             </td>
                             <td>
-                              {(
-                                Number(
-                                  ethers.utils
-                                    .formatUnits(
-                                      element.toTokenAmount,
-                                      tradeInfo.to.decimals
-                                    )
-                                    .toString()
-                                ) /
-                                  Number(sellBalance) -
-                                (index * 0.1 + index * 0.01)
-                              ).toFixed(4)}
+                              {tradeInfo?.to?.decimals && element && (
+                                <>
+                                  {(
+                                    Number(
+                                      ethers.utils
+                                        .formatUnits(
+                                          element?.toTokenAmount,
+                                          tradeInfo?.to?.decimals
+                                        )
+                                        .toString()
+                                    ) /
+                                      Number(sellBalance) -
+                                    (index * 0.1 + index * 0.01)
+                                  ).toFixed(4)}
+                                </>
+                              )}
                             </td>
                             <td>
                               {index === 0 ? (
@@ -654,8 +693,6 @@ const SwapPage = () => {
                       </tbody>
                     </table>
                   </Grid>
-                ) : (
-                  <></>
                 )}
               </Grid>
             </Grid>

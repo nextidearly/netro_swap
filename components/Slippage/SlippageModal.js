@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Typography, Box, Modal, InputBase, Grid } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
-import './styles.scss'
 
 const SlippageModal = (props) => {
   const { modalOpen, closeModal } = props

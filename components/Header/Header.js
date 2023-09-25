@@ -9,15 +9,15 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import { Link, useLocation } from "react-router-dom";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
-import { setWallet } from "../../redux/actions";
-import LogoImage from "../../assets/logo.png";
-import "./styles.scss";
+import { setWallet } from "./../../redux/actions";
+import Link from "next/link";
+import { useRouter } from 'next/router'
 
 const Header = () => {
   const dispatch = useDispatch();
+  const router = useRouter()
   const [anchorEl1, setAnchorEl1] = React.useState(null);
   const { address, isConnected } = useAccount();
 
@@ -27,7 +27,6 @@ const Header = () => {
   }, [isConnected]);
 
   const mobileMenuOpen = Boolean(anchorEl1);
-  const location = useLocation();
   const matches = useMediaQuery("(min-width: 901px )");
 
   return (
@@ -35,7 +34,7 @@ const Header = () => {
       <Container maxWidth={"fixed"}>
         <Grid container className='header' alignItems='center'>
           <Grid xs={2} sm={2} md={4} item>
-            <img src={LogoImage} alt='Netro logo' className='site-logo' />
+            <img src='/logo.png' alt='Netro logo' className='site-logo' />
           </Grid>
           <Grid
             xs={4}
@@ -46,9 +45,9 @@ const Header = () => {
             <Grid container justifyContent={"center"}>
               <Grid className='nav-group'>
                 <Link
-                  to={"/swap"}
+                  href={"/"}
                   className={
-                    location.pathname === "/swap"
+                    router.pathname === "/"
                       ? "nav-link active"
                       : "nav-link"
                   }
@@ -56,9 +55,9 @@ const Header = () => {
                   Swap
                 </Link>
                 <Link
-                  to={"/stats"}
+                  href={"/stats"}
                   className={
-                    location.pathname === "/stats"
+                    router.pathname === "/stats"
                       ? "nav-link active"
                       : "nav-link"
                   }
@@ -66,9 +65,9 @@ const Header = () => {
                   Stats
                 </Link>
                 <Link
-                  to={"/donate"}
+                  href={"/donate"}
                   className={
-                    location.pathname === "/donate"
+                    router.pathname === "/donate"
                       ? "nav-link active"
                       : "nav-link"
                   }
@@ -76,9 +75,9 @@ const Header = () => {
                   Donate
                 </Link>
                 {/* <Link
-                  to={"/farm"}
+                  href={"/farm"}
                   className={
-                    location.pathname === "/farm"
+                    router.pathname === "/farm"
                       ? "nav-link active"
                       : "nav-link"
                   }
@@ -86,9 +85,9 @@ const Header = () => {
                   Farm
                 </Link>
                 <Link
-                  to={"/launchpad"}
+                  href={"/launchpad"}
                   className={
-                    location.pathname === "/launchpad"
+                    router.pathname === "/launchpad"
                       ? "nav-link active"
                       : "nav-link"
                   }
@@ -96,9 +95,9 @@ const Header = () => {
                   Launchpad
                 </Link>
                 <Link
-                  to={"/airdrop"}
+                  href={"/airdrop"}
                   className={
-                    location.pathname === "/airdrop"
+                    router.pathname === "/airdrop"
                       ? "nav-link active"
                       : "nav-link"
                   }
@@ -135,9 +134,9 @@ const Header = () => {
               >
                 <MenuItem>
                   <Link
-                    to={"/swap"}
+                    href={"/"}
                     className={
-                      location.pathname === "/swap"
+                      router.pathname === "/"
                         ? "nav-link active"
                         : "nav-link"
                     }
@@ -147,9 +146,9 @@ const Header = () => {
                 </MenuItem>
                 <MenuItem>
                   <Link
-                    to={"/stats"}
+                    href={"/stats"}
                     className={
-                      location.pathname === "/stats"
+                      router.pathname === "/stats"
                         ? "nav-link active"
                         : "nav-link"
                     }
@@ -159,9 +158,9 @@ const Header = () => {
                 </MenuItem>
                 <MenuItem>
                   <Link
-                    to={"/donate"}
+                    href={"/donate"}
                     className={
-                      location.pathname === "/donate"
+                      router.pathname === "/donate"
                         ? "nav-link active"
                         : "nav-link"
                     }
@@ -171,9 +170,9 @@ const Header = () => {
                 </MenuItem>
                 {/* <MenuItem>
                   <Link
-                    to={'/launchpad'}
+                    href={'/launchpad'}
                     className={
-                      location.pathname === '/launchpad'
+                      router.pathname === '/launchpad'
                         ? 'nav-link active'
                         : 'nav-link'
                     }
@@ -183,9 +182,9 @@ const Header = () => {
                 </MenuItem>
                 <MenuItem>
                   <Link
-                    to={'/airdrop'}
+                    href={'/airdrop'}
                     className={
-                      location.pathname === '/airdrop'
+                      router.pathname === '/airdrop'
                         ? 'nav-link active'
                         : 'nav-link'
                     }

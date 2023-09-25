@@ -5,9 +5,7 @@ import { Typography, Box, Modal, InputBase, Grid } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { Scrollbars } from "rc-scrollbars";
-// import { tokenList } from '../../environment/tokenList.js'
-import "./styles.scss";
-import defaultImg from "../../assets/erc20.png";
+import TokenIterm from "../TokenIterm/TokenIterm";
 
 const TokenListModal = (props) => {
   const tokenList = Object.entries(props.tokenList);
@@ -42,9 +40,7 @@ const TokenListModal = (props) => {
     }
     closeModal();
   };
-  const addDefaultImg = (e) => {
-    e.target.src = defaultImg;
-  };
+
   useEffect(() => {
     setTokens(tokenList);
   }, [props.tokenList]);
@@ -53,26 +49,26 @@ const TokenListModal = (props) => {
     <Modal
       open={modalOpen}
       onClose={closeModal}
-      aria-labelledby='modal-modal-title'
-      aria-describedby='modal-modal-description'
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
     >
-      <Box className='tokenSelectModalBox'>
+      <Box className="tokenSelectModalBox">
         <Grid justifyContent={"space-between"} container alignItems={"center"}>
-          <Typography variant='h6' component='h2' color={"white"}>
+          <Typography variant="h6" component="h2" color={"white"}>
             Select a Token
           </Typography>
-          <CloseIcon onClick={closeModal} className='close-button' />
+          <CloseIcon onClick={closeModal} className="close-button" />
         </Grid>
-        <Grid className='search-box'>
+        <Grid className="search-box">
           <InputBase
-            placeholder='Search token name or address'
+            placeholder="Search token name or address"
             onKeyUp={(e) => searchToken(e)}
             fullWidth={true}
           />
-          <SearchOutlinedIcon className='search-icon' />
+          <SearchOutlinedIcon className="search-icon" />
         </Grid>
         <hr />
-        <Grid container direction='column'>
+        <Grid container direction="column">
           <Scrollbars
             style={{ height: 300 }}
             autoHide
@@ -87,42 +83,13 @@ const TokenListModal = (props) => {
                       modalKey === "from") ||
                     (tradeInfo.to.symbol === token[1].symbol &&
                       modalKey === "to") ? (
-                      <Grid
-                        item
-                        container
-                        key={index}
-                        className='token-item disabled'
-                        alignItems={"center"}
-                      >
-                        <img
-                          src={token[1].logoURI}
-                          alt='icon'
-                          className='token-icon'
-                          onError={(element) => {
-                            addDefaultImg(element);
-                          }}
-                        />
-                        {token[1].symbol}
-                      </Grid>
+                      <TokenIterm token={token} disabled={true} index={index} />
                     ) : (
-                      <Grid
-                        item
-                        container
-                        key={index}
-                        className='token-item'
-                        onClick={() => changeTrade(token[1])}
-                        alignItems={"center"}
-                      >
-                        <img
-                          src={token[1].logoURI}
-                          alt='icon'
-                          className={" token-icon"}
-                          onError={(element) => {
-                            addDefaultImg(element);
-                          }}
-                        />
-                        {token[1].symbol}
-                      </Grid>
+                      <TokenIterm
+                        token={token}
+                        changeTrade={changeTrade}
+                        index={index}
+                      />
                     )}
                   </React.Fragment>
                 );
