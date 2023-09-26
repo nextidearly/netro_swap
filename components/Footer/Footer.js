@@ -1,5 +1,4 @@
 import { Container, Grid } from '@mui/material'
-import './styles.scss'
 
 const Footer = () => {
   return (

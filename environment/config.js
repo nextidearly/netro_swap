@@ -65,6 +65,12 @@ export const PROTOCOL_LIST = {
   },
 };
 
+export const TelegramLink = process.env.TELEGRAM || '';
+export const GithubLink = process.env.GITHUB || '';
+export const DiscordLink = process.env.DISCORD || '';
+export const TwitterLink = process.env.TWITTER || '';
+
+
 export const PROTOCOL_WHITE_LIST = {
   324: "ZKSYNC_MUTE,ZKSYNC_ONE_INCH_LIMIT_ORDER_V3,ZKSYNC_PMMX,ZKSYNC_SPACEFI,ZKSYNC_SYNCSWAP,ZKSYNC_GEM,ZKSYNC_MAVERICK_V1",
   42161:

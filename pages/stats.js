@@ -24,27 +24,42 @@ const StatsPage = () => {
 
   const [TVLhistory, setTVLhistory] = useState([]);
   const [dexTVLData, setDexTVLData] = useState([]);
+  
   const addDefaultImg = (e) => {
     e.target.src = "/default.png";
   };
 
   const getTVL = async (protocol) => {
     const response = await fetch(
-      `https://api.llama.fi/v2/historicalChainTvl/${protocol}`
+      `/api-llama/v2/historicalChainTvl/${protocol}`
     );
     const result = await response.json();
     setTVLhistory(result);
   };
 
   const getDexTVL = async (protocol) => {
-    const response = await fetch(
-      `https://api.llama.fi/overview/dexs/${protocol}`
-    );
+    const response = await fetch(`/api-llama/overview/dexs/${protocol}`);
     const result = await response.json();
-    const dexList = result.protocols.sort((a, b) => {
-      return b.totalAllTime - a.totalAllTime;
+    let tvlList = [];
+    for (let i = 0; i < result.protocols.length; i++) {
+      const res = await fetch(`/api-llama/tvl/${result.protocols[i].module}`);
+      const tvl = await res.json();
+      if (tvl && !tvl.message) {
+        const data = {
+          logo: result.protocols[i].logo,
+          displayName: result.protocols[i].displayName,
+          change_1d: result.protocols[i].change_1d,
+          change_7d: result.protocols[i].change_7d,
+          change_1m: result.protocols[i].change_1m,
+          tvl: Number(tvl) !== NaN ? tvl : 0,
+        };
+        tvlList.push(data);
+      }
+    }
+    const dexList = tvlList.sort((a, b) => {
+      return b.tvl - a.tvl;
     });
-    setDexTVLData(dexList.slice(0, 5));
+    setDexTVLData(dexList);
   };
 
   const convertCurrency = (labelValue) => {
@@ -232,7 +247,7 @@ const StatsPage = () => {
                           <td className={data.change_1m > 0 ? "up" : "down"}>
                             $ {convertCurrency(data.change_1m)}
                           </td>
-                          <td>$ {convertCurrency(data.totalAllTime)}</td>
+                          <td>$ {convertCurrency(data.tvl)}</td>
                         </tr>
                       );
                     })}

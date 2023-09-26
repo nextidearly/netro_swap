@@ -29,6 +29,7 @@ import {
   swap,
   token_list,
 } from "@/utils/api";
+import Head from "next/head";
 
 const SwapPage = () => {
   const dispatch = useDispatch();
@@ -91,17 +92,19 @@ const SwapPage = () => {
   };
 
   const changeOrder = () => {
-    setSellBalance(buyBalance);
-    calculatePrice(buyBalance);
-    setBalanceError(false);
-    setEstimatedGas(0);
-    setallowanceError(false);
     const oldOrder = {
       ...tradeInfo,
     };
 
-    dispatch(setTradeFrom(oldOrder.to));
-    dispatch(setTradeTo(oldOrder.from));
+    if (oldOrder.to.address) {
+      setSellBalance(buyBalance);
+      calculatePrice(buyBalance);
+      setBalanceError(false);
+      setEstimatedGas(0);
+      setallowanceError(false);
+      dispatch(setTradeFrom(oldOrder.to));
+      dispatch(setTradeTo(oldOrder.from));
+    }
   };
 
   const getRouter = async () => {
@@ -120,7 +123,6 @@ const SwapPage = () => {
   const getQuote = async () => {
     if (sellBalance <= 0) return false;
     if (tradeInfo.to.address === "") return false;
-    if (Number(sellBalance) > Number(balanceFrom)) return false;
     setLoading(true);
     const fromTokenAddress = tradeInfo.from.address;
     const toTokenAddress = tradeInfo.to.address;
@@ -419,6 +421,55 @@ const SwapPage = () => {
     <>
       <Grid className={modalOpen || slippageModalOpen ? "blur-background" : ""}>
         <Header />
+        <Head>
+          <title>Swap | XYXY Finance</title>
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+          />
+          <link rel="manifest" href="/site.webmanifest" />{" "}
+          <meta
+            name="description"
+            content="XYXY is the leading swap platform on Base"
+          />
+          <meta
+            name="keywords"
+            content="Defi, Base, Dex, Dex Aggregator, XYXY "
+          />
+          <meta property="og:title" content={`XYXY | XYXY Finance`} />
+          <meta property="og:type" content="website" />
+          <meta
+            property="og:description"
+            content={`XYXY is the Dex aggregator on Base network`}
+          />
+          <meta
+            property="og:url"
+            content={`https://xyxybase-swap.netlify.app/`}
+          />
+          <meta property="og:site_name" content="XYXY Swap Base"></meta>
+          <meta
+            property="og:image"
+            content="https://xyxybase-swap.netlify.app/logo_new.png"
+          ></meta>
+          <meta property="og:image:type" content="image/png"></meta>
+          <meta property="og:image:width" content="2000"></meta>
+          <meta property="og:image:height" content="2000"></meta>
+          <meta property="og:image:alt" content="Logo"></meta>
+        </Head>
+
         <Container maxWidth="md">
           <Grid className="main-wrapper" container justifyContent="center">
             <Grid className="swap-wrapper">
@@ -526,7 +577,6 @@ const SwapPage = () => {
                         value={buyBalance}
                         placeholder="0.0000000"
                         className="input-box"
-                        disabled={true}
                       />
                     </Grid>
                     <Grid className="balance-text">

@@ -27,6 +27,10 @@ const nextConfig = {
         source: "/1inch/:slug*",
         destination: "https://api.1inch.dev/:slug*",
       },
+      {
+        source: '/api-llama/:slug*',
+        destination: 'https://api.llama.fi/:slug*',
+      },
     ];
   },
 };
