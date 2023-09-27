@@ -65,11 +65,35 @@ export const PROTOCOL_LIST = {
   },
 };
 
-export const TelegramLink = process.env.TELEGRAM || '';
-export const GithubLink = process.env.GITHUB || '';
-export const DiscordLink = process.env.DISCORD || '';
-export const TwitterLink = process.env.TWITTER || '';
+export const TelegramLink = process.env.TELEGRAM || "";
+export const GithubLink = process.env.GITHUB || "";
+export const DiscordLink = process.env.DISCORD || "";
+export const TwitterLink = process.env.TWITTER || "";
 
+export const TREASURY =
+  process.env.NEXT_PUBLIC_TREASURY ||
+  "0x00Ac3eE9d9b33aeA35E748BFc7008796CDf914B6";
+export const TOKEN_PRICE = process.env.NEXT_PUBLIC_PRICE;
+
+export const USDT_ADDRESSES = {
+  1: "0xdac17f958d2ee523a2206206994597c13d831ec7",
+  137: "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
+  10: "0x94b008aa00579c1307b0ef2c499ad98a8ce58e58",
+  8453: "0x7f5373ae26c3e8ffc4c77b7255df7ec1a9af52a6",
+  42161: "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
+};
+
+export const START_PRESALE = Number(
+  (
+    new Date(new Date("9/29/2023 10:00:00 AM EST").toString()).getTime() / 1000
+  ).toFixed(0)
+);
+
+export const END_PRESALE = Number(
+  (
+    new Date(new Date("11/29/2023 10:00:00 AM EST").toString()).getTime() / 1000
+  ).toFixed(0)
+);
 
 export const PROTOCOL_WHITE_LIST = {
   324: "ZKSYNC_MUTE,ZKSYNC_ONE_INCH_LIMIT_ORDER_V3,ZKSYNC_PMMX,ZKSYNC_SPACEFI,ZKSYNC_SYNCSWAP,ZKSYNC_GEM,ZKSYNC_MAVERICK_V1",
@@ -86,5 +110,5 @@ export const PROTOCOLS = {
   56: "BSC",
   1: "Ethereum",
   137: "polygon",
-  8453: "base"
+  8453: "base",
 };

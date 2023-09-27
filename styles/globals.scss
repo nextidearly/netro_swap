@@ -458,7 +458,7 @@ a {
 .page-wrapper {
   width: 100%;
   min-height: 100vh;
-  padding-bottom: 50px;
+  padding-bottom: 15px;
   position: relative;
 }
 /*  Swap Page   */
@@ -1004,6 +1004,7 @@ a {
       height: 14px;
       background-color: #233253;
       border-radius: 5px;
+      border: 1px solid #343e4f;
 
       .progress {
         background-color: #4a6af3;
@@ -1387,9 +1388,6 @@ a {
               transition: 0.5s;
               color: white;
               cursor: pointer;
-              &:hover {
-                transform: rotate(180deg);
-              }
             }
           }
 
@@ -1431,6 +1429,11 @@ a {
         gap: 1rem;
         .presale-card-progress {
           margin-top: 1rem;
+          .presale-card-progress-button {
+            button {
+              cursor: pointer;
+            }
+          }
           .presale-progress {
             padding-top: 0.5rem;
             display: flex;
@@ -1453,6 +1456,7 @@ a {
               background-color: #1f2937;
               border-radius: 0.3rem;
               overflow: hidden;
+              border: 1px solid #343e4f;
               .progress-bar-inner {
                 background-color: #0a7aff;
                 height: 100%;
@@ -1471,23 +1475,43 @@ a {
             .disable-anchor {
               cursor: not-allowed !important;
             }
+            .active {
+              cursor: pointer !important;
+              color: #06f;
+            }
             h1 {
               font-size: 1rem;
             }
           }
+          .prasale-card-label {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            p {
+              width: 100%;
+              margin-bottom: 5px;
+            }
+          }
           .presale-card-inner {
-            background-color: #19202b;
-            border-radius: 0.5rem;
-            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 20px;
             .presale-card-input {
-              display: flex;
-              align-items: center;
               justify-content: space-between;
               width: 100%;
+              padding: 10px !important;
+              background-color: #19202b !important;
+              border-radius: 6px;
+              display: flex;
+              img {
+                height: 30px;
+                width: 30px;
+                margin-right: 10px;
+                border-radius: 50%;
+              }
               input {
                 width: 100%;
                 color: #fff !important;
-                padding: 0 !important;
                 font-size: 1.2rem !important;
                 background: none;
                 text-overflow: ellipsis;
@@ -1609,9 +1633,8 @@ a {
             }
             p {
               color: #fff !important;
-              font-size: 1.1rem;
-              font-weight: 500;
-              margin: 10px;
+              font-size: 17px;
+              font-weight: 400;
             }
             @media (max-width: 414px) {
               h1 {
@@ -1798,6 +1821,10 @@ a {
             gap: 0.5rem;
             .disable-anchor {
               cursor: not-allowed !important;
+            }
+            .active {
+              cursor: pointer !important;
+              color: #06f;
             }
             h1 {
               font-size: 1rem;
@@ -2139,4 +2166,21 @@ a {
   font-weight: bold;
   font-size: 16px;
   padding-top: 2px;
+}
+
+.time-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 6px;
+  font-size: 18px;
+  span {
+    background-color: #1f2937;
+    border: thin solid #374151;
+    width: 100%;
+    text-align: center;
+    padding: 6px;
+    border-radius: 6px;
+  }
 }

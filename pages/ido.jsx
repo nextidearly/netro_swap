@@ -1,14 +1,268 @@
-import React, { useState } from "react";
+import dynamic from 'next/dynamic'
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
-import { TwitterLink, DiscordLink } from "../environment/config";
+import { TwitterLink, DiscordLink, TOKEN_PRICE } from "../environment/config";
+import {
+  END_PRESALE,
+  START_PRESALE,
+  USDT_ADDRESSES,
+  TREASURY,
+} from "../environment/config";
+import moment from "moment";
+import { useAccount, useBalance, useNetwork } from "wagmi";
+import { ethers } from "ethers";
+import { useSnackbar } from "notistack";
+import ABI from "../environment/ERC20_ABI.json";
+const CountDownComponent = dynamic(() => import('../components/CountDown/CountDown'), { ssr: false })
 
 const Donate = () => {
-  const [type, setType] = useState("sale");
-  const [farming, setFarming] = useState("farming");
-  const [totalRaised, setTotalRaised] = useState(0);
-  const [amount, setAmount] = useState(0);
+  const { address, isConnected } = useAccount();
+  const { chain } = useNetwork();
+  const { data } = useBalance({ address: address });
+  const { enqueueSnackbar } = useSnackbar();
+  const [type, setType] = useState("ETH");
+  const [totalRaisedETH, setTotalRaisedETH] = useState(0);
+  const [totalRaisedUSDT, setTotalRaisedUSDT] = useState(0);
+  const [amount, setAmount] = useState("");
+  const [amount2, setAmount2] = useState("");
+  const [insufficient, setInsufficient] = useState(false);
+  const [eth, setEth] = useState("");
+  const [xyxy, setXyxy] = useState("");
+  const [loadingTx, setLoadingTx] = useState(false);
+  const [allowance, setAllowance] = useState(0);
+  const [balance, setBalance] = useState({
+    decimals: 18,
+    formatted: "0.00",
+    symbol: "ETH",
+    value: 0,
+  });
+
+  const getTokenBalance = async (address) => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const contract = new ethers.Contract(
+      USDT_ADDRESSES[chain.id],
+      ABI,
+      provider
+    );
+    const decimals1 = await contract.decimals();
+    const balance1 = await contract.balanceOf(address);
+    setBalance({
+      decimals: 18,
+      symbol: "USDT",
+      formatted: ethers.utils.formatUnits(balance1, decimals1),
+      value: 0,
+    });
+  };
+
+  const handleMaxAmount = () => {
+    setAmount(Number(data.formatted));
+    setXyxy(Number(data.formatted));
+  };
+
+  const checkAllowance = async () => {
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const contract = new ethers.Contract(
+        USDT_ADDRESSES[chain.id],
+        ABI,
+        provider
+      );
+      const amount = (await contract.allowance(address, TREASURY)).toString();
+      const decimals = await contract.decimals();
+      setAllowance(ethers.utils.formatUnits(amount, decimals));
+    } catch (e) {
+      console.log(e);
+      return 0;
+    }
+  };
+
+  const approve = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const walletSigner = provider.getSigner(address);
+    try {
+      const token_contract = new ethers.Contract(
+        USDT_ADDRESSES[chain.id],
+        ABI,
+        walletSigner
+      );
+      const decimals = await token_contract.decimals();
+      const value = ethers.utils.parseUnits(eth.toString(), decimals);
+
+      await token_contract.approve(TREASURY, value);
+      setAllowance(Number(eth));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const handleChangeAmount = (amount) => {
+    setEth(amount);
+    setXyxy(Number(amount) * TOKEN_PRICE || "");
+  };
+
+  const handleChangeXyxy = (amount2) => {
+    setEth(Number(amount2) / TOKEN_PRICE || "");
+    setAmount(Number(amount2) / TOKEN_PRICE || "");
+    setXyxy(amount2);
+  };
+
+  const handleBuyWithCoin = async () => {
+    setLoadingTx(true);
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const walletSigner = provider.getSigner(address);
+    try {
+      const transactionHash = await walletSigner.sendTransaction({
+        to: TREASURY,
+        value: ethers.utils.parseEther("0.05"),
+      });
+      console.log("asdfafd");
+
+      enqueueSnackbar(
+        `Transaction has been submited. Tx hash: ${transactionHash.hash}`,
+        {
+          variant: "info",
+          autoHideDuration: 5000,
+          style: {
+            backgroundColor: "#202946",
+          },
+        }
+      );
+      const receipt = await transactionHash.wait();
+      setLoadingTx(false);
+      enqueueSnackbar(
+        `Transaction has been confirmed. Tx hash: ${receipt.transactionHash}`,
+        {
+          variant: "info",
+          autoHideDuration: 5000,
+          style: {
+            backgroundColor: "#202946",
+          },
+        }
+      );
+      getTokenBalance(address);
+    } catch (error) {
+      console.log(error);
+      setLoadingTx(false);
+    }
+  };
+
+  const handleBuyWithUSDT = async () => {
+    setLoadingTx(true);
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const walletSigner = provider.getSigner(address);
+    try {
+      const token_contract = new ethers.Contract(
+        USDT_ADDRESSES[chain.id],
+        ABI,
+        walletSigner
+      );
+      const decimals = await token_contract.decimals();
+      const value = ethers.utils.parseUnits(eth.toString(), decimals);
+
+      const transactionHash = await token_contract.transferFrom(
+        address,
+        TREASURY,
+        ethers.utils.parseUnits(eth.toString(), decimals)
+      );
+
+      enqueueSnackbar(
+        `Transaction has been submited. Tx hash: ${transactionHash.hash}`,
+        {
+          variant: "info",
+          autoHideDuration: 5000,
+          style: {
+            backgroundColor: "#202946",
+          },
+        }
+      );
+      const receipt = await transactionHash.wait();
+      setLoadingTx(false);
+      enqueueSnackbar(
+        `Transaction has been confirmed. Tx hash: ${receipt.transactionHash}`,
+        {
+          variant: "info",
+          autoHideDuration: 5000,
+          style: {
+            backgroundColor: "#202946",
+          },
+        }
+      );
+      getTokenBalance(address);
+    } catch (error) {
+      console.log(error);
+      setLoadingTx(false);
+    }
+  };
+
+  useEffect(() => {
+    handleChangeAmount(amount);
+  }, [amount]);
+
+  useEffect(() => {
+    handleChangeXyxy(amount2);
+  }, [amount2]);
+
+  useEffect(() => {
+    if (data) {
+      setBalance(data);
+    } else {
+      setBalance({
+        decimals: 18,
+        formatted: "0",
+        symbol: "ETH",
+        value: 0,
+      });
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (balance?.decimals) {
+      if (Number(eth) > Number(balance.formatted)) {
+        setInsufficient(true);
+      }
+      if (Number(eth) < Number(balance.formatted)) {
+        setInsufficient(false);
+      }
+    }
+  }, [eth]);
+
+  useEffect(() => {
+    setAmount("");
+    setAmount2("");
+    if (type === "USDT") {
+      checkAllowance();
+
+      getTokenBalance(address);
+    } else {
+      setBalance(
+        data || { decimals: 18, formatted: "0", symbol: "ETH", value: 0 }
+      );
+    }
+  }, [type, chain]);
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const contract = new ethers.Contract(
+        USDT_ADDRESSES[chain.id],
+        ABI,
+        provider
+      );
+      const decimals1 = await contract.decimals();
+      const balance1 = await contract.balanceOf(TREASURY);
+      const value1 = ethers.utils.formatUnits(balance1, decimals1);
+      setTotalRaisedETH(value1);
+      const balance2 = await provider?.getBalance(TREASURY);
+      const value2 = ethers.utils.formatUnits(balance2, 18);
+      setTotalRaisedUSDT(value2);
+    }, 10000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
     <div className="page-wrapper">
@@ -61,11 +315,6 @@ const Donate = () => {
         <meta property="og:image:height" content="2000"></meta>
         <meta property="og:image:alt" content="Logo"></meta>
       </Head>
-
-       <div className="presale-card">
-asdfasdf
-       </div>
-
       <div className="presale">
         <div spacing={2} className="default-container page-layout">
           <div spacing={2} className="presale-wrapper">
@@ -73,7 +322,7 @@ asdfasdf
               <div className="presale-card-info">
                 <div className="presale-image-container">
                   <img
-                    src="/logo.png"
+                    src="/XYXY1--800X800.png"
                     className="presale-img"
                     layout="fixed"
                     width={150}
@@ -81,7 +330,6 @@ asdfasdf
                     alt="presale-logo"
                   />
                 </div>
-
                 <div className="presale-card-info-content">
                   <div className="presale-card-info-content-title">
                     <h1>XYXY swap</h1>
@@ -119,95 +367,222 @@ asdfasdf
                 </div>
               </div>
             </div>
+
             <div className="presale-cards">
               <div className="presale-cards-left">
                 <div className="presale-card">
                   <div className="tap-block">
                     <button
                       className={
-                        type === "sale"
+                        type === "ETH"
                           ? "tap-option muted active"
                           : "tap-option muted"
                       }
-                      onClick={() => setType("sale")}
+                      onClick={() => setType("ETH")}
                     >
-                      Sale
+                      ETH
                     </button>
                     <button
                       className={
-                        type === "claim"
+                        type === "USDT"
                           ? "tap-option muted active"
                           : "tap-option muted"
                       }
-                      onClick={() => setType("claim")}
+                      onClick={() => setType("USDT")}
                     >
-                      Claim
+                      USDT
                     </button>
                   </div>
-                  {type === "sale" ? (
+                  {type === "ETH" ? (
                     <div className="presale-card-progress">
                       <div className="presale-progress">
+                        <div>
+                          <CountDownComponent
+                            targetBlockTime={"2023-11-29T07:00:00-08:00"}
+                          />
+                        </div>
                         <div className="presale-progress-info">
-                          <h1>{totalRaised}/100 ETH</h1>
+                          <h1>{totalRaisedETH}/100 ETH</h1>
                           <h1>0%</h1>
                         </div>
                         <div className="progress-bar">
                           <div
                             className="progress-bar-inner"
-                            style={{ width: "0%" }}
+                            style={{ width: `${Number(totalRaisedETH)}%` }}
                           ></div>
                         </div>
                       </div>
                       <div className="presale-card-input-right">
-                        <h1>Balance: {totalRaised} ETH</h1>
-                        <a className="disable-anchor">MAX</a>
+                        <h1>
+                          Balance: {Number(balance.formatted).toFixed(6)}
+                          {balance.symbol}
+                        </h1>
+                        <a
+                          className={
+                            balance.formatted === "0"
+                              ? "disable-anchor"
+                              : "active"
+                          }
+                          onClick={() =>
+                            balance.formatted !== "0" && handleMaxAmount()
+                          }
+                        >
+                          MAX
+                        </a>
+                      </div>
+                      <div className="prasale-card-label">
+                        <p>You pay {balance.symbol}</p>
+                        <p>You Receive XYXY</p>
                       </div>
                       <div className="presale-card-inner">
                         <div className="presale-card-input">
+                          {balance?.symbol === "MATIC" ? (
+                            <img src="/assets/matic.webp" alt="" />
+                          ) : (
+                            <img src="/assets/eth.png" alt="" />
+                          )}
                           <input
                             type="number"
                             value={amount}
+                            onKeyPress={(e) => {
+                              if (e.key === "-" || e.key === "e") {
+                                e.preventDefault();
+                              }
+                            }}
                             onChange={(e) => setAmount(e.target.value)}
                             placeholder="0.0"
+                            min={0}
+                          />
+                        </div>
+                        <div className="presale-card-input">
+                          <img src="/assets/XYXY.PNG" alt="" />
+                          <input
+                            type="number"
+                            value={xyxy}
+                            onKeyPress={(e) => {
+                              if (e.key === "-" || e.key === "e") {
+                                e.preventDefault();
+                              }
+                            }}
+                            onChange={(e) => setAmount2(e.target.value)}
+                            placeholder="0.0"
+                            min={0}
                           />
                         </div>
                       </div>
                       <div className="presale-card-progress-button">
-                        <button disabled="">Buy</button>
-                      </div>
-                      <div className="presale-card-progress-info">
-                        <div className="App-card-divider"></div>
-                        <div className="presale-card-progress-info-col">
-                          <h1>Your Committed</h1>
-                          <p>0 ETH</p>
-                        </div>
+                        <button
+                          disabled={
+                            balance?.formatted === "0" ||
+                            !isConnected ||
+                            insufficient ||
+                            amount === ""
+                          }
+                          onClick={handleBuyWithCoin}
+                        >
+                          {!insufficient ? "Buy" : "Insufficient Balance"}
+                        </button>
                       </div>
                     </div>
                   ) : (
                     <div className="presale-card-progress">
-                      <div className="presale-card-progress-info">
-                        <div className="presale-card-progress-info-col">
-                          <h1>Your Committed</h1>
-                          <p>0 ETH</p>
+                      <div className="presale-progress">
+                        <div>
+                          <CountDownComponent
+                            targetBlockTime={"2023-11-29T07:00:00-08:00"}
+                          />
                         </div>
-                        <div className="app-card-divider"></div>
-                        <div className="presale-card-progress-info-col">
-                          <h1>ETH to Refund</h1>
-                          <p>0 ETH</p>
+                        <div className="presale-progress-info">
+                          <h1>{totalRaisedUSDT}/10000 USDT</h1>
+                          <h1>0%</h1>
                         </div>
-                        <div className="app-card-divider"></div>
-                        <div className="presale-card-progress-info-col">
-                          <h1>Claimable</h1>
-                          <p>0 $XYXY</p>
+                        <div className="progress-bar">
+                          <div
+                            className="progress-bar-inner"
+                            style={{ width: `${Number(totalRaisedUSDT)}%` }}
+                          ></div>
                         </div>
-                        <div className="app-card-divider"></div>
-                        <div className="presale-card-progress-info-col">
-                          <h1>Earned Farming Bonuses</h1>
-                          <p style={{ color: "rgb(42, 128, 255)" }}>0 $XYXY</p>
+                      </div>
+                      <div className="presale-card-input-right">
+                        <h1>
+                          Balance: {Number(balance.formatted).toFixed(6)}
+                          {balance.symbol}
+                        </h1>
+                        <a
+                          className={
+                            balance.formatted === "0"
+                              ? "disable-anchor"
+                              : "active"
+                          }
+                          onClick={() =>
+                            balance.formatted !== "0" && handleMaxAmount()
+                          }
+                        >
+                          MAX
+                        </a>
+                      </div>
+                      <div className="prasale-card-label">
+                        <p>You pay {balance.symbol}</p>
+                        <p>You Receive XYXY</p>
+                      </div>
+                      <div className="presale-card-inner">
+                        <div className="presale-card-input">
+                          <img src="/assets/usdt.png" alt="" />
+                          <input
+                            type="number"
+                            value={amount}
+                            onKeyPress={(e) => {
+                              if (e.key === "-" || e.key === "e") {
+                                e.preventDefault();
+                              }
+                            }}
+                            onChange={(e) => setAmount(e.target.value)}
+                            placeholder="0.0"
+                            min={0}
+                          />
                         </div>
-                        <div className="claim-button-actions">
-                          <button disabled="">Claim</button>
+                        <div className="presale-card-input">
+                          <img src="/assets/XYXY.PNG" alt="" />
+                          <input
+                            type="number"
+                            value={xyxy}
+                            onKeyPress={(e) => {
+                              if (e.key === "-" || e.key === "e") {
+                                e.preventDefault();
+                              }
+                            }}
+                            onChange={(e) => setAmount2(e.target.value)}
+                            placeholder="0.0"
+                            min={0}
+                          />
                         </div>
+                      </div>
+                      <div className="presale-card-progress-button">
+                        {allowance === 0 || allowance < Number(eth) ? (
+                          <button
+                            disabled={
+                              balance?.formatted === "0.0" ||
+                              !isConnected ||
+                              insufficient ||
+                              amount === ""
+                            }
+                            onClick={approve}
+                          >
+                            {!insufficient ? "Approve" : "Insufficient Balance"}
+                          </button>
+                        ) : (
+                          <button
+                            disabled={
+                              balance?.formatted === "0.0" ||
+                              !isConnected ||
+                              insufficient ||
+                              amount === ""
+                            }
+                            onClick={handleBuyWithUSDT}
+                          >
+                            {!insufficient ? "Buy" : "Insufficient Balance"}
+                          </button>
+                        )}
                       </div>
                     </div>
                   )}
@@ -218,31 +593,20 @@ asdfasdf
                 <div className="presale-card">
                   <div className="presale-card-right-main-info">
                     <div className="main-info-card">
-                      <h1>APR</h1>
-                      <h2>25.546%</h2>
+                      <h1>USDT</h1>
+                      <h2>{totalRaisedUSDT} USDT</h2>
                     </div>
                     <div className="main-info-card">
                       <h1>Total Raised</h1>
-                      <h2>{totalRaised} ETH</h2>
+                      <h2>{totalRaisedETH} ETH</h2>
                     </div>
                   </div>
                   <div className="presale-card-right-info">
                     <h1>Main Details</h1>
-                    <div className="app-card-divider first-child"></div>
-                    <div className="presale-card-right-col">
-                      <h1>Token Sale Contract</h1>
-                      <a
-                        target="_blank"
-                        rel="noreferrer"
-                        href="https://basescan.org/address/0x2d6F76BF3Ab4Cba841888F7Afe847E0Af8737a34"
-                      >
-                        0x2d6F...7a34
-                      </a>
-                    </div>
                     <div className="app-card-divider"></div>
                     <div className="presale-card-right-col">
                       <h1>Softcap</h1>
-                      <p>5</p>
+                      <p>5 $</p>
                     </div>
                     <div className="app-card-divider"></div>
                     <div className="presale-card-right-col">
@@ -252,7 +616,7 @@ asdfasdf
                     <div className="app-card-divider"></div>
                     <div className="presale-card-right-col">
                       <h1>Hardcap</h1>
-                      <p>20 ETH</p>
+                      <p>10,000 $</p>
                     </div>
                     <div className="app-card-divider"></div>
                     <div className="presale-card-right-col">
@@ -267,7 +631,7 @@ asdfasdf
                     <div className="app-card-divider"></div>
                     <div className="presale-card-right-col">
                       <h1>Total Token Sale</h1>
-                      <p>400,000 $XYXY</p>
+                      <p>4,000,000 XYXY</p>
                     </div>
                     <div className="app-card-divider"></div>
                     <div className="presale-card-right-col">
@@ -276,15 +640,15 @@ asdfasdf
                     </div>
                     <div className="app-card-divider"></div>
                     <div className="presale-card-right-col">
-                      <h1>Start Time</h1>
-                      <p>TBA</p>
+                      <h1> Start Time</h1>
+                      {moment.unix(Number(START_PRESALE)).format()}
                     </div>
                     <div className="app-card-divider"></div>
                     <div className="presale-card-right-col">
                       <h1>End Time</h1>
-                      <p>TBA</p>
+                      {moment.unix(Number(END_PRESALE)).format()}
                     </div>
-                    <div className="app-card-divider"></div>
+                    {/* <div className="app-card-divider"></div>
                     <div className="presale-card-right-col">
                       <h1>Minimum / Maximum Committed</h1>
                       <p>0.01 ETH / 1 ETH</p>
@@ -293,17 +657,17 @@ asdfasdf
                     <div className="presale-card-right-col">
                       <h1>Minimum Committed</h1>
                       <p>0.01 ETH</p>
-                    </div>
-                    <div className="app-card-divider"></div>
+                    </div> */}
+                    {/* <div className="app-card-divider"></div>
                     <div className="presale-card-right-col">
                       <h1>Sale Method</h1>
                       <p>Farming Overflow</p>
-                    </div>
-                    <div className="app-card-divider"></div>
+                    </div> */}
+                    {/* <div className="app-card-divider"></div>
                     <div className="presale-card-right-col">
                       <h1>Vesting</h1>
                       <p>100% released on TGE</p>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
