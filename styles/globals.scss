@@ -354,6 +354,17 @@ a {
       border-radius: 5px;
       background-color: #010514;
 
+      .image-nav {
+        position: relative;
+        img {
+          position: absolute;
+          top: 0px;
+          right: 4px;
+          height: 10px;
+          width: 10px;
+        }
+      }
+
       .nav-link {
         text-decoration: none;
         color: #3a466b;

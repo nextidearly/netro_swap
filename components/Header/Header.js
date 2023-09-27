@@ -71,14 +71,16 @@ const Header = () => {
                 >
                   Stats
                 </Link>
-                <Link
-                  href={"/ido"}
+                <a
+                  href={"https://xyxy-presale.vercel.app/"}
                   className={
-                    router.pathname === "/ido" ? "nav-link active" : "nav-link"
+                    router.pathname === "/ido" ? "nav-link active" : "nav-link image-nav"
                   }
+                  target="_blank"
                 >
                   IDO
-                </Link>
+                <img src='/blank.png' alt=""/>
+                </a>
                 <Link
                   href={"/nodes"}
                   className={
@@ -89,36 +91,6 @@ const Header = () => {
                 >
                   Nodes
                 </Link>
-                {/* <Link
-                  href={"/farm"}
-                  className={
-                    router.pathname === "/farm"
-                      ? "nav-link active"
-                      : "nav-link"
-                  }
-                >
-                  Farm
-                </Link>
-                <Link
-                  href={"/launchpad"}
-                  className={
-                    router.pathname === "/launchpad"
-                      ? "nav-link active"
-                      : "nav-link"
-                  }
-                >
-                  Launchpad
-                </Link>
-                <Link
-                  href={"/airdrop"}
-                  className={
-                    router.pathname === "/airdrop"
-                      ? "nav-link active"
-                      : "nav-link"
-                  }
-                >
-                  Airdrop
-                </Link> */}
               </Grid>
             </Grid>
           </Grid>
@@ -170,41 +142,30 @@ const Header = () => {
                   </Link>
                 </MenuItem>
                 <MenuItem>
-                  <Link
-                    href={"/donate"}
+                  <a
+                    href='https://xyxy-presale.vercel.app/'
                     className={
-                      router.pathname === "/donate"
+                      router.pathname === "/ido"
+                        ? "nav-link active"
+                        : "nav-link"
+                    }
+                    target="_blank"
+                  >
+                    IDO
+                  </a>
+                </MenuItem>
+                <MenuItem>
+                  <Link
+                    href={"/nodes"}
+                    className={
+                      router.pathname === "/nodes"
                         ? "nav-link active"
                         : "nav-link"
                     }
                   >
-                    Donate
+                    Nodes
                   </Link>
                 </MenuItem>
-                {/* <MenuItem>
-                  <Link
-                    href={'/launchpad'}
-                    className={
-                      router.pathname === '/launchpad'
-                        ? 'nav-link active'
-                        : 'nav-link'
-                    }
-                  >
-                    Launchpad
-                  </Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link
-                    href={'/airdrop'}
-                    className={
-                      router.pathname === '/airdrop'
-                        ? 'nav-link active'
-                        : 'nav-link'
-                    }
-                  >
-                    Airdrop
-                  </Link> 
-                </MenuItem>*/}
                 {!matches && (
                   <MenuItem>
                     <ConnectButton
