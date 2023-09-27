@@ -61,6 +61,11 @@ const Donate = () => {
         <meta property="og:image:height" content="2000"></meta>
         <meta property="og:image:alt" content="Logo"></meta>
       </Head>
+
+       <div className="presale-card">
+asdfasdf
+       </div>
+
       <div className="presale">
         <div spacing={2} className="default-container page-layout">
           <div spacing={2} className="presale-wrapper">
@@ -207,68 +212,8 @@ const Donate = () => {
                     </div>
                   )}
                 </div>
-                {/* <div className="presale-card">
-                  <div className="tap-block">
-                    <button
-                      className={
-                        farming === 'farming'
-                          ? 'tap-option muted active'
-                          : 'tap-option muted'
-                      }
-                      onClick={() => setFarming('farming')}
-                    >
-                      Farming Overflow
-                    </button>
-                    <button
-                      className={
-                        farming === 'claming'
-                          ? 'tap-option muted active'
-                          : 'tap-option muted'
-                      }
-                      onClick={() => setFarming('claming')}
-                    >
-                      Claiming Process
-                    </button>
-                  </div>
-                  {farming === 'farming' ? (
-                    <div style={{ marginTop: '1.66rem' }}>
-                      <h1
-                        style={{
-                          fontSize: '1.2rem',
-                          color: 'white',
-                          fontWeight: '400',
-                        }}
-                      >
-                        Farming Overflow is an improved launch model that, while
-                        maintaining all the classic Overflow benefits such as
-                        fairness and transparency it carries a substantial
-                        improvement: it rewards early bird contributors. It
-                        ensures that every single ETH contributed to the pool
-                        generates income until it is returned. Users will be
-                        able to farm and generate extra yield while waiting for
-                        the sale to end. The current APR will be shown in the
-                        'Sale' section. Tokens allocated to Token Sale Pool:
-                        5,480,000 $esXYXY
-                      </h1>
-                    </div>
-                  ) : (
-                    <div style={{ marginTop: '1.66rem' }}>
-                      <h1
-                        style={{
-                          fontSize: '1.2rem',
-                          color: 'white',
-                          fontWeight: '400',
-                        }}
-                      >
-                        $XYXY and $esXYXY will be claimable immediately after
-                        launch. In the 'Claim' section, you will be able to
-                        check the invested amount, the final $XYXY and $esXYXY
-                        allocation and the ETH to be refunded.
-                      </h1>
-                    </div>
-                  )}
-                </div> */}
               </div>
+
               <div className="presale-cards-right">
                 <div className="presale-card">
                   <div className="presale-card-right-main-info">
@@ -299,11 +244,11 @@ const Donate = () => {
                       <h1>Softcap</h1>
                       <p>5</p>
                     </div>
-                    {/* <div className="app-card-divider"></div>
+                    <div className="app-card-divider"></div>
                     <div className="presale-card-right-col">
                       <h1>Minimum Raise</h1>
                       <p>20 ETH</p>
-                    </div> */}
+                    </div>
                     <div className="app-card-divider"></div>
                     <div className="presale-card-right-col">
                       <h1>Hardcap</h1>
@@ -314,21 +259,21 @@ const Donate = () => {
                       <h1>Sale Price</h1>
                       <p>0.00000067 ETH</p>
                     </div>
-                    {/* <div className="app-card-divider"></div>
+                    <div className="app-card-divider"></div>
                     <div className="presale-card-right-col">
                       <h1>Listing Price</h1>
                       <p>0.0000008 ETH</p>
-                    </div> */}
+                    </div>
                     <div className="app-card-divider"></div>
                     <div className="presale-card-right-col">
                       <h1>Total Token Sale</h1>
                       <p>400,000 $XYXY</p>
                     </div>
-                    {/* <div className="app-card-divider"></div>
+                    <div className="app-card-divider"></div>
                     <div className="presale-card-right-col">
                       <h1>Farming bonus</h1>
                       <p className="bonus-info">5,480,000 $esXYXY</p>
-                    </div> */}
+                    </div>
                     <div className="app-card-divider"></div>
                     <div className="presale-card-right-col">
                       <h1>Start Time</h1>
@@ -345,20 +290,20 @@ const Donate = () => {
                       <p>0.01 ETH / 1 ETH</p>
                     </div>
                     <div className="app-card-divider"></div>
-                    {/* <div className="presale-card-right-col">
+                    <div className="presale-card-right-col">
                       <h1>Minimum Committed</h1>
                       <p>0.01 ETH</p>
-                    </div> */}
-                    {/* <div className="app-card-divider"></div>
+                    </div>
+                    <div className="app-card-divider"></div>
                     <div className="presale-card-right-col">
                       <h1>Sale Method</h1>
                       <p>Farming Overflow</p>
-                    </div> */}
-                    {/* <div className="app-card-divider"></div>
+                    </div>
+                    <div className="app-card-divider"></div>
                     <div className="presale-card-right-col">
                       <h1>Vesting</h1>
                       <p>100% released on TGE</p>
-                    </div> */}
+                    </div>
                   </div>
                 </div>
               </div>

@@ -30,6 +30,7 @@ import {
   token_list,
 } from "@/utils/api";
 import Head from "next/head";
+import Footer from "@/components/Footer/Footer";
 
 const SwapPage = () => {
   const dispatch = useDispatch();
@@ -411,6 +412,18 @@ const SwapPage = () => {
     } else {
       setCorrectNetwork(false);
     }
+
+    if (chain?.id === 137) {
+      dispatch(
+        setTradeFrom({
+          symbol: "MATIC",
+          name: "MATIC",
+          address: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          logoURI: "/assets/matic.webp",
+          decimals: 18,
+        })
+      );
+    }
   }, [chain]);
 
   const initTradeState = (chainID) => {
@@ -760,6 +773,7 @@ const SwapPage = () => {
         modalOpen={slippageModalOpen}
         closeModal={() => setSlippageModalOpen(false)}
       />
+      <Footer/>
     </>
   );
 };

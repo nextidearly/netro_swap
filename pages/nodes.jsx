@@ -532,8 +532,8 @@ const LaunchPad = () => {
             )}
           </Container>
         </Grid>
-        <Footer />
       </Grid>
+      <Footer/>
     </Grid>
   );
 };

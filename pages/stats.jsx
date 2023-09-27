@@ -16,6 +16,7 @@ import { initTradeInfo } from "../redux/actions";
 import Skeleton from "@mui/material/Skeleton";
 import moment from "moment";
 import { PROTOCOLS } from "../environment/config";
+import Footer from "@/components/Footer/Footer";
 
 const StatsPage = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const StatsPage = () => {
 
   const [TVLhistory, setTVLhistory] = useState([]);
   const [dexTVLData, setDexTVLData] = useState([]);
-  
+
   const addDefaultImg = (e) => {
     e.target.src = "/default.png";
   };
@@ -104,6 +105,12 @@ const StatsPage = () => {
       if (chain) {
         initTradeState(chain.id);
       }
+    } else {
+      getTVL(PROTOCOLS[1]);
+      getDexTVL(PROTOCOLS[1].toLowerCase());
+      if (chain) {
+        initTradeState(1);
+      }
     }
   }, [chain]);
 
@@ -149,7 +156,6 @@ const StatsPage = () => {
               </Grid>
             </Grid>
           </Grid>
-
           <Grid item xs={12} md={9}>
             <Grid className="grid-wrapper">
               {TVLhistory.length ? (
@@ -199,7 +205,6 @@ const StatsPage = () => {
               )}
             </Grid>
           </Grid>
-
           <Grid item xs={12}>
             <Typography variant="h6">TVL Rankings</Typography>
             <Grid className="grid-wrapper dex-ranking">
@@ -255,47 +260,101 @@ const StatsPage = () => {
                 ) : (
                   <tbody className="skeleton-table">
                     <tr>
-                      <td colSpan={4}>
+                      <td colSpan={6}>
                         <Skeleton
                           variant="rounded"
                           sx={{ bgcolor: "#2a3454" }}
-                          height={40}
+                          height={30}
                         />
                       </td>
                     </tr>
                     <tr>
-                      <td colSpan={4}>
+                      <td colSpan={6}>
                         <Skeleton
                           variant="rounded"
                           sx={{ bgcolor: "#2a3454" }}
-                          height={40}
+                          height={30}
                         />
                       </td>
                     </tr>
                     <tr>
-                      <td colSpan={4}>
+                      <td colSpan={6}>
                         <Skeleton
                           variant="rounded"
                           sx={{ bgcolor: "#2a3454" }}
-                          height={40}
+                          height={30}
                         />
                       </td>
                     </tr>
                     <tr>
-                      <td colSpan={4}>
+                      <td colSpan={6}>
                         <Skeleton
                           variant="rounded"
                           sx={{ bgcolor: "#2a3454" }}
-                          height={40}
+                          height={30}
                         />
                       </td>
                     </tr>
                     <tr>
-                      <td colSpan={4}>
+                      <td colSpan={6}>
                         <Skeleton
                           variant="rounded"
                           sx={{ bgcolor: "#2a3454" }}
-                          height={40}
+                          height={30}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colSpan={6}>
+                        <Skeleton
+                          variant="rounded"
+                          sx={{ bgcolor: "#2a3454" }}
+                          height={30}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colSpan={6}>
+                        <Skeleton
+                          variant="rounded"
+                          sx={{ bgcolor: "#2a3454" }}
+                          height={30}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colSpan={6}>
+                        <Skeleton
+                          variant="rounded"
+                          sx={{ bgcolor: "#2a3454" }}
+                          height={30}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colSpan={6}>
+                        <Skeleton
+                          variant="rounded"
+                          sx={{ bgcolor: "#2a3454" }}
+                          height={30}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colSpan={6}>
+                        <Skeleton
+                          variant="rounded"
+                          sx={{ bgcolor: "#2a3454" }}
+                          height={30}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colSpan={6}>
+                        <Skeleton
+                          variant="rounded"
+                          sx={{ bgcolor: "#2a3454" }}
+                          height={30}
                         />
                       </td>
                     </tr>
@@ -306,6 +365,7 @@ const StatsPage = () => {
           </Grid>
         </Grid>
       </Container>
+      <Footer />
     </>
   );
 };
