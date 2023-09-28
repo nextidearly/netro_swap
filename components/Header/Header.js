@@ -74,12 +74,14 @@ const Header = () => {
                 <a
                   href={"https://xyxy-presale.vercel.app/"}
                   className={
-                    router.pathname === "/ido" ? "nav-link active" : "nav-link image-nav"
+                    router.pathname === "/ido"
+                      ? "nav-link active"
+                      : "nav-link image-nav"
                   }
                   target="_blank"
                 >
                   IDO
-                <img src='/blank.png' alt=""/>
+                  <img src="/blank.png" alt="" />
                 </a>
                 <Link
                   href={"/nodes"}
@@ -123,7 +125,9 @@ const Header = () => {
                   <Link
                     href={"/"}
                     className={
-                      router.pathname === "/" ? "nav-link active" : "nav-link"
+                      router.pathname === "/"
+                        ? "nav-link-mobile active"
+                        : "nav-link-mobile"
                     }
                   >
                     Swap
@@ -134,8 +138,8 @@ const Header = () => {
                     href={"/stats"}
                     className={
                       router.pathname === "/stats"
-                        ? "nav-link active"
-                        : "nav-link"
+                        ? "nav-link-mobile active"
+                        : "nav-link-mobile"
                     }
                   >
                     Stats
@@ -143,15 +147,16 @@ const Header = () => {
                 </MenuItem>
                 <MenuItem>
                   <a
-                    href='https://xyxy-presale.vercel.app/'
+                    href={"https://xyxy-presale.vercel.app/"}
                     className={
                       router.pathname === "/ido"
-                        ? "nav-link active"
-                        : "nav-link"
+                        ? "nav-link-mobile active"
+                        : "nav-link-mobile image-nav"
                     }
                     target="_blank"
                   >
                     IDO
+                    <img src="/blank.png" alt="" />
                   </a>
                 </MenuItem>
                 <MenuItem>
@@ -159,8 +164,8 @@ const Header = () => {
                     href={"/nodes"}
                     className={
                       router.pathname === "/nodes"
-                        ? "nav-link active"
-                        : "nav-link"
+                        ? "nav-link-mobile active"
+                        : "nav-link-mobile"
                     }
                   >
                     Nodes

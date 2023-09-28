@@ -42,19 +42,23 @@ const StatsPage = () => {
     const response = await fetch(`/api-llama/overview/dexs/${protocol}`);
     const result = await response.json();
     let tvlList = [];
-    for (let i = 0; i < result.protocols.length; i++) {
-      const res = await fetch(`/api-llama/tvl/${result.protocols[i].module}`);
-      const tvl = await res.json();
-      if (tvl && !tvl.message) {
-        const data = {
-          logo: result.protocols[i].logo,
-          displayName: result.protocols[i].displayName,
-          change_1d: result.protocols[i].change_1d,
-          change_7d: result.protocols[i].change_7d,
-          change_1m: result.protocols[i].change_1m,
-          tvl: Number(tvl) !== NaN ? tvl : 0,
-        };
-        tvlList.push(data);
+    for (let i = 0; i < result.protocols.length - 20; i++) {
+      try {
+        const res = await fetch(`/api-llama/tvl/${result.protocols[i].module}`);
+        const tvl = await res.json();
+        if (tvl && !tvl.message) {
+          const data = {
+            logo: result.protocols[i].logo,
+            displayName: result.protocols[i].displayName,
+            change_1d: result.protocols[i].change_1d,
+            change_7d: result.protocols[i].change_7d,
+            change_1m: result.protocols[i].change_1m,
+            tvl: Number(tvl) !== NaN ? tvl : 0,
+          };
+          tvlList.push(data);
+        }
+      } catch (error) {
+        console.log(error);
       }
     }
     const dexList = tvlList.sort((a, b) => {
