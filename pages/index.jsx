@@ -394,6 +394,7 @@ const SwapPage = () => {
         chain.id === 42161);
 
     if (network) {
+      setTokenList([])
       getProtocols();
       setTimeout(() => {
         getRouter(chain.id);

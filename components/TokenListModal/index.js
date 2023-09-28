@@ -75,7 +75,7 @@ const TokenListModal = (props) => {
             autoHideTimeout={1000}
             autoHideDuration={200}
           >
-            {tokens &&
+            {tokens && tokens.length ? (
               tokens.map((token, index) => {
                 return (
                   <React.Fragment key={index}>
@@ -93,7 +93,10 @@ const TokenListModal = (props) => {
                     )}
                   </React.Fragment>
                 );
-              })}
+              })
+            ) : (
+              <p>Feching tokens...</p>
+            )}
           </Scrollbars>
         </Grid>
       </Box>
