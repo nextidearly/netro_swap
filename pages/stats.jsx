@@ -15,7 +15,7 @@ import { initTradeInfo } from "../redux/actions";
 
 import Skeleton from "@mui/material/Skeleton";
 import moment from "moment";
-import { PROTOCOLS } from "../environment/config";
+import { PROTOCOLS, DEX_TVL_RANKINGS } from "../environment/config";
 import Footer from "@/components/Footer/Footer";
 
 const StatsPage = () => {
@@ -42,7 +42,7 @@ const StatsPage = () => {
     const response = await fetch(`/api-llama/overview/dexs/${protocol}`);
     const result = await response.json();
     let tvlList = [];
-    for (let i = 0; i < result.protocols.length - 20; i++) {
+    for (let i = 0; i < result.protocols.length; i++) {
       try {
         const res = await fetch(`/api-llama/tvl/${result.protocols[i].module}`);
         const tvl = await res.json();
@@ -65,6 +65,7 @@ const StatsPage = () => {
       return b.tvl - a.tvl;
     });
     setDexTVLData(dexList);
+    sessionStorage.setItem("asdfasdf", JSON.stringify(dexList));
   };
 
   const convertCurrency = (labelValue) => {
@@ -104,6 +105,7 @@ const StatsPage = () => {
         chain.id === 8453 ||
         chain.id === 42161);
     if (network) {
+      setDexTVLData(DEX_TVL_RANKINGS[chain.id]);
       getTVL(PROTOCOLS[chain ? chain.id : tradeInfo.chainId]);
       getDexTVL(PROTOCOLS[chain ? chain.id : tradeInfo.chainId].toLowerCase());
       if (chain) {
@@ -119,7 +121,7 @@ const StatsPage = () => {
   }, [chain]);
 
   return (
-    <>
+    <div className="page">
       <Header />
       <Container className="content-wrapper-stats">
         <Grid container spacing={2}>
@@ -370,7 +372,7 @@ const StatsPage = () => {
         </Grid>
       </Container>
       <Footer />
-    </>
+    </div>
   );
 };
 

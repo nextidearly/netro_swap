@@ -1,4 +1,4 @@
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Header from "../components/Header/Header";
@@ -15,7 +15,10 @@ import { useAccount, useBalance, useNetwork } from "wagmi";
 import { ethers } from "ethers";
 import { useSnackbar } from "notistack";
 import ABI from "../environment/ERC20_ABI.json";
-const CountDownComponent = dynamic(() => import('../components/CountDown/CountDown'), { ssr: false })
+const CountDownComponent = dynamic(
+  () => import("../components/CountDown/CountDown"),
+  { ssr: false }
+);
 
 const Donate = () => {
   const { address, isConnected } = useAccount();
@@ -265,7 +268,9 @@ const Donate = () => {
   }, []);
 
   return (
-    <div className="page-wrapper">
+    <div
+      className="page"
+    >
       <Header />
       <Head>
         <title>Presale | XYXY Finance</title>

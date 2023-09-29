@@ -6,6 +6,7 @@ body {
   background: linear-gradient(to top, #30cfd0 0%, #330867 100%);
   padding: 0;
   min-height: 100vh;
+  box-sizing: border-box;
 }
 
 ::-webkit-scrollbar {
@@ -70,11 +71,29 @@ a {
   text-decoration: none;
 }
 
+.page {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 70px;
+  box-sizing: border-box;
+}
+
+.ju367v15 {
+  font-size: 16px;
+  line-height: 20px;
+  width: 100%;
+}
+
+.no-tokens {
+  color: white;
+}
+
 .main-wrapper {
   margin-top: 65px;
   min-height: calc(100vh - 22vh);
 
   .swap-wrapper {
+    max-width: 563px;;
     .title {
       font-size: 20px;
       font-weight: 700;
@@ -2129,12 +2148,15 @@ a {
 
 /* Footer */
 .footer-wrapper {
+  display: flex;
+  position: absolute;
+  bottom: 13px;
+  left: 50%;
+  transform: translateX(-50%);
   margin-top: 20px;
   color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
+  justify-content: center;
   .social-links {
     color: #fff;
     margin: 0 10px;

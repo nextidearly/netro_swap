@@ -18,11 +18,13 @@ import {
   optimism,
   polygon,
   base,
+  bsc,
 } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
     mainnet,
+    bsc,
     polygon,
     optimism,
     arbitrum,

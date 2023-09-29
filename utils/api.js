@@ -37,3 +37,9 @@ export function swap(from, to, amount, chain, address) {
   const res = fetch(url, { headers: headers });
   return res;
 }
+
+export function searchTokenList(chain, query) {
+  const url = `/1inch/token/${token_api_version}/${chain}/search?query=${query}&ignore_listed=false&limit=10`;
+  const res = fetch(url, { headers: headers });
+  return res;
+}

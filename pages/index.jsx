@@ -21,13 +21,14 @@ import TokenListModal from "../components/TokenListModal";
 import ABI from "../environment/ERC20_ABI.json";
 import Header from "../components/Header/Header";
 import SlippageModal from "../components/Slippage/SlippageModal";
-import { PROTOCOLS } from "../environment/config";
+import { PROTOCOLS, ROUTER } from "../environment/config";
+import { TOKEN_LIST } from "../environment/tokenList";
 import {
   get_protocols,
-  get_router,
+  // get_router,
   quote,
   swap,
-  token_list,
+  // token_list,
 } from "@/utils/api";
 import Head from "next/head";
 import Footer from "@/components/Footer/Footer";
@@ -61,7 +62,7 @@ const SwapPage = () => {
   const [pathResults, setPathResults] = useState(null);
   const [protocols, setProtocols] = useState([]);
   const [correctNetwork, setCorrectNetwork] = useState(false);
-  const [router, setRouter] = useState(null);
+  const [router, setRouter] = useState(ROUTER);
 
   const showModal = (key) => {
     setModalKey(key);
@@ -108,18 +109,19 @@ const SwapPage = () => {
     }
   };
 
-  const getRouter = async () => {
-    if (!chain) return;
-    const response = await get_router(chain.id);
-    if (response.status !== 429) {
-      const { address } = await response.json();
-      setRouter(address);
-    } else {
-      setTimeout(() => {
-        getRouter();
-      }, 100);
-    }
-  };
+  // const getRouter = async () => {
+  //   if (!chain) return;
+  //   const response = await get_router(chain.id);
+  //   if (response.status !== 429) {
+  //     const { address } = await response.json();
+  //     setRouter(address);
+  //     console.log(address, "router");
+  //   } else {
+  //     setTimeout(() => {
+  //       getRouter();
+  //     }, 100);
+  //   }
+  // };
 
   const getQuote = async () => {
     if (sellBalance <= 0) return false;
@@ -147,6 +149,7 @@ const SwapPage = () => {
       setLoading(false);
       if (quoteData.statusCode === 400) {
         setErrorMsg(quoteData.description);
+        console.log(quoteData);
         if (quoteData.meta && quoteData?.meta[1]?.type === "allowance")
           setallowanceError(true);
         setBuyBalance(0);
@@ -349,17 +352,17 @@ const SwapPage = () => {
     }
   };
 
-  const getTokenList = async (chainId) => {
-    const res = await token_list(chainId);
-    if (res.status !== 429) {
-      const response = await res.json();
-      setTokenList(response.tokens);
-    } else {
-      setTimeout(() => {
-        getTokenList(chainId);
-      }, 100);
-    }
-  };
+  // const getTokenList = async (chainId) => {
+  //   const res = await token_list(chainId);
+  //   if (res.status !== 429) {
+  //     const response = await res.json();
+  //     setTokenList(response.tokens);
+  //   } else {
+  //     setTimeout(() => {
+  //       getTokenList(chainId);
+  //     }, 100);
+  //   }
+  // };
 
   useEffect(() => {
     if (correctNetwork) {
@@ -391,17 +394,14 @@ const SwapPage = () => {
         chain.id === 137 ||
         chain.id === 10 ||
         chain.id === 8453 ||
-        chain.id === 42161);
+        chain.id === 42161 ||
+        chain.id === 56);
 
     if (network) {
-      setTokenList([])
+      setTokenList(TOKEN_LIST[chain.id]);
       getProtocols();
-      setTimeout(() => {
-        getRouter(chain.id);
-      }, 100);
-      setTimeout(() => {
-        getTokenList(chain.id);
-      }, 300);
+      // getRouter(chain.id);
+      // getTokenList(chain.id)
       setCorrectNetwork(network);
       initTradeState(chain.id);
       setpairResult([]);
@@ -433,348 +433,354 @@ const SwapPage = () => {
 
   return (
     <>
-      <Grid className={modalOpen || slippageModalOpen ? "blur-background" : ""}>
-        <Header />
-        <Head>
-          <title>Swap | XYXY Finance</title>
-          <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="/apple-touch-icon.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="/favicon-32x32.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="/favicon-16x16.png"
-          />
-          <link rel="manifest" href="/site.webmanifest" />{" "}
-          <meta
-            name="description"
-            content="XYXY is the leading swap platform on Base"
-          />
-          <meta
-            name="keywords"
-            content="Defi, Base, Dex, Dex Aggregator, XYXY "
-          />
-          <meta property="og:title" content={`XYXY | XYXY Finance`} />
-          <meta property="og:type" content="website" />
-          <meta
-            property="og:description"
-            content={`XYXY is the Dex aggregator on Base network`}
-          />
-          <meta
-            property="og:url"
-            content={`https://xyxybase-swap.netlify.app/`}
-          />
-          <meta property="og:site_name" content="XYXY Swap Base"></meta>
-          <meta
-            property="og:image"
-            content="https://xyxybase-swap.netlify.app/logo_new.png"
-          ></meta>
-          <meta property="og:image:type" content="image/png"></meta>
-          <meta property="og:image:width" content="2000"></meta>
-          <meta property="og:image:height" content="2000"></meta>
-          <meta property="og:image:alt" content="Logo"></meta>
-        </Head>
+      <div className="page">
+        <Grid
+          className={modalOpen || slippageModalOpen ? "blur-background" : ""}
+        >
+          <Header />
+          <Head>
+            <title>Swap | XYXY Finance</title>
+            <link
+              rel="apple-touch-icon"
+              sizes="180x180"
+              href="/apple-touch-icon.png"
+            />
+            <link
+              rel="icon"
+              type="image/png"
+              sizes="32x32"
+              href="/favicon-32x32.png"
+            />
+            <link
+              rel="icon"
+              type="image/png"
+              sizes="16x16"
+              href="/favicon-16x16.png"
+            />
+            <link rel="manifest" href="/site.webmanifest" />{" "}
+            <meta
+              name="description"
+              content="XYXY is the leading swap platform on Base"
+            />
+            <meta
+              name="keywords"
+              content="Defi, Base, Dex, Dex Aggregator, XYXY "
+            />
+            <meta property="og:title" content={`XYXY | XYXY Finance`} />
+            <meta property="og:type" content="website" />
+            <meta
+              property="og:description"
+              content={`XYXY is the Dex aggregator on Base network`}
+            />
+            <meta
+              property="og:url"
+              content={`https://xyxybase-swap.netlify.app/`}
+            />
+            <meta property="og:site_name" content="XYXY Swap Base"></meta>
+            <meta
+              property="og:image"
+              content="https://xyxybase-swap.netlify.app/logo_new.png"
+            ></meta>
+            <meta property="og:image:type" content="image/png"></meta>
+            <meta property="og:image:width" content="2000"></meta>
+            <meta property="og:image:height" content="2000"></meta>
+            <meta property="og:image:alt" content="Logo"></meta>
+          </Head>
 
-        <Container maxWidth="md">
-          <Grid className="main-wrapper" container justifyContent="center">
-            <Grid className="swap-wrapper">
-              <Grid container justifyContent={"space-between"}>
-                <Typography variant="h1" className="title">
-                  Swap tokens
-                </Typography>
-                <SettingsOutlinedIcon
-                  className="setting-icon"
-                  onClick={() => setSlippageModalOpen(true)}
-                />
-              </Grid>
-
-              <Grid
-                container
-                direction="column"
-                className="swap-form"
-                rowSpacing={2}
-              >
-                <Grid item>
-                  <Box className="token-box">
-                    <Grid container alignItems={"center"}>
-                      <Button
-                        className="token-select"
-                        onClick={(e) => showModal("from")}
-                      >
-                        <img
-                          src={tradeInfo.from.logoURI}
-                          alt="icon"
-                          className="token-icon"
-                          onError={(element) => {
-                            addDefaultImg(element);
-                          }}
-                        />
-                        {tradeInfo.from.symbol}
-                        <ArrowDropDownIcon />
-                      </Button>
-
-                      <InputBase
-                        type="number"
-                        value={sellBalance}
-                        placeholder="0.0000000"
-                        className="input-box"
-                        onChange={(e) => calculatePrice(e.target.value)}
-                        disabled={!correctNetwork}
-                      />
-                    </Grid>
-                    <Grid container justifyContent={"space-between"}>
-                      <Grid className="balance-text">
-                        Balance:{" "}
-                        {tradeInfo.from.address ===
-                        "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
-                          ? Number(balance).toFixed(5)
-                          : Number(balanceFrom).toFixed(5)}{" "}
-                        {tradeInfo.from.symbol}
-                      </Grid>
-
-                      <Grid>
-                        {balanceError && (
-                          <Typography
-                            textAlign={"right"}
-                            className="balance-error"
-                          >
-                            Insufficient balance
-                          </Typography>
-                        )}
-                      </Grid>
-                    </Grid>
-                  </Box>
-                </Grid>
-
-                <Grid container justifyContent={"center"}>
-                  <div className="change-order">
-                    <SwapCallsOutlinedIcon onClick={changeOrder} />
-                  </div>
-                </Grid>
-
-                <Grid item>
-                  <Box className="token-box">
-                    <Grid container alignItems={"center"}>
-                      <Button
-                        className="token-select"
-                        onClick={(e) => showModal("to")}
-                      >
-                        {tradeInfo.to.symbol ? (
-                          <>
-                            <img
-                              src={tradeInfo.to.logoURI}
-                              alt="icon"
-                              className="token-icon"
-                              onError={(element) => {
-                                addDefaultImg(element);
-                              }}
-                            />
-                            {tradeInfo.to.symbol}
-                          </>
-                        ) : (
-                          <span className="text-blue">Select a Token</span>
-                        )}
-
-                        <ArrowDropDownIcon />
-                      </Button>
-                      <InputBase
-                        type="number"
-                        value={buyBalance}
-                        placeholder="0.0000000"
-                        className="input-box"
-                      />
-                    </Grid>
-                    <Grid className="balance-text">
-                      Balance:{" "}
-                      {tradeInfo.to.address ===
-                      "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
-                        ? Number(balance).toFixed(5)
-                        : Number(balanceTo).toFixed(5)}{" "}
-                      {tradeInfo.to.symbol}
-                    </Grid>
-                  </Box>
-                </Grid>
-                <Grid>
-                  {estimatedGas ? (
-                    <Typography color={"#a9b6bf"} textAlign={"right"}>
-                      Estimated Gas: {estimatedGas}
-                    </Typography>
-                  ) : (
-                    <></>
-                  )}
-                  {unknownPrice && (
-                    <Typography className="unknown-price" textAlign={"right"}>
-                      Unknown price <WarningAmberIcon></WarningAmberIcon>
-                    </Typography>
-                  )}
-                  {errorMsg && (
-                    <Typography className="unknown-price" textAlign={"right"}>
-                      {errorMsg} <WarningAmberIcon></WarningAmberIcon>
-                    </Typography>
-                  )}
-                  <Typography className="exchange-rate" textAlign={"right"}>
-                    {pairResult.length > 0 ? (
-                      <>
-                        1 {pairResult[0].baseToken.symbol} ={" "}
-                        {pairResult[0].priceNative}{" "}
-                        {pairResult[0].quoteToken.symbol}
-                      </>
-                    ) : (
-                      <></>
-                    )}
+          <Container maxWidth="md">
+            <Grid className="main-wrapper" container justifyContent="center">
+              <Grid className="swap-wrapper">
+                <Grid container justifyContent={"space-between"}>
+                  <Typography variant="h1" className="title">
+                    Swap tokens
                   </Typography>
+                  <SettingsOutlinedIcon
+                    className="setting-icon"
+                    onClick={() => setSlippageModalOpen(true)}
+                  />
                 </Grid>
-                <Grid item container justifyContent={"center"}>
-                  {allowanceError ? (
-                    <LoadingButton
-                      loading={loadingTx}
-                      variant="contained"
-                      fullWidth
-                      onClick={callApprove}
-                    >
-                      Approve
-                    </LoadingButton>
-                  ) : (
-                    <>
-                      {liquidityError ? (
-                        <Button variant="contained" disabled fullWidth>
-                          No liquidity for swap
+
+                <Grid
+                  container
+                  direction="column"
+                  className="swap-form"
+                  rowSpacing={2}
+                >
+                  <Grid item>
+                    <Box className="token-box">
+                      <Grid container alignItems={"center"}>
+                        <Button
+                          className="token-select"
+                          onClick={(e) => showModal("from")}
+                        >
+                          <img
+                            src={tradeInfo.from.logoURI}
+                            alt="icon"
+                            className="token-icon"
+                            onError={(element) => {
+                              addDefaultImg(element);
+                            }}
+                          />
+                          {tradeInfo.from.symbol}
+                          <ArrowDropDownIcon />
                         </Button>
-                      ) : (
-                        <>
-                          {isConnected ? (
-                            <>
-                              {balanceError || !Number(sellBalance) ? (
-                                <Button
-                                  variant="contained"
-                                  disabled
-                                  className="swap-button"
-                                  fullWidth
-                                >
-                                  {!balanceError
-                                    ? "SWAP"
-                                    : "Insufficient balance"}
-                                </Button>
-                              ) : (
-                                <Button
-                                  component={"button"}
-                                  variant="contained"
-                                  className="swap-button"
-                                  fullWidth
-                                  target={"_blank"}
-                                  disabled={loading}
-                                  onClick={callSwap}
-                                >
-                                  SWAP
-                                </Button>
-                              )}
-                            </>
-                          ) : (
-                            <>
-                              <Button
-                                variant="contained"
-                                fullWidth
-                                disabled={true}
-                              >
-                                SWAP
-                              </Button>
-                            </>
+
+                        <InputBase
+                          type="number"
+                          value={sellBalance}
+                          placeholder="0.0000000"
+                          className="input-box"
+                          onChange={(e) => calculatePrice(e.target.value)}
+                          disabled={!correctNetwork}
+                        />
+                      </Grid>
+                      <Grid container justifyContent={"space-between"}>
+                        <Grid className="balance-text">
+                          Balance:{" "}
+                          {tradeInfo.from.address ===
+                          "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+                            ? Number(balance).toFixed(5)
+                            : Number(balanceFrom).toFixed(5)}{" "}
+                          {tradeInfo.from.symbol}
+                        </Grid>
+
+                        <Grid>
+                          {balanceError && (
+                            <Typography
+                              textAlign={"right"}
+                              className="balance-error"
+                            >
+                              Insufficient balance
+                            </Typography>
                           )}
-                        </>
-                      )}
-                    </>
-                  )}
-                </Grid>
-                {pathResults && pathResults.length > 0 && tradeInfo.to && (
-                  <Grid className="exchanges">
-                    <Typography variant="h6">Exchanges:</Typography>
+                        </Grid>
+                      </Grid>
+                    </Box>
+                  </Grid>
 
-                    <table border="0" cellSpacing="0" cellPadding="0">
-                      <thead>
-                        <tr>
-                          <th>Name</th>
-                          <th>
-                            {tradeInfo.from.name} / {tradeInfo.to.name}
-                          </th>
-                          <th>Diff</th>
-                        </tr>
-                      </thead>
+                  <Grid container justifyContent={"center"}>
+                    <div className="change-order">
+                      <SwapCallsOutlinedIcon onClick={changeOrder} />
+                    </div>
+                  </Grid>
 
-                      <tbody>
-                        {pathResults.map((element, index) => (
-                          <tr className="dex-item" key={index}>
-                            <td className="dex-name">
+                  <Grid item>
+                    <Box className="token-box">
+                      <Grid container alignItems={"center"}>
+                        <Button
+                          className="token-select"
+                          onClick={(e) => showModal("to")}
+                        >
+                          {tradeInfo.to.symbol ? (
+                            <>
                               <img
-                                src={element.img}
+                                src={tradeInfo.to.logoURI}
                                 alt="icon"
-                                className="dex-icon"
+                                className="token-icon"
                                 onError={(element) => {
                                   addDefaultImg(element);
                                 }}
                               />
-                              {element.title}
-                            </td>
-                            <td>
-                              {tradeInfo?.to?.decimals && element && (
-                                <>
-                                  {(
-                                    Number(
-                                      ethers.utils
-                                        .formatUnits(
-                                          element?.toTokenAmount,
-                                          tradeInfo?.to?.decimals
-                                        )
-                                        .toString()
-                                    ) /
-                                      Number(sellBalance) -
-                                    (index * 0.1 + index * 0.01)
-                                  ).toFixed(4)}
-                                </>
-                              )}
-                            </td>
-                            <td>
-                              {index === 0 ? (
-                                <Typography className="badge best">
-                                  Best
-                                </Typography>
-                              ) : (
-                                <Typography className="badge">Match</Typography>
-                              )}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                              {tradeInfo.to.symbol}
+                            </>
+                          ) : (
+                            <span className="text-blue">Select a Token</span>
+                          )}
+
+                          <ArrowDropDownIcon />
+                        </Button>
+                        <InputBase
+                          type="number"
+                          value={buyBalance}
+                          placeholder="0.0000000"
+                          className="input-box"
+                        />
+                      </Grid>
+                      <Grid className="balance-text">
+                        Balance:{" "}
+                        {tradeInfo.to.address ===
+                        "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+                          ? Number(balance).toFixed(5)
+                          : Number(balanceTo).toFixed(5)}{" "}
+                        {tradeInfo.to.symbol}
+                      </Grid>
+                    </Box>
                   </Grid>
-                )}
+                  <Grid>
+                    {estimatedGas ? (
+                      <Typography color={"#a9b6bf"} textAlign={"right"}>
+                        Estimated Gas: {estimatedGas}
+                      </Typography>
+                    ) : (
+                      <></>
+                    )}
+                    {unknownPrice && (
+                      <Typography className="unknown-price" textAlign={"right"}>
+                        Unknown price <WarningAmberIcon></WarningAmberIcon>
+                      </Typography>
+                    )}
+                    {errorMsg && (
+                      <Typography className="unknown-price" textAlign={"right"}>
+                        {errorMsg} <WarningAmberIcon></WarningAmberIcon>
+                      </Typography>
+                    )}
+                    <Typography className="exchange-rate" textAlign={"right"}>
+                      {pairResult.length > 0 ? (
+                        <>
+                          1 {pairResult[0].baseToken.symbol} ={" "}
+                          {pairResult[0].priceNative}{" "}
+                          {pairResult[0].quoteToken.symbol}
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                    </Typography>
+                  </Grid>
+                  <Grid item container justifyContent={"center"}>
+                    {allowanceError ? (
+                      <LoadingButton
+                        loading={loadingTx}
+                        variant="contained"
+                        fullWidth
+                        onClick={callApprove}
+                      >
+                        Approve
+                      </LoadingButton>
+                    ) : (
+                      <>
+                        {liquidityError ? (
+                          <Button variant="contained" disabled fullWidth>
+                            No liquidity for swap
+                          </Button>
+                        ) : (
+                          <>
+                            {isConnected ? (
+                              <>
+                                {balanceError || !Number(sellBalance) ? (
+                                  <Button
+                                    variant="contained"
+                                    disabled
+                                    className="swap-button"
+                                    fullWidth
+                                  >
+                                    {!balanceError
+                                      ? "SWAP"
+                                      : "Insufficient balance"}
+                                  </Button>
+                                ) : (
+                                  <Button
+                                    component={"button"}
+                                    variant="contained"
+                                    className="swap-button"
+                                    fullWidth
+                                    target={"_blank"}
+                                    disabled={loading}
+                                    onClick={callSwap}
+                                  >
+                                    SWAP
+                                  </Button>
+                                )}
+                              </>
+                            ) : (
+                              <>
+                                <Button
+                                  variant="contained"
+                                  fullWidth
+                                  disabled={true}
+                                >
+                                  SWAP
+                                </Button>
+                              </>
+                            )}
+                          </>
+                        )}
+                      </>
+                    )}
+                  </Grid>
+                  {pathResults && pathResults.length > 0 && tradeInfo.to && (
+                    <Grid className="exchanges">
+                      <Typography variant="h6">Exchanges:</Typography>
+
+                      <table border="0" cellSpacing="0" cellPadding="0">
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>
+                              {tradeInfo.from.name} / {tradeInfo.to.name}
+                            </th>
+                            <th>Diff</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          {pathResults.map((element, index) => (
+                            <tr className="dex-item" key={index}>
+                              <td className="dex-name">
+                                <img
+                                  src={element.img}
+                                  alt="icon"
+                                  className="dex-icon"
+                                  onError={(element) => {
+                                    addDefaultImg(element);
+                                  }}
+                                />
+                                {element.title}
+                              </td>
+                              <td>
+                                {tradeInfo?.to?.decimals && element && (
+                                  <>
+                                    {(
+                                      Number(
+                                        ethers.utils
+                                          .formatUnits(
+                                            element?.toTokenAmount,
+                                            tradeInfo?.to?.decimals
+                                          )
+                                          .toString()
+                                      ) /
+                                        Number(sellBalance) -
+                                      (index * 0.1 + index * 0.01)
+                                    ).toFixed(4)}
+                                  </>
+                                )}
+                              </td>
+                              <td>
+                                {index === 0 ? (
+                                  <Typography className="badge best">
+                                    Best
+                                  </Typography>
+                                ) : (
+                                  <Typography className="badge">
+                                    Match
+                                  </Typography>
+                                )}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </Grid>
+                  )}
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </Container>
-      </Grid>
-      {tokenList && (
-        <TokenListModal
-          modalOpen={modalOpen}
-          closeModal={closeModal}
-          modalKey={modalKey}
-          changeBalance={changeBalance}
-          tokenList={tokenList}
+          </Container>
+        </Grid>
+        {tokenList && (
+          <TokenListModal
+            modalOpen={modalOpen}
+            closeModal={closeModal}
+            modalKey={modalKey}
+            changeBalance={changeBalance}
+            tokenList={tokenList}
+          />
+        )}
+        <SlippageModal
+          modalOpen={slippageModalOpen}
+          closeModal={() => setSlippageModalOpen(false)}
         />
-      )}
-      <SlippageModal
-        modalOpen={slippageModalOpen}
-        closeModal={() => setSlippageModalOpen(false)}
-      />
-      <Footer/>
+        <Footer />
+      </div>
     </>
   );
 };

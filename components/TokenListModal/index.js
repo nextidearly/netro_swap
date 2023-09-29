@@ -6,22 +6,69 @@ import CloseIcon from "@mui/icons-material/Close";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { Scrollbars } from "rc-scrollbars";
 import TokenIterm from "../TokenIterm/TokenIterm";
+import { getAddress } from "@ethersproject/address";
+import { ethers } from "ethers";
+import { erc20ABI } from "wagmi";
 
 const TokenListModal = (props) => {
   const tokenList = Object.entries(props.tokenList);
-
   const dispatch = useDispatch();
   const tradeInfo = useSelector((RootState) => RootState.trade);
-
   const { modalOpen, closeModal, modalKey, changeBalance } = props;
   const [tokens, setTokens] = useState([]);
-  const searchToken = (e) => {
-    const keyword = e.target.value;
-    const filtered = tokenList.filter((token, index) => {
-      return token[1].name.toLowerCase().indexOf(keyword.toLowerCase()) > -1;
-    });
 
-    setTokens(filtered);
+  function isAddress(value) {
+    try {
+      return getAddress(value.toLowerCase());
+    } catch {
+      return false;
+    }
+  }
+
+  const addToken = async (address) => {
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const tokenContract = new ethers.Contract(address, erc20ABI, provider);
+      const name = await tokenContract.name();
+      const symbol = await tokenContract.symbol();
+      const decimals = await tokenContract.decimals();
+
+      const newToken = {
+        chainId: chain.id,
+        address: address,
+        name: name,
+        symbol: symbol,
+        decimals: decimals,
+        logoURI: "",
+        tags: ["tokens"],
+      };
+
+      setTokens(newToken);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const searchToken = async (e) => {
+    const keyword = e.target.value;
+
+    if (isAddress(keyword)) {
+      const filtered = await tokenList.filter((token, index) => {
+        return (
+          token[1].address.toLowerCase().indexOf(keyword.toLowerCase()) > -1
+        );
+      });
+      if (filtered) {
+        setTokens(filtered);
+      } else {
+        addToken(keyword);
+      }
+    } else {
+      const filtered = await tokenList.filter((token, index) => {
+        return token[1].name.toLowerCase().indexOf(keyword.toLowerCase()) > -1;
+      });
+      setTokens(filtered);
+    }
   };
 
   const changeTrade = (token) => {
@@ -44,6 +91,13 @@ const TokenListModal = (props) => {
   useEffect(() => {
     setTokens(tokenList);
   }, [props.tokenList]);
+  
+  useEffect(() => {
+    return () => {
+      setTokens()
+    }
+  }, [])
+  
 
   return (
     <Modal
@@ -70,7 +124,7 @@ const TokenListModal = (props) => {
         <hr />
         <Grid container direction="column">
           <Scrollbars
-            style={{ height: 300 }}
+            style={{ height: 326 }}
             autoHide
             autoHideTimeout={1000}
             autoHideDuration={200}
@@ -95,7 +149,7 @@ const TokenListModal = (props) => {
                 );
               })
             ) : (
-              <p>Feching tokens...</p>
+              <p className="no-tokens">There is no token on the current network</p>
             )}
           </Scrollbars>
         </Grid>

@@ -54,7 +54,7 @@ const LaunchPad = () => {
   // }, [provider]);
 
   return (
-    <Grid className="page-wrapper">
+    <Grid className="page" >
       <Header />
       <Head>
         <title>NodeSale | XYXY Finance</title>
