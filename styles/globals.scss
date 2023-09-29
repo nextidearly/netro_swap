@@ -88,6 +88,31 @@ a {
   color: white;
 }
 
+.nav-link-mobile {
+  height: 33px!important;
+}
+
+.custom-button {
+  margin-top: 12px;
+  width: 164px;
+  height: 37px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 6px;
+  background-color: #0a1125;
+  transition: all .2s ease-in-out;
+}
+
+.custom-button:hover {
+  background-color: #3a466b;
+}
+
 .main-wrapper {
   margin-top: 65px;
   min-height: calc(100vh - 22vh);
@@ -2191,9 +2216,9 @@ a {
   width: 100%;
 }
 
-.ju367vec {
-  background-color: #1a1b1f !important;
-}
+// .ju367vec {
+//   background-color: #1a1b1f !important;
+// }
 .action-buttons {
   position: relative;
   display: flex;
@@ -2203,6 +2228,8 @@ a {
     width: 100%;
   }
 }
+
+
 
 .unknown-logo {
   margin-right: 15px;

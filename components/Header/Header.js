@@ -15,6 +15,7 @@ import { setWallet } from "./../../redux/actions";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { CustomConnectButton } from "../ConnectButton/ConnectButton";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -96,6 +97,7 @@ const Header = () => {
               </Grid>
             </Grid>
           </Grid>
+
           <Grid xs={10} md={4} item>
             <Grid container justifyContent="flex-end" alignItems={"center"}>
               {matches && (
@@ -171,17 +173,8 @@ const Header = () => {
                     Nodes
                   </Link>
                 </MenuItem>
-                {!matches && (
-                  <MenuItem>
-                    <ConnectButton
-                      showBalance={{
-                        smallScreen: false,
-                        largeScreen: true,
-                      }}
-                      className="mobile_connect_btn"
-                    />
-                  </MenuItem>
-                )}
+                <hr/>
+                <CustomConnectButton />
               </Menu>
             </Grid>
           </Grid>
