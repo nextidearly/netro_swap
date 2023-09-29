@@ -75,7 +75,7 @@ export const CustomConnectButton = () => {
                     )}
                     {chain.name}
                   </button>
-                  <button   style={{ display: "flex" }}  className="custom-button" onClick={openAccountModal} type="button">
+                  <button   style={{ display: "flex", justifyContent: 'center', alignContent: 'center' }}  className="custom-button" onClick={openAccountModal} type="button">
                     {account.displayName}
                     {account.displayBalance
                       ? ` (${account.displayBalance})`
