@@ -33,14 +33,32 @@ export const CustomConnectButton = () => {
             {(() => {
               if (!connected) {
                 return (
-                  <button onClick={openConnectModal} type="button">
+                  <button
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                    className="custom-button"
+                    onClick={openConnectModal}
+                    type="button"
+                  >
                     Connect Wallet
                   </button>
                 );
               }
               if (chain.unsupported) {
                 return (
-                  <button onClick={openChainModal} type="button">
+                  <button
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                    className="custom-button"
+                    onClick={openChainModal}
+                    type="button"
+                  >
                     Wrong network
                   </button>
                 );
@@ -49,7 +67,11 @@ export const CustomConnectButton = () => {
                 <div>
                   <button
                     onClick={openChainModal}
-                    style={{ display: "flex", justifyContent: "center", alignItems: 'center' }}
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
                     type="button"
                     className="custom-button"
                   >
@@ -75,7 +97,16 @@ export const CustomConnectButton = () => {
                     )}
                     {chain.name}
                   </button>
-                  <button   style={{ display: "flex", justifyContent: 'center', alignContent: 'center' }}  className="custom-button" onClick={openAccountModal} type="button">
+                  <button
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignContent: "center",
+                    }}
+                    className="custom-button"
+                    onClick={openAccountModal}
+                    type="button"
+                  >
                     {account.displayName}
                     {account.displayBalance
                       ? ` (${account.displayBalance})`
