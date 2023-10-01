@@ -125,9 +125,11 @@ const StatsPage = () => {
       <Header />
       <Container className="content-wrapper-stats">
         <div className="flex flex-col gap-2 sm:hidden w-full">
+
           <p className="text-center text-white text-2xl font-semibold">
             {PROTOCOLS[tradeInfo.chainId]} Stats
           </p>
+
           <div className="flex gap-3">
             <div className="w-full">
               <div className="grid-wrapper">
@@ -179,6 +181,7 @@ const StatsPage = () => {
               </div>
             </div>
           </div>
+
           <div className="grid grid-cols-1 justify-between">
             <p className="text-white pt-1 text-right">
               TVL (USD):&nbsp;
@@ -336,12 +339,13 @@ const StatsPage = () => {
             </div>
           </div>
         </div>
+
         <div className="hidden sm:flex sm:flex-col sm:gap-2 mt-10 w-full">
           <p className="text-center text-white text-3xl font-semibold">
             {PROTOCOLS[tradeInfo.chainId]} Stats
           </p>
-          <div className="flex gap-3">
-            <div className="w-full max-w-[200px] min-w-[130px] flex flex-col">
+          <div className="grid grid-cols-12 gap-3">
+            <div className="col-span-3 flex flex-col">
               <div className="grid-wrapper">
                 <p className="text-[22px] font-semibold text-white">
                   TVL (USD)
@@ -375,7 +379,7 @@ const StatsPage = () => {
                 )}
               </div>
             </div>
-            <div className="w-full">
+            <div className="col-span-9">
               <div className="grid-wrapper">
                 {TVLhistory.length ? (
                   <ResponsiveContainer width="100%" height={200}>
