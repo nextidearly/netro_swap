@@ -85,7 +85,7 @@ const Header = () => {
                   <img src="/blank.png" alt="" />
                 </a>
                 <a
-                  href={"https://xyxy-presale.vercel.app/"}
+                  href={"https://xyxy-presale-5y2g0sq7k-nextidearly.vercel.app/airdrop/"}
                   className={
                     router.pathname === "/ido"
                       ? "nav-link active"
@@ -175,7 +175,7 @@ const Header = () => {
                 </MenuItem>
                 <MenuItem>
                   <a
-                    href={"https://xyxy-presale.vercel.app/"}
+                    href={"https://xyxy-presale-5y2g0sq7k-nextidearly.vercel.app/airdrop"}
                     className={
                       router.pathname === "/ido"
                         ? "nav-link-mobile active"
