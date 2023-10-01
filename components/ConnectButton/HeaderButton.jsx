@@ -96,9 +96,6 @@ export const HeaderButton = () => {
                     <span className="hidden lg:flex">
                       {account.displayName}
                     </span>
-                    {/* {account.displayBalance
-                      ? ` (${account.displayBalance})`
-                      : ""} */}
                     &nbsp;
                     <IoIosArrowDown />
                   </button>
