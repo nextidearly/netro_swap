@@ -149,7 +149,6 @@ const SwapPage = () => {
       setLoading(false);
       if (quoteData.statusCode === 400) {
         setErrorMsg(quoteData.description);
-        console.log(quoteData);
         if (quoteData.meta && quoteData?.meta[1]?.type === "allowance")
           setallowanceError(true);
         setBuyBalance(0);

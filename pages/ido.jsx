@@ -120,7 +120,6 @@ const Donate = () => {
         to: TREASURY,
         value: ethers.utils.parseEther("0.05"),
       });
-      console.log("asdfafd");
 
       enqueueSnackbar(
         `Transaction has been submited. Tx hash: ${transactionHash.hash}`,

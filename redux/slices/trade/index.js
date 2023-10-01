@@ -30,7 +30,6 @@ const tradeSlice = createSlice({
       state.to = action.payload;
     },
     initTradeInfo: (state, action) => {
-      console.log(action.payload);
       state.chainId = action.payload;
       if (action.payload === 56) {
         state.from = {

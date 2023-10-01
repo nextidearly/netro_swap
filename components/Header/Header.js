@@ -9,13 +9,13 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
 import { setWallet } from "./../../redux/actions";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { CustomConnectButton } from "../ConnectButton/ConnectButton";
+import { HeaderButton } from "../ConnectButton/HeaderButton";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -84,6 +84,18 @@ const Header = () => {
                   IDO
                   <img src="/blank.png" alt="" />
                 </a>
+                <a
+                  href={"https://xyxy-presale.vercel.app/"}
+                  className={
+                    router.pathname === "/ido"
+                      ? "nav-link active"
+                      : "nav-link image-nav"
+                  }
+                  target="_blank"
+                >
+                  Air Drop
+                  <img src="/blank.png" alt="" />
+                </a>
                 <Link
                   href={"/nodes"}
                   className={
@@ -101,7 +113,7 @@ const Header = () => {
           <Grid xs={10} md={4} item>
             <Grid container justifyContent="flex-end" alignItems={"center"}>
               {matches && (
-                <ConnectButton
+                <HeaderButton
                   showBalance={{
                     smallScreen: false,
                     largeScreen: true,
@@ -162,6 +174,20 @@ const Header = () => {
                   </a>
                 </MenuItem>
                 <MenuItem>
+                  <a
+                    href={"https://xyxy-presale.vercel.app/"}
+                    className={
+                      router.pathname === "/ido"
+                        ? "nav-link-mobile active"
+                        : "nav-link-mobile image-nav"
+                    }
+                    target="_blank"
+                  >
+                    Air Drop
+                    <img src="/blank.png" alt="" />
+                  </a>
+                </MenuItem>
+                <MenuItem>
                   <Link
                     href={"/nodes"}
                     className={
@@ -173,7 +199,7 @@ const Header = () => {
                     Nodes
                   </Link>
                 </MenuItem>
-                <hr/>
+                <hr />
                 <CustomConnectButton />
               </Menu>
             </Grid>

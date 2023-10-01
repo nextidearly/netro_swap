@@ -1,4 +1,5 @@
 import "@/styles/globals.scss";
+import 'react-slideshow-image/dist/styles.css'
 import { Provider } from "react-redux";
 import { ThemeProvider } from "@mui/material/styles";
 import { SnackbarProvider } from "notistack";

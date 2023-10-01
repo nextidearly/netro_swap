@@ -1,32 +1,35 @@
 @import url("https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
   margin: 0;
   font-family: "Mukta";
-  background: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+  background: linear-gradient(to top, #30cfd0 0%, #330867 100%) no-repeat;
   padding: 0;
-  min-height: 100vh;
   box-sizing: border-box;
+  height: 100%;
 }
 
 ::-webkit-scrollbar {
   width: 5px;
-  border-radius: 2px;
+  border-radius: 5px!important;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #202946;
+  background: #20294600;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #202946;
+  background: #02091b;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #202946;
+  background: #08153d;
 }
 
 .blur-background {
@@ -113,9 +116,24 @@ a {
   background-color: #3a466b;
 }
 
+
+// .each-slide-effect > div {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   background-size: cover;
+//   height: 350px;
+// }
+
+// .each-slide-effect span {
+//   padding: 20px;
+//   font-size: 20px;
+//   background: #efefef;
+//   text-align: center;
+// }
+
 .main-wrapper {
   margin-top: 65px;
-  min-height: calc(100vh - 22vh);
 
   .swap-wrapper {
     max-width: 563px;;
@@ -550,7 +568,6 @@ a {
 /*  Swap Page   */
 .main-wrapper {
   margin-top: 65px;
-  min-height: calc(100vh - 22vh);
 
   .swap-wrapper {
     .title {
@@ -959,6 +976,7 @@ a {
 .content-wrapper-stats {
   display: flex;
   justify-content: center;
+  height: calc(100ch - 130px);
 
   h3 {
     margin-top: 50px;
@@ -981,18 +999,15 @@ a {
     background-color: #202946;
     padding: 20px;
     margin-top: 10px;
-    border-radius: 20px;
-
+    border-radius: 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    
     .down {
       color: #fd3c99 !important;
     }
 
     .up {
       color: #2ee09a !important;
-    }
-
-    &.dex-ranking {
-      overflow-x: auto;
     }
   }
   .table-hover {
@@ -1345,10 +1360,6 @@ a {
 
     .up {
       color: #2ee09a;
-    }
-
-    &.dex-ranking {
-      overflow-x: auto;
     }
   }
   .table-hover {
@@ -2188,8 +2199,11 @@ a {
     display: flex;
     gap: 1rem;
     .social-link {
+      height: 28px;
+      width: 28px;
+      transition: all .3s ease-in-out;
       &:hover {
-        color: #031d38;
+        transform: scale(1.2);
       }
     }
 
