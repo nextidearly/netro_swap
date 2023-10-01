@@ -340,7 +340,7 @@ const StatsPage = () => {
           </div>
         </div>
 
-        <div className="hidden sm:flex sm:flex-col sm:gap-2 mt-10 w-full h-full">
+        <div className="hidden sm:flex sm:flex-col sm:gap-2 mt-10 w-full h-full`">
           <p className="text-center text-white text-3xl font-semibold">
             {PROTOCOLS[tradeInfo.chainId]} Stats
           </p>

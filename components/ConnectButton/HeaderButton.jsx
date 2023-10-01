@@ -93,12 +93,12 @@ export const HeaderButton = () => {
                     type="button"
                     className="bg-[#010514] py-2 px-3 rounded-md hover:text-gray-400 transition ease-in-out hover:scale-105 flex items-center"
                   >
-                    {/* <span className="hidden lg:flex">
+                    <span className="hidden lg:flex">
                       {account.displayName}
-                    </span> */}
-                    {account.displayBalance
+                    </span>
+                    {/* {account.displayBalance
                       ? ` (${account.displayBalance})`
-                      : ""}
+                      : ""} */}
                     &nbsp;
                     <IoIosArrowDown />
                   </button>
