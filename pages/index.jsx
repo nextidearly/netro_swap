@@ -351,17 +351,17 @@ const SwapPage = () => {
     }
   };
 
-  // const getTokenList = async (chainId) => {
-  //   const res = await token_list(chainId);
-  //   if (res.status !== 429) {
-  //     const response = await res.json();
-  //     setTokenList(response.tokens);
-  //   } else {
-  //     setTimeout(() => {
-  //       getTokenList(chainId);
-  //     }, 100);
-  //   }
-  // };
+  const getTokenList = async (chainId) => {
+    const res = await token_list(chainId);
+    if (res.status !== 429) {
+      const response = await res.json();
+      setTokenList(response.tokens);
+    } else {
+      setTimeout(() => {
+        getTokenList(chainId);
+      }, 100);
+    }
+  };
 
   useEffect(() => {
     if (correctNetwork) {
@@ -394,9 +394,10 @@ const SwapPage = () => {
         chain.id === 10 ||
         chain.id === 8453 ||
         chain.id === 42161 ||
-        chain.id === 56);
-
+        chain.id === 56 ||
+        chain.id === 324);
     if (network) {
+      // getTokenList(chain.id);
       setTokenList(TOKEN_LIST[chain.id]);
       getProtocols();
       // getRouter(chain.id);

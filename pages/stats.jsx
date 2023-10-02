@@ -103,7 +103,8 @@ const StatsPage = () => {
         chain.id === 137 ||
         chain.id === 10 ||
         chain.id === 8453 ||
-        chain.id === 42161);
+        chain.id === 42161 ||
+        chain.id === 324);
     if (network) {
       setDexTVLData(DEX_TVL_RANKINGS[chain.id]);
       getTVL(PROTOCOLS[chain ? chain.id : tradeInfo.chainId]);
@@ -125,7 +126,6 @@ const StatsPage = () => {
       <Header />
       <Container className="content-wrapper-stats">
         <div className="flex flex-col gap-2 sm:hidden w-full">
-
           <p className="text-center text-white text-2xl font-semibold">
             {PROTOCOLS[tradeInfo.chainId]} Stats
           </p>

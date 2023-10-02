@@ -30,26 +30,26 @@ import { publicProvider } from "wagmi/providers/public";
 
 const starknet = {
   id: 43_114,
-  name: 'Avalanche',
-  network: 'avalanche',
-  iconUrl: 'https://example.com/icon.svg',
-  iconBackground: '#fff',
+  name: "Avalanche",
+  network: "avalanche",
+  iconUrl: "https://example.com/icon.svg",
+  iconBackground: "#fff",
   nativeCurrency: {
     decimals: 18,
-    name: 'Avalanche',
-    symbol: 'AVAX',
+    name: "Avalanche",
+    symbol: "AVAX",
   },
   rpcUrls: {
-    public: { http: ['https://api.avax.network/ext/bc/C/rpc'] },
-    default: { http: ['https://api.avax.network/ext/bc/C/rpc'] },
+    public: { http: ["https://api.avax.network/ext/bc/C/rpc"] },
+    default: { http: ["https://api.avax.network/ext/bc/C/rpc"] },
   },
   blockExplorers: {
-    default: { name: 'SnowTrace', url: 'https://snowtrace.io' },
-    etherscan: { name: 'SnowTrace', url: 'https://snowtrace.io' },
+    default: { name: "SnowTrace", url: "https://snowtrace.io" },
+    etherscan: { name: "SnowTrace", url: "https://snowtrace.io" },
   },
   contracts: {
     multicall3: {
-      address: '0xca11bde05977b3631167028862be2a173976ca11',
+      address: "0xca11bde05977b3631167028862be2a173976ca11",
       blockCreated: 11_907_934,
     },
   },
@@ -64,8 +64,8 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
     optimism,
     arbitrum,
     base,
-    zora,
     { ...zkSync, iconUrl: "/assets/zksync.png" },
+    zora,
     { ...celo, iconUrl: "/assets/celo.png" },
     { ...mantle, iconUrl: "/assets/mantel.png" },
     { ...taikoJolnir, iconUrl: "/assets/taiko.png" },

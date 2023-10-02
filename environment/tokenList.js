@@ -22705,4 +22705,386 @@ export const TOKEN_LIST = {
       tags: ["tokens"],
     },
   ],
+  324: [
+    {
+      chainId: 324,
+      address: "0x5aea5775959fbc2557cc8789bc1bf90a239d9a91",
+      name: "Wrapped Ether",
+      decimals: 18,
+      symbol: "WETH",
+      logoURI:
+        "https://tokens.1inch.io/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2.png",
+      tags: ["PEG:ETH", "tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x3355df6d4c9c3035724fd0e3914de96a5a83aaf4",
+      name: "USD Coin",
+      decimals: 6,
+      symbol: "USDC",
+      logoURI:
+        "https://tokens.1inch.io/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.png",
+      tags: ["PEG:USD", "tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x0e97c7a0f8b2c9885c8ac9fc6136e829cbc21d42",
+      name: "Mute.io",
+      decimals: 18,
+      symbol: "MUTE",
+      logoURI:
+        "https://tokens.1inch.io/324/0x0e97c7a0f8b2c9885c8ac9fc6136e829cbc21d42.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0xbfb4b5616044eded03e5b1ad75141f0d9cb1499b",
+      name: "zkDoge",
+      decimals: 18,
+      symbol: "ZKDOGE",
+      logoURI:
+        "https://tokens.1inch.io/324/0xbfb4b5616044eded03e5b1ad75141f0d9cb1499b.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0xc8ec5b0627c794de0e4ea5d97ad9a556b361d243",
+      name: "Whisper",
+      decimals: 18,
+      symbol: "WISP",
+      logoURI:
+        "https://tokens.1inch.io/324/0xc8ec5b0627c794de0e4ea5d97ad9a556b361d243.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x5e38cb3e6c0faafaa5c32c482864fcef5a0660ad",
+      name: "Zksync Shib",
+      decimals: 18,
+      symbol: "ZKSHIB",
+      logoURI:
+        "https://tokens.1inch.io/324/0x5e38cb3e6c0faafaa5c32c482864fcef5a0660ad.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x0231b3de40b6b3bdd28dcef037f1b7a3fcf5a95a",
+      name: "Zynergy",
+      decimals: 18,
+      symbol: "ZYN",
+      logoURI:
+        "https://tokens.1inch.io/0x0231b3de40b6b3bdd28dcef037f1b7a3fcf5a95a.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      name: "Ether",
+      decimals: 18,
+      symbol: "ETH",
+      logoURI:
+        "https://tokens.1inch.io/0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee.png",
+      tags: ["native", "PEG:ETH"],
+    },
+    {
+      chainId: 324,
+      address: "0xc2b13bb90e33f1e191b8aa8f44ce11534d5698e3",
+      name: "Furucombo",
+      decimals: 18,
+      symbol: "COMBO",
+      logoURI:
+        "https://tokens.1inch.io/324/0xc2b13bb90e33f1e191b8aa8f44ce11534d5698e3.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x42c1c56be243c250ab24d2ecdcc77f9ccaa59601",
+      name: "Perpetual",
+      decimals: 18,
+      symbol: "PERP",
+      logoURI:
+        "https://tokens.1inch.io/0x42c1c56be243c250ab24d2ecdcc77f9ccaa59601.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x2b64237277c605d07f17b96f9627712340c32981",
+      name: "ZkSync Gem Token",
+      decimals: 18,
+      symbol: "ZGEM",
+      logoURI:
+        "https://tokens.1inch.io/324/0x2b64237277c605d07f17b96f9627712340c32981.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x85d84c774cf8e9ff85342684b0e795df72a24908",
+      name: "Velocore",
+      decimals: 18,
+      symbol: "VC",
+      logoURI:
+        "https://tokens.1inch.io/324/0x85d84c774cf8e9ff85342684b0e795df72a24908.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x8e86e46278518efc1c5ced245cba2c7e3ef11557",
+      name: "USD+",
+      decimals: 6,
+      symbol: "USD+",
+      logoURI:
+        "https://tokens.1inch.io/0x8e86e46278518efc1c5ced245cba2c7e3ef11557.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x6d27b6252b980ba4350a1e349a3b684237d5e986",
+      name: "Hush",
+      decimals: 18,
+      symbol: "HUSH",
+      logoURI:
+        "https://tokens.1inch.io/0x6d27b6252b980ba4350a1e349a3b684237d5e986.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0xc8ac6191cdc9c7bf846ad6b52aaaa7a0757ee305",
+      name: "Metavault Trade",
+      decimals: 18,
+      symbol: "MVX",
+      logoURI:
+        "https://tokens.1inch.io/0xc8ac6191cdc9c7bf846ad6b52aaaa7a0757ee305.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x503234f203fc7eb888eec8513210612a43cf6115",
+      name: "LUSD Stablecoin",
+      decimals: 18,
+      symbol: "LUSD",
+      logoURI:
+        "https://tokens.1inch.io/0x503234f203fc7eb888eec8513210612a43cf6115.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x9e22d758629761fc5708c171d06c2fabb60b5159",
+      name: "Wootrade Network",
+      decimals: 18,
+      symbol: "WOO",
+      logoURI:
+        "https://tokens.1inch.io/0x9e22d758629761fc5708c171d06c2fabb60b5159.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0xdd9f72afed3631a6c85b5369d84875e6c42f1827",
+      name: "Symbiosis",
+      decimals: 18,
+      symbol: "SIS",
+      logoURI:
+        "https://tokens.1inch.io/0xdd9f72afed3631a6c85b5369d84875e6c42f1827.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x493257fd37edb34451f62edf8d2a0c418852ba4c",
+      name: "Tether USD",
+      decimals: 6,
+      symbol: "USDT",
+      logoURI:
+        "https://tokens.1inch.io/0x493257fd37edb34451f62edf8d2a0c418852ba4c.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0xbbd1ba24d589c319c86519646817f2f153c9b716",
+      name: "DeversiFi Token",
+      decimals: 18,
+      symbol: "DVF",
+      logoURI:
+        "https://tokens.1inch.io/0xbbd1ba24d589c319c86519646817f2f153c9b716.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x32fd44bb869620c0ef993754c8a00be67c464806",
+      name: "Rocket Pool ETH",
+      decimals: 18,
+      symbol: "rETH",
+      logoURI:
+        "https://tokens.1inch.io/0x32fd44bb869620c0ef993754c8a00be67c464806.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x1cf8553da5a75c20cdc33532cb19ef7e3bfff5bc",
+      name: "Rocket Pool Protocol",
+      decimals: 18,
+      symbol: "RPL",
+      logoURI:
+        "https://tokens.1inch.io/0x1cf8553da5a75c20cdc33532cb19ef7e3bfff5bc.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x75af292c1c9a37b3ea2e6041168b4e48875b9ed5",
+      name: "Coinbase Wrapped Staked ETH",
+      decimals: 18,
+      symbol: "cbETH",
+      logoURI:
+        "https://tokens.1inch.io/0x75af292c1c9a37b3ea2e6041168b4e48875b9ed5.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0xbbeb516fb02a01611cbbe0453fe3c580d7281011",
+      name: "Wrapped BTC",
+      decimals: 8,
+      symbol: "WBTC",
+      logoURI:
+        "https://tokens.1inch.io/0xbbeb516fb02a01611cbbe0453fe3c580d7281011.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0xfd282f16a64c6d304ac05d1a58da15bed0467c71",
+      name: "Pepe",
+      decimals: 18,
+      symbol: "PEPE",
+      logoURI:
+        "https://tokens.1inch.io/0xfd282f16a64c6d304ac05d1a58da15bed0467c71.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x458a2e32eabc7626187e6b75f29d7030a5202bd4",
+      name: "LSD Coin",
+      decimals: 18,
+      symbol: "LSD",
+      logoURI:
+        "https://tokens.1inch.io/0x458a2e32eabc7626187e6b75f29d7030a5202bd4.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0xbe9f8c0d6f0fd7e46cdacca340747ea2f247991d",
+      name: "Impermax",
+      decimals: 18,
+      symbol: "IBEX",
+      logoURI:
+        "https://tokens.1inch.io/0xbe9f8c0d6f0fd7e46cdacca340747ea2f247991d.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x1ab721f531cab4c87d536be8b985eafce17f0184",
+      name: "ZigZag",
+      decimals: 18,
+      symbol: "ZZ",
+      logoURI:
+        "https://tokens.1inch.io/0x1ab721f531cab4c87d536be8b985eafce17f0184.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x6ee46cb7cd2f15ee1ec9534cf29a5b51c83283e6",
+      name: "Kyber Network Crystal v2",
+      decimals: 18,
+      symbol: "KNC",
+      logoURI:
+        "https://tokens.1inch.io/0x6ee46cb7cd2f15ee1ec9534cf29a5b51c83283e6.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0xb83cfb285fc8d936e8647fa9b1cc641dbaae92d9",
+      name: "Bella",
+      decimals: 18,
+      symbol: "BEL",
+      logoURI:
+        "https://tokens.1inch.io/0xb83cfb285fc8d936e8647fa9b1cc641dbaae92d9.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0xf755cf4f0887279a8bcbe5e39ee062a5b7188401",
+      name: "LQTY",
+      decimals: 18,
+      symbol: "LQTY",
+      logoURI:
+        "https://tokens.1inch.io/0xf755cf4f0887279a8bcbe5e39ee062a5b7188401.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0xd63ef5e9c628c8a0e8984cdfb7444aee44b09044",
+      name: "GOVI",
+      decimals: 18,
+      symbol: "GOVI",
+      logoURI:
+        "https://tokens.1inch.io/0xd63ef5e9c628c8a0e8984cdfb7444aee44b09044.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x140d5bc5b62d6cb492b1a475127f50d531023803",
+      name: "Deri",
+      decimals: 18,
+      symbol: "DERI",
+      logoURI:
+        "https://tokens.1inch.io/0x140d5bc5b62d6cb492b1a475127f50d531023803.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x9929bcac4417a21d7e6fc86f6dae1cc7f27a2e41",
+      name: "DEXTF Token",
+      decimals: 18,
+      symbol: "DEXTF",
+      logoURI:
+        "https://tokens.1inch.io/0x9929bcac4417a21d7e6fc86f6dae1cc7f27a2e41.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0xa0c1bc64364d39c7239bd0118b70039dbe5bbdae",
+      name: "PureFi Token",
+      decimals: 18,
+      symbol: "UFI",
+      logoURI:
+        "https://tokens.1inch.io/0xa0c1bc64364d39c7239bd0118b70039dbe5bbdae.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x6f1a89c16a49549508a2b6d2ac6f34523aa2a545",
+      name: "xcRMRK",
+      decimals: 10,
+      symbol: "xcRMRK",
+      logoURI:
+        "https://tokens.1inch.io/0x6f1a89c16a49549508a2b6d2ac6f34523aa2a545.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x3d79f1e3f6afd3f30ea450afffb8632aed59b46f",
+      name: "Raise Finance Token",
+      decimals: 18,
+      symbol: "RAISE",
+      logoURI:
+        "https://tokens.1inch.io/0x3d79f1e3f6afd3f30ea450afffb8632aed59b46f.png",
+      tags: ["tokens"],
+    },
+    {
+      chainId: 324,
+      address: "0x668cc2668eeeaf8075d38e72ef54fa546bf3c39c",
+      name: "LSDx Pool",
+      decimals: 18,
+      symbol: "ETHx",
+      logoURI:
+        "https://tokens.1inch.io/0x668cc2668eeeaf8075d38e72ef54fa546bf3c39c.png",
+      tags: ["tokens"],
+    },
+  ],
 };
