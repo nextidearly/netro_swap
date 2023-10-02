@@ -56,8 +56,6 @@ const starknet = {
   testnet: false,
 };
 
-
-
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
     mainnet,

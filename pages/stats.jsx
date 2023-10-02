@@ -197,7 +197,7 @@ const StatsPage = () => {
             </p>
           </div>
 
-          <div className="grid-wrapper h-full relative mt-[0px!important]">
+          <div className="grid-wrapper h-full relative mt-[0px!important] mb-[30px]">
             <div className="h-[calc(100%-32px)] absolute w-[calc(100%-32px)] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-y-scroll">
               <table
                 className="dex-table"
