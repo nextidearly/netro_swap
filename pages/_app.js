@@ -1,5 +1,5 @@
 import "@/styles/globals.scss";
-import 'react-slideshow-image/dist/styles.css'
+import "react-slideshow-image/dist/styles.css";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "@mui/material/styles";
 import { SnackbarProvider } from "notistack";
@@ -20,8 +20,44 @@ import {
   polygon,
   base,
   bsc,
+  zkSync,
+  zora,
+  celo,
+  mantle,
+  taikoJolnir,
 } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
+
+const starknet = {
+  id: 43_114,
+  name: 'Avalanche',
+  network: 'avalanche',
+  iconUrl: 'https://example.com/icon.svg',
+  iconBackground: '#fff',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'Avalanche',
+    symbol: 'AVAX',
+  },
+  rpcUrls: {
+    public: { http: ['https://api.avax.network/ext/bc/C/rpc'] },
+    default: { http: ['https://api.avax.network/ext/bc/C/rpc'] },
+  },
+  blockExplorers: {
+    default: { name: 'SnowTrace', url: 'https://snowtrace.io' },
+    etherscan: { name: 'SnowTrace', url: 'https://snowtrace.io' },
+  },
+  contracts: {
+    multicall3: {
+      address: '0xca11bde05977b3631167028862be2a173976ca11',
+      blockCreated: 11_907_934,
+    },
+  },
+  testnet: false,
+};
+
+
+
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
     mainnet,
@@ -30,6 +66,11 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
     optimism,
     arbitrum,
     base,
+    zora,
+    { ...zkSync, iconUrl: "/assets/zksync.png" },
+    { ...celo, iconUrl: "/assets/celo.png" },
+    { ...mantle, iconUrl: "/assets/mantel.png" },
+    { ...taikoJolnir, iconUrl: "/assets/taiko.png" },
     ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true" ? [goerli] : []),
   ],
   [publicProvider()]
