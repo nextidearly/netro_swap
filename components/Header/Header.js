@@ -73,7 +73,7 @@ const Header = () => {
                   Stats
                 </Link>
                 <a
-                  href={"https://xyxy-presale.vercel.app/"}
+                  href={"https://ido.xyxy.io"}
                   className={
                     router.pathname === "/ido"
                       ? "nav-link active"
@@ -85,7 +85,7 @@ const Header = () => {
                   <img src="/blank.png" alt="" />
                 </a>
                 <a
-                  href={"https://xyxy-presale.vercel.app/airdrop/"}
+                  href={"https://airdrop.xyxy.io/"}
                   className={
                     router.pathname === "/ido"
                       ? "nav-link active"
@@ -93,7 +93,7 @@ const Header = () => {
                   }
                   target="_blank"
                 >
-                  Air Drop
+                  Airdrop
                   <img src="/blank.png" alt="" />
                 </a>
                 <Link

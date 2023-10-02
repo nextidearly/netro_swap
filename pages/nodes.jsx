@@ -151,7 +151,7 @@ const LaunchPad = () => {
                       justifyContent={"space-between"}
                     >
                       <Typography>APY:</Typography>
-                      <Typography>7.4%</Typography>
+                      <Typography>9.2%</Typography>
                     </Grid>
 
                     <Grid
@@ -162,7 +162,7 @@ const LaunchPad = () => {
                     >
                       <Typography>Mint Price:</Typography>
                       <Typography>
-                        500 <span style={{ fontSize: "12px" }}>XYXY</span>{" "}
+                        400 <span style={{ fontSize: "12px" }}>XYXY</span>{" "}
                       </Typography>
                     </Grid>
                     <Grid
@@ -270,7 +270,7 @@ const LaunchPad = () => {
                       justifyContent={"space-between"}
                     >
                       <Typography>APY:</Typography>
-                      <Typography>7.4%</Typography>
+                      <Typography>115%</Typography>
                     </Grid>
 
                     <Grid
@@ -281,7 +281,7 @@ const LaunchPad = () => {
                     >
                       <Typography>Mint Price:</Typography>
                       <Typography>
-                        500 <span style={{ fontSize: "12px" }}>XYXY</span>{" "}
+                        250 <span style={{ fontSize: "12px" }}>XYXY</span>{" "}
                       </Typography>
                     </Grid>
                     <Grid
@@ -386,7 +386,7 @@ const LaunchPad = () => {
                       justifyContent={"space-between"}
                     >
                       <Typography variant="h5">APY:</Typography>
-                      <Typography variant="h5">7.4%</Typography>
+                      <Typography variant="h5">9.2%</Typography>
                     </Grid>
 
                     <Grid
@@ -409,7 +409,7 @@ const LaunchPad = () => {
                       justifyContent={"space-between"}
                     >
                       <Typography variant="h5">Unclaimed Rewards:</Typography>
-                      <Typography variant="h5">1</Typography>
+                      <Typography variant="h5">0<span style={{ fontSize: "12px" }}>ETH</span>{" "}</Typography>
                     </Grid>
                     <Grid
                       mt={2}
@@ -426,7 +426,7 @@ const LaunchPad = () => {
                           className="action-button bg-blue-600"
                           onClick={handleBuy}
                         >
-                          BUY
+                          REGISTER
                         </Button>
                       </Grid>
                       <Grid item mt={2} className="action-group">
@@ -461,7 +461,7 @@ const LaunchPad = () => {
                       justifyContent={"space-between"}
                     >
                       <Typography variant="h5">APY:</Typography>
-                      <Typography variant="h5">7.4%</Typography>
+                      <Typography variant="h5">115%</Typography>
                     </Grid>
                     <Grid
                       item
@@ -483,7 +483,7 @@ const LaunchPad = () => {
                       justifyContent={"space-between"}
                     >
                       <Typography variant="h5">Unclaimed Rewards:</Typography>
-                      <Typography variant="h5">1</Typography>
+                      <Typography variant="h5">0<span style={{ fontSize: "12px" }}>XYXY</span>{" "}</Typography>
                     </Grid>
                     <Grid
                       mt={2}
@@ -500,7 +500,7 @@ const LaunchPad = () => {
                           className="action-button bg-blue-600"
                           onClick={handleBuy}
                         >
-                          BUY
+                          REGISTER
                         </Button>
                       </Grid>
                       <Grid item mt={2} className="action-group">
@@ -548,7 +548,7 @@ const LaunchPad = () => {
                           justifyContent={"space-between"}
                         >
                           <Typography>APY:</Typography>
-                          <Typography>7.4%</Typography>
+                          <Typography>9.2%</Typography>
                         </Grid>
 
                         <Grid
@@ -669,7 +669,7 @@ const LaunchPad = () => {
                           justifyContent={"space-between"}
                         >
                           <Typography>APY:</Typography>
-                          <Typography>7.4%</Typography>
+                          <Typography>115%</Typography>
                         </Grid>
 
                         <Grid
