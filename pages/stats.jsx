@@ -125,7 +125,7 @@ const StatsPage = () => {
     <Grid className="page">
       <Header />
       <Container className="content-wrapper-stats">
-        <div className="flex flex-col gap-2 sm:hidden w-full">
+        <div className="flex flex-col gap-2 sm:hidden w-full h-full">
           <p className="text-center text-white text-2xl font-semibold">
             {PROTOCOLS[tradeInfo.chainId]} Stats
           </p>
