@@ -29,7 +29,7 @@ import {
 import { publicProvider } from "wagmi/providers/public";
 import React from "react";
 import { I18nextProvider } from "react-i18next";
-import i18n from "./i18n"; // Import your i18n configuration file
+import i18n from "../utils/i18n.js"; // Import your i18n configuration file
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
