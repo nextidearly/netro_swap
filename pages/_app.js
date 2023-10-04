@@ -27,34 +27,9 @@ import {
   taikoJolnir,
 } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
-
-const starknet = {
-  id: 43_114,
-  name: "Avalanche",
-  network: "avalanche",
-  iconUrl: "https://example.com/icon.svg",
-  iconBackground: "#fff",
-  nativeCurrency: {
-    decimals: 18,
-    name: "Avalanche",
-    symbol: "AVAX",
-  },
-  rpcUrls: {
-    public: { http: ["https://api.avax.network/ext/bc/C/rpc"] },
-    default: { http: ["https://api.avax.network/ext/bc/C/rpc"] },
-  },
-  blockExplorers: {
-    default: { name: "SnowTrace", url: "https://snowtrace.io" },
-    etherscan: { name: "SnowTrace", url: "https://snowtrace.io" },
-  },
-  contracts: {
-    multicall3: {
-      address: "0xca11bde05977b3631167028862be2a173976ca11",
-      blockCreated: 11_907_934,
-    },
-  },
-  testnet: false,
-};
+import React from "react";
+import { I18nextProvider } from "react-i18next";
+import i18n from "./i18n"; // Import your i18n configuration file
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
@@ -102,8 +77,10 @@ export default function App({ Component, pageProps }) {
             })}
           >
             <SnackbarProvider maxSnack={3}>
-              <Component {...pageProps} />
-            </SnackbarProvider>{" "}
+              <I18nextProvider i18n={i18n}>
+                <Component {...pageProps} />
+              </I18nextProvider>
+            </SnackbarProvider>
           </RainbowKitProvider>
         </WagmiConfig>
       </ThemeProvider>

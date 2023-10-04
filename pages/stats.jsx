@@ -17,11 +17,13 @@ import Skeleton from "@mui/material/Skeleton";
 import moment from "moment";
 import { PROTOCOLS, DEX_TVL_RANKINGS } from "../environment/config";
 import Footer from "@/components/Footer/Footer";
+import { useTranslation } from "react-i18next";
 
 const StatsPage = () => {
   const dispatch = useDispatch();
   const { chain } = useNetwork();
   let tradeInfo = useSelector((RootState) => RootState.trade);
+  const { t } = useTranslation();
 
   const [TVLhistory, setTVLhistory] = useState([]);
   const [dexTVLData, setDexTVLData] = useState([]);
@@ -127,7 +129,7 @@ const StatsPage = () => {
       <Container className="content-wrapper-stats">
         <div className="flex flex-col gap-2 sm:hidden w-full h-full">
           <p className="text-center text-white text-2xl font-semibold">
-            {PROTOCOLS[tradeInfo.chainId]} Stats
+            {PROTOCOLS[tradeInfo.chainId]} {t("stats", "Stats")}
           </p>
 
           <div className="flex gap-3">
@@ -190,7 +192,7 @@ const StatsPage = () => {
                   <>${convertCurrency(TVLhistory[TVLhistory.length - 1].tvl)}</>
                 )}
               </span>
-              &nbsp;&nbsp; Change (24h):&nbsp;
+              &nbsp;&nbsp; {t("change", "Change")} (24h):&nbsp;
               <span className="text-[#00ff16]">
                 {TVLhistory.length && calcChange()}%
               </span>
@@ -207,8 +209,8 @@ const StatsPage = () => {
               >
                 <thead>
                   <tr>
-                    <th>No</th>
-                    <th>Name</th>
+                    <th>{t("Число", "No")}</th>
+                    <th>{t("name", "Name")}</th>
                     <th>1D</th>
                     <th>1w</th>
                     <th>1m</th>
@@ -342,7 +344,7 @@ const StatsPage = () => {
 
         <div className="hidden sm:flex sm:flex-col sm:gap-2 mt-10 w-full h-full">
           <p className="text-center text-white text-3xl font-semibold">
-            {PROTOCOLS[tradeInfo.chainId]} Stats
+            {PROTOCOLS[tradeInfo.chainId]} {t("stats", "Stats")}
           </p>
           <div className="grid grid-cols-12 gap-3">
             <div className="col-span-3 flex flex-col">
@@ -363,7 +365,7 @@ const StatsPage = () => {
 
               <div className="grid-wrapper">
                 <p className="text-[22px] font-semibold text-white">
-                  Change (24h)
+                  {t("change", "Change")} (24h)
                 </p>
                 {TVLhistory.length ? (
                   <Typography
@@ -429,7 +431,7 @@ const StatsPage = () => {
               </div>
             </div>
           </div>
-          <Typography variant="h6">TVL Rankings</Typography>
+          <Typography variant="h6">TVL {t("rankings", "Rankings")}</Typography>
           <div className="grid-wrapper h-full relative mt-[0px!important]">
             <div className="h-[calc(100%-32px)] absolute w-[calc(100%-32px)] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-y-scroll">
               <table
@@ -440,11 +442,11 @@ const StatsPage = () => {
               >
                 <thead>
                   <tr>
-                    <th>No</th>
-                    <th>Name</th>
-                    <th>1D change</th>
-                    <th>1w change</th>
-                    <th>1m change</th>
+                    <th>{t("Число", "No")}</th>
+                    <th>{t("name", "Name")}</th>
+                    <th>1D {t("change", "Change")}</th>
+                    <th>1w {t("change", "Change")}</th>
+                    <th>1m {t("change", "Change")}</th>
                     <th>TVL</th>
                   </tr>
                 </thead>

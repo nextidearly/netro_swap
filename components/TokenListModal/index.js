@@ -9,6 +9,7 @@ import TokenIterm from "../TokenIterm/TokenIterm";
 import { getAddress } from "@ethersproject/address";
 import { ethers } from "ethers";
 import { erc20ABI } from "wagmi";
+import { useTranslation } from "react-i18next";
 
 const TokenListModal = (props) => {
   const tokenList = Object.entries(props.tokenList);
@@ -16,6 +17,7 @@ const TokenListModal = (props) => {
   const tradeInfo = useSelector((RootState) => RootState.trade);
   const { modalOpen, closeModal, modalKey, changeBalance } = props;
   const [tokens, setTokens] = useState([]);
+  const { t } = useTranslation();
 
   function isAddress(value) {
     try {
@@ -91,13 +93,12 @@ const TokenListModal = (props) => {
   useEffect(() => {
     setTokens(tokenList);
   }, [props.tokenList]);
-  
+
   useEffect(() => {
     return () => {
-      setTokens()
-    }
-  }, [])
-  
+      setTokens();
+    };
+  }, []);
 
   return (
     <Modal
@@ -109,13 +110,13 @@ const TokenListModal = (props) => {
       <Box className="tokenSelectModalBox">
         <Grid justifyContent={"space-between"} container alignItems={"center"}>
           <Typography variant="h6" component="h2" color={"white"}>
-            Select a Token
+            {t("sat", "Select a Token")}
           </Typography>
           <CloseIcon onClick={closeModal} className="close-button" />
         </Grid>
         <Grid className="search-box">
           <InputBase
-            placeholder="Search token name or address"
+            placeholder={t("stna", "Search token name or address")}
             onKeyUp={(e) => searchToken(e)}
             fullWidth={true}
           />
@@ -149,7 +150,9 @@ const TokenListModal = (props) => {
                 );
               })
             ) : (
-              <p className="no-tokens">There is no token on the current network</p>
+              <p className="no-tokens">
+                There is no token on the current network
+              </p>
             )}
           </Scrollbars>
         </Grid>

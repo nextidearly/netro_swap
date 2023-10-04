@@ -8,12 +8,17 @@ import {
   ZealyLink,
 } from "./../../environment/config";
 import { BsDiscord } from "react-icons/bs";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       <footer className="footer-wrapper">
-        <div>@ {new Date().getFullYear()} XYXY Finance</div>
+        <div>
+          @ {new Date().getFullYear()} XYXY {t("finance", "Finance")}
+        </div>
         <div className="social-links">
           <Link href={TwitterLink} target="_blank">
             <TwitterIcon className="social-link" />

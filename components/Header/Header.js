@@ -16,20 +16,25 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { CustomConnectButton } from "../ConnectButton/ConnectButton";
 import { HeaderButton } from "../ConnectButton/HeaderButton";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [anchorEl1, setAnchorEl1] = React.useState(null);
   const { address, isConnected } = useAccount();
+  const { t, i18n } = useTranslation();
+  const mobileMenuOpen = Boolean(anchorEl1);
+  const matches = useMediaQuery("(min-width: 901px )");
+
+  const handleChangeLocale = (val) => {
+    i18n.changeLanguage(val);
+  };
 
   useEffect(() => {
     if (isConnected) dispatch(setWallet(address));
     else dispatch(setWallet(null));
   }, [isConnected]);
-
-  const mobileMenuOpen = Boolean(anchorEl1);
-  const matches = useMediaQuery("(min-width: 901px )");
 
   return (
     <Grid className="navbar">
@@ -60,7 +65,7 @@ const Header = () => {
                     router.pathname === "/" ? "nav-link active" : "nav-link"
                   }
                 >
-                  Swap
+                  {t("swap")}
                 </Link>
                 <Link
                   href={"/stats"}
@@ -70,7 +75,7 @@ const Header = () => {
                       : "nav-link"
                   }
                 >
-                  Stats
+                  {t("stats")}
                 </Link>
                 <a
                   href={"https://ido.xyxy.io"}
@@ -81,7 +86,7 @@ const Header = () => {
                   }
                   target="_blank"
                 >
-                  IDO
+                  {t("ido")}
                   <img src="/blank.png" alt="" />
                 </a>
                 <a
@@ -93,7 +98,7 @@ const Header = () => {
                   }
                   target="_blank"
                 >
-                  Airdrop
+                  {t("airdrop")}
                   <img src="/blank.png" alt="" />
                 </a>
                 <Link
@@ -104,7 +109,7 @@ const Header = () => {
                       : "nav-link"
                   }
                 >
-                  Nodes
+                  {t("nodes")}
                 </Link>
               </Grid>
             </Grid>
@@ -112,6 +117,15 @@ const Header = () => {
 
           <Grid xs={10} md={4} item>
             <Grid container justifyContent="flex-end" alignItems={"center"}>
+              <select
+                defaultValue={"es"}
+                className="mr-2 p-1.5 rounded-md bg-[#010514] font-semibold text-gray-300 focus-visible:outline-none cursor-pointer"
+                onChange={(e) => handleChangeLocale(e.target.value)}
+              >
+                <option value={"es"}>English</option>
+                <option value={"ru"}>Русский</option>
+              </select>
+
               {matches && (
                 <HeaderButton
                   showBalance={{
@@ -144,7 +158,7 @@ const Header = () => {
                         : "nav-link-mobile"
                     }
                   >
-                    Swap
+                    {t("swap")}
                   </Link>
                 </MenuItem>
                 <MenuItem>
@@ -156,7 +170,7 @@ const Header = () => {
                         : "nav-link-mobile"
                     }
                   >
-                    Stats
+                    {t("stats")}
                   </Link>
                 </MenuItem>
                 <MenuItem>
@@ -169,7 +183,7 @@ const Header = () => {
                     }
                     target="_blank"
                   >
-                    IDO
+                    {t("ido")}
                     <img src="/blank.png" alt="" />
                   </a>
                 </MenuItem>
@@ -183,7 +197,7 @@ const Header = () => {
                     }
                     target="_blank"
                   >
-                    Air Drop
+                    {t("airDrop")}
                     <img src="/blank.png" alt="" />
                   </a>
                 </MenuItem>
@@ -196,7 +210,7 @@ const Header = () => {
                         : "nav-link-mobile"
                     }
                   >
-                    Nodes
+                    {t("nodes")}
                   </Link>
                 </MenuItem>
                 <hr />

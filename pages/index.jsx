@@ -32,12 +32,14 @@ import {
 } from "@/utils/api";
 import Head from "next/head";
 import Footer from "@/components/Footer/Footer";
+import { useTranslation } from "react-i18next";
 
 const SwapPage = () => {
   const dispatch = useDispatch();
   let tradeInfo = useSelector((RootState) => RootState.trade);
   const { address, isConnected } = useAccount();
   const { chain } = useNetwork();
+  const { t } = useTranslation();
 
   const { enqueueSnackbar } = useSnackbar();
   const [tokenList, setTokenList] = useState([]);
@@ -492,7 +494,7 @@ const SwapPage = () => {
               <Grid className="swap-wrapper">
                 <Grid container justifyContent={"space-between"}>
                   <Typography variant="h1" className="title">
-                    Swap tokens
+                    {t("spt", "Swap Tokens")}
                   </Typography>
                   <SettingsOutlinedIcon
                     className="setting-icon"
@@ -584,7 +586,9 @@ const SwapPage = () => {
                               {tradeInfo.to.symbol}
                             </>
                           ) : (
-                            <span className="text-blue">Select a Token</span>
+                            <span className="text-blue">
+                              {t("sat", "Select a Token")}
+                            </span>
                           )}
 
                           <ArrowDropDownIcon />
@@ -663,9 +667,11 @@ const SwapPage = () => {
                                     className="swap-button"
                                     fullWidth
                                   >
-                                    {!balanceError
-                                      ? "SWAP"
-                                      : "Insufficient balance"}
+                                    {!balanceError ? (
+                                      <>{t("swap")}</>
+                                    ) : (
+                                      "Insufficient balance"
+                                    )}
                                   </Button>
                                 ) : (
                                   <Button
@@ -677,7 +683,7 @@ const SwapPage = () => {
                                     disabled={loading}
                                     onClick={callSwap}
                                   >
-                                    SWAP
+                                    {t("swap")}
                                   </Button>
                                 )}
                               </>
@@ -688,7 +694,7 @@ const SwapPage = () => {
                                   fullWidth
                                   disabled={true}
                                 >
-                                  SWAP
+                                  {t("swap")}
                                 </Button>
                               </>
                             )}

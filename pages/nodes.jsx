@@ -6,6 +6,7 @@ import Footer from "../components/Footer/Footer";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Slide } from "react-slideshow-image";
+import { useTranslation } from "react-i18next";
 import "react-slideshow-image/dist/styles.css";
 
 const LaunchPad = () => {
@@ -13,6 +14,7 @@ const LaunchPad = () => {
   const [mintValue1, setMintValue1] = useState(0);
   const [mintValue2, setMintValue2] = useState(0);
   const [open, setOpen] = useState(false);
+  const { t } = useTranslation();
 
   const handleBuy = async () => {};
 
@@ -95,7 +97,7 @@ const LaunchPad = () => {
         }
       >
         <p className="text-center text-white text-3xl font-semibold mt-8">
-          Node Sales
+          {t("nds", " Node Sales")}
         </p>
         <Grid>
           <Container className="nodesale-container">
@@ -109,7 +111,7 @@ const LaunchPad = () => {
                   }
                   onClick={() => setType("node1")}
                 >
-                  Mint
+                  {t("mint", "Mint")}
                 </button>
                 <button
                   className={
@@ -119,7 +121,7 @@ const LaunchPad = () => {
                   }
                   onClick={() => setType("node2")}
                 >
-                  Manage
+                  {t("manage", "Manage")}
                 </button>
               </Grid>
             </Grid>
@@ -140,7 +142,7 @@ const LaunchPad = () => {
                       container
                       justifyContent={"space-between"}
                     >
-                      <Typography>Node Name:</Typography>
+                      <Typography>{t("nn", "Node Name:")}</Typography>
                       <Typography>XYXY1</Typography>
                     </Grid>
 
@@ -160,7 +162,7 @@ const LaunchPad = () => {
                       container
                       justifyContent={"space-between"}
                     >
-                      <Typography>Mint Price:</Typography>
+                      <Typography>{t("mp", "Mint Price:")}</Typography>
                       <Typography>
                         400 <span style={{ fontSize: "12px" }}>XYXY</span>{" "}
                       </Typography>
@@ -171,7 +173,7 @@ const LaunchPad = () => {
                       container
                       justifyContent={"space-between"}
                     >
-                      <Typography>Max per Wallet:</Typography>
+                      <Typography>{t("mpw", "Max per Wallet:")}</Typography>
                       <Typography>
                         100 &nbsp;
                         <span
@@ -241,7 +243,7 @@ const LaunchPad = () => {
                           className="action-button bg-blue-600"
                           onClick={handleBuy}
                         >
-                          Approve
+                          {t("approve", "Approve")}
                         </Button>
                       </Grid>
                     </Grid>
@@ -259,7 +261,7 @@ const LaunchPad = () => {
                       container
                       justifyContent={"space-between"}
                     >
-                      <Typography>Node Name:</Typography>
+                      <Typography>{t("nn", "Node Name:")}</Typography>
                       <Typography>XYXY2</Typography>
                     </Grid>
 
@@ -279,7 +281,7 @@ const LaunchPad = () => {
                       container
                       justifyContent={"space-between"}
                     >
-                      <Typography>Mint Price:</Typography>
+                      <Typography>{t("mp", "Mint Price:")}</Typography>
                       <Typography>
                         250 <span style={{ fontSize: "12px" }}>XYXY</span>{" "}
                       </Typography>
@@ -290,7 +292,7 @@ const LaunchPad = () => {
                       container
                       justifyContent={"space-between"}
                     >
-                      <Typography>Max per Wallet:</Typography>
+                      <Typography>{t("mpw", "Max per Wallet:")}</Typography>
                       <Typography>
                         100 &nbsp;
                         <span
@@ -359,7 +361,7 @@ const LaunchPad = () => {
                           className="action-button bg-blue-600"
                           onClick={handleBuy}
                         >
-                          Approve
+                          {t("approve", "Approve")}
                         </Button>
                       </Grid>
                     </Grid>
@@ -369,7 +371,9 @@ const LaunchPad = () => {
                 <div className="grid grid-cols-2 max-w-[700px] mx-auto gap-16 mt-6 pt-8">
                   <Grid className="wrapper" padding={2}>
                     <Grid className="header" padding={2}>
-                      <Typography variant="h5">Register to Earn</Typography>
+                      <Typography variant="h6">
+                        {t("rte", "Register to Earn")}
+                      </Typography>
                       <img
                         src={"/logo.png"}
                         alt="XYXY logo"
@@ -385,8 +389,8 @@ const LaunchPad = () => {
                       container
                       justifyContent={"space-between"}
                     >
-                      <Typography variant="h5">APY:</Typography>
-                      <Typography variant="h5">9.2%</Typography>
+                      <Typography variant="h6">APY:</Typography>
+                      <Typography variant="h6">9.2%</Typography>
                     </Grid>
 
                     <Grid
@@ -397,8 +401,10 @@ const LaunchPad = () => {
                       container
                       justifyContent={"space-between"}
                     >
-                      <Typography variant="h5">Total Registered:</Typography>
-                      <Typography variant="h5">0 /100</Typography>
+                      <Typography variant="h6">
+                        {t("ttr", "Total Registered:")}
+                      </Typography>
+                      <Typography variant="h6">0 /100</Typography>
                     </Grid>
                     <Grid
                       item
@@ -408,8 +414,12 @@ const LaunchPad = () => {
                       container
                       justifyContent={"space-between"}
                     >
-                      <Typography variant="h5">Unclaimed Rewards:</Typography>
-                      <Typography variant="h5">0<span style={{ fontSize: "12px" }}>ETH</span>{" "}</Typography>
+                      <Typography variant="h6">
+                        {t("ulr", "Unclaimed Rewards:")}
+                      </Typography>
+                      <Typography variant="h6">
+                        0<span style={{ fontSize: "12px" }}>ETH</span>{" "}
+                      </Typography>
                     </Grid>
                     <Grid
                       mt={2}
@@ -426,7 +436,7 @@ const LaunchPad = () => {
                           className="action-button bg-blue-600"
                           onClick={handleBuy}
                         >
-                          REGISTER
+                          {t("register", "REGISTER")}
                         </Button>
                       </Grid>
                       <Grid item mt={2} className="action-group">
@@ -436,14 +446,16 @@ const LaunchPad = () => {
                           className="action-button bg-blue-600"
                           onClick={handleClaim}
                         >
-                          CLAIM
+                          {t("claim", "CLAIM")}
                         </Button>
                       </Grid>
                     </Grid>
                   </Grid>
                   <Grid className="wrapper" padding={2}>
                     <Grid className="header" padding={2}>
-                      <Typography variant="h5">Register to Earn</Typography>
+                      <Typography variant="h6">
+                        {t("rte", "Register to Earn")}
+                      </Typography>
 
                       <img
                         src={"/logo.png"}
@@ -460,8 +472,8 @@ const LaunchPad = () => {
                       container
                       justifyContent={"space-between"}
                     >
-                      <Typography variant="h5">APY:</Typography>
-                      <Typography variant="h5">115%</Typography>
+                      <Typography variant="h6">APY:</Typography>
+                      <Typography variant="h6">115%</Typography>
                     </Grid>
                     <Grid
                       item
@@ -471,8 +483,10 @@ const LaunchPad = () => {
                       container
                       justifyContent={"space-between"}
                     >
-                      <Typography variant="h5">Total Registered:</Typography>
-                      <Typography variant="h5">0 /100</Typography>
+                      <Typography variant="h6">
+                        {t("ttr", "Total Registered:")}
+                      </Typography>
+                      <Typography variant="h6">0 /100</Typography>
                     </Grid>
                     <Grid
                       item
@@ -482,8 +496,12 @@ const LaunchPad = () => {
                       container
                       justifyContent={"space-between"}
                     >
-                      <Typography variant="h5">Unclaimed Rewards:</Typography>
-                      <Typography variant="h5">0<span style={{ fontSize: "12px" }}>XYXY</span>{" "}</Typography>
+                      <Typography variant="h6">
+                        {t("ulr", "Unclaimed Rewards:")}
+                      </Typography>
+                      <Typography variant="h6">
+                        0<span style={{ fontSize: "12px" }}>XYXY</span>{" "}
+                      </Typography>
                     </Grid>
                     <Grid
                       mt={2}
@@ -500,7 +518,7 @@ const LaunchPad = () => {
                           className="action-button bg-blue-600"
                           onClick={handleBuy}
                         >
-                          REGISTER
+                          {t("register", "REGISTER")}
                         </Button>
                       </Grid>
                       <Grid item mt={2} className="action-group">
@@ -510,7 +528,7 @@ const LaunchPad = () => {
                           className="action-button bg-blue-600"
                           onClick={handleClaim}
                         >
-                          CLAIM
+                          {t("claim", "CLAIM")}
                         </Button>
                       </Grid>
                     </Grid>
@@ -537,7 +555,7 @@ const LaunchPad = () => {
                           container
                           justifyContent={"space-between"}
                         >
-                          <Typography>Node Name:</Typography>
+                          <Typography>{t("nn", "Node Name:")}</Typography>
                           <Typography>XYXY1</Typography>
                         </Grid>
 
@@ -557,7 +575,7 @@ const LaunchPad = () => {
                           container
                           justifyContent={"space-between"}
                         >
-                          <Typography>Mint Price:</Typography>
+                          <Typography>{t("mp", "Mint Price:")}</Typography>
                           <Typography>
                             500 <span style={{ fontSize: "12px" }}>XYXY</span>{" "}
                           </Typography>
@@ -568,7 +586,7 @@ const LaunchPad = () => {
                           container
                           justifyContent={"space-between"}
                         >
-                          <Typography>Max per Wallet:</Typography>
+                          <Typography>{t("mpw", "Max per Wallet:")}</Typography>
                           <Typography>
                             100 &nbsp;
                             <span
@@ -658,7 +676,7 @@ const LaunchPad = () => {
                           container
                           justifyContent={"space-between"}
                         >
-                          <Typography>Node Name:</Typography>
+                          <Typography>{t("nn", "Node Name:")}</Typography>
                           <Typography>XYXY2</Typography>
                         </Grid>
 
@@ -678,7 +696,7 @@ const LaunchPad = () => {
                           container
                           justifyContent={"space-between"}
                         >
-                          <Typography>Mint Price:</Typography>
+                          <Typography>{t("mp", "Mint Price:")}</Typography>
                           <Typography>
                             500 <span style={{ fontSize: "12px" }}>XYXY</span>{" "}
                           </Typography>
@@ -689,7 +707,7 @@ const LaunchPad = () => {
                           container
                           justifyContent={"space-between"}
                         >
-                          <Typography>Max per Wallet:</Typography>
+                          <Typography>{t("mpw", "Max per Wallet:")}</Typography>
                           <Typography>
                             100 &nbsp;
                             <span
@@ -775,7 +793,9 @@ const LaunchPad = () => {
                         padding={2}
                       >
                         <Grid className="header" padding={2}>
-                          <Typography variant="h5">Register to Earn</Typography>
+                          <Typography variant="h6">
+                            {t("rte", "Register to Earn")}
+                          </Typography>
                           <img
                             src={"/logo.png"}
                             alt="XYXY logo"
@@ -791,8 +811,8 @@ const LaunchPad = () => {
                           container
                           justifyContent={"space-between"}
                         >
-                          <Typography variant="h5">APY:</Typography>
-                          <Typography variant="h5">7.4%</Typography>
+                          <Typography variant="h6">APY:</Typography>
+                          <Typography variant="h6">7.4%</Typography>
                         </Grid>
 
                         <Grid
@@ -803,10 +823,10 @@ const LaunchPad = () => {
                           container
                           justifyContent={"space-between"}
                         >
-                          <Typography variant="h5">
+                          <Typography variant="h6">
                             Total Registered:
                           </Typography>
-                          <Typography variant="h5">0 /100</Typography>
+                          <Typography variant="h6">0 /100</Typography>
                         </Grid>
                         <Grid
                           item
@@ -816,10 +836,10 @@ const LaunchPad = () => {
                           container
                           justifyContent={"space-between"}
                         >
-                          <Typography variant="h5">
+                          <Typography variant="h6">
                             Unclaimed Rewards:
                           </Typography>
-                          <Typography variant="h5">1</Typography>
+                          <Typography variant="h6">1</Typography>
                         </Grid>
                         <Grid
                           mt={2}
@@ -858,7 +878,9 @@ const LaunchPad = () => {
                         padding={2}
                       >
                         <Grid className="header" padding={2}>
-                          <Typography variant="h5">Register to Earn</Typography>
+                          <Typography variant="h6">
+                            {t("rte", "Register to Earn")}
+                          </Typography>
 
                           <img
                             src={"/logo.png"}
@@ -875,8 +897,8 @@ const LaunchPad = () => {
                           container
                           justifyContent={"space-between"}
                         >
-                          <Typography variant="h5">APY:</Typography>
-                          <Typography variant="h5">7.4%</Typography>
+                          <Typography variant="h6">APY:</Typography>
+                          <Typography variant="h6">7.4%</Typography>
                         </Grid>
                         <Grid
                           item
@@ -886,10 +908,10 @@ const LaunchPad = () => {
                           container
                           justifyContent={"space-between"}
                         >
-                          <Typography variant="h5">
+                          <Typography variant="h6">
                             Total Registered:
                           </Typography>
-                          <Typography variant="h5">0 /100</Typography>
+                          <Typography variant="h6">0 /100</Typography>
                         </Grid>
                         <Grid
                           item
@@ -899,10 +921,10 @@ const LaunchPad = () => {
                           container
                           justifyContent={"space-between"}
                         >
-                          <Typography variant="h5">
+                          <Typography variant="h6">
                             Unclaimed Rewards:
                           </Typography>
-                          <Typography variant="h5">1</Typography>
+                          <Typography variant="h6">1</Typography>
                         </Grid>
                         <Grid
                           mt={2}
