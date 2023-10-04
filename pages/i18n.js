@@ -29,6 +29,7 @@ const resources = {
       register: "ulr",
       claim: "ulr",
       nds: "nds",
+      finance: 'finance'
     },
   },
   ru: {
@@ -43,7 +44,7 @@ const resources = {
       sat: "Выберите токен",
       stna: "Поиск имени или адреса токена",
       rankings: "Рейтинги",
-      change: "Change",
+      change: "Изменять",
       name: "Имя",
       no: "Число",
       mint: "Мятный",
@@ -58,6 +59,7 @@ const resources = {
       register: "регистр",
       claim: "Требовать",
       nds: "Продажи узлов",
+      finance: 'Финансы'
     },
   },
 };
