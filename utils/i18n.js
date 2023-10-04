@@ -5,7 +5,7 @@ const resources = {
   en: {
     translation: {
       swap: "Swap",
-      stats: "stats",
+      stats: "Stats",
       iDO: "IDO",
       airdrop: "Airdrop",
       nodes: "Nodes",

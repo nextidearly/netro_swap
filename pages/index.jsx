@@ -156,6 +156,7 @@ const SwapPage = () => {
         setBuyBalance(0);
         setEstimatedGas(0);
       } else {
+        setErrorMsg('')
         setLiquidityError(false);
         setUnknownPrice(false);
         const toTokenAmount = ethers.utils.formatUnits(
@@ -305,6 +306,7 @@ const SwapPage = () => {
       );
       setallowanceError(false);
       getQuote();
+      setErrorMsg('')
     } catch (error) {
       console.log(error);
       setLoadingTx(false);
@@ -647,6 +649,7 @@ const SwapPage = () => {
                         loading={loadingTx}
                         variant="contained"
                         fullWidth
+                        className="bg-blue-600 mb-2"
                         onClick={callApprove}
                       >
                         {t("approve", "Approve")}
@@ -678,7 +681,7 @@ const SwapPage = () => {
                                   <Button
                                     component={"button"}
                                     variant="contained"
-                                    className="swap-button"
+                                    className="swap-button bg-blue-600"
                                     fullWidth
                                     target={"_blank"}
                                     disabled={loading}

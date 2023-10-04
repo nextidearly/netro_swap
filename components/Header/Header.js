@@ -65,7 +65,7 @@ const Header = () => {
                     router.pathname === "/" ? "nav-link active" : "nav-link"
                   }
                 >
-                  {t("swap")}
+                  {t("swap", "Swap")}
                 </Link>
                 <Link
                   href={"/stats"}
@@ -75,7 +75,7 @@ const Header = () => {
                       : "nav-link"
                   }
                 >
-                  {t("stats")}
+                  {t("stats", "Stats")}
                 </Link>
                 <a
                   href={"https://ido.xyxy.io"}
@@ -86,7 +86,7 @@ const Header = () => {
                   }
                   target="_blank"
                 >
-                  {t("ido")}
+                  {t("ido", "IDO")}
                   <img src="/blank.png" alt="" />
                 </a>
                 <a
@@ -98,7 +98,7 @@ const Header = () => {
                   }
                   target="_blank"
                 >
-                  {t("airdrop")}
+                  {t("airdrop", "Airdrop")}
                   <img src="/blank.png" alt="" />
                 </a>
                 <Link
@@ -109,7 +109,7 @@ const Header = () => {
                       : "nav-link"
                   }
                 >
-                  {t("nodes")}
+                  {t("nodes", "Nodes")}
                 </Link>
               </Grid>
             </Grid>
@@ -158,7 +158,7 @@ const Header = () => {
                         : "nav-link-mobile"
                     }
                   >
-                    {t("swap")}
+                    {t("swap", "Swap")}
                   </Link>
                 </MenuItem>
                 <MenuItem>
@@ -170,7 +170,7 @@ const Header = () => {
                         : "nav-link-mobile"
                     }
                   >
-                    {t("stats")}
+                    {t("stats", "Stats")}
                   </Link>
                 </MenuItem>
                 <MenuItem>
@@ -183,7 +183,7 @@ const Header = () => {
                     }
                     target="_blank"
                   >
-                    {t("ido")}
+                    {t("ido", "IDO")}
                     <img src="/blank.png" alt="" />
                   </a>
                 </MenuItem>
@@ -197,7 +197,7 @@ const Header = () => {
                     }
                     target="_blank"
                   >
-                    {t("airDrop")}
+                    {t("airDrop", "Airdrop")}
                     <img src="/blank.png" alt="" />
                   </a>
                 </MenuItem>
@@ -210,7 +210,7 @@ const Header = () => {
                         : "nav-link-mobile"
                     }
                   >
-                    {t("nodes")}
+                    {t("nodes", "Nodes")}
                   </Link>
                 </MenuItem>
                 <hr />
