@@ -123,7 +123,7 @@ const Header = () => {
                 onChange={(e) => handleChangeLocale(e.target.value)}
               >
                 <option value={"es"}>US</option>
-                <option value={"ru"}>🇹🇨</option>
+                <option value={"ru"}>RU</option>
               </select>
 
               {matches && (
