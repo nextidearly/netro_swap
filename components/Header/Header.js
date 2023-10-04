@@ -122,8 +122,8 @@ const Header = () => {
                 className="mr-2 p-1.5 rounded-md bg-[#010514] font-semibold text-gray-300 focus-visible:outline-none cursor-pointer"
                 onChange={(e) => handleChangeLocale(e.target.value)}
               >
-                <option value={"es"}>English</option>
-                <option value={"ru"}>Русский</option>
+                <option value={"es"}>US</option>
+                <option value={"ru"}>🇹🇨</option>
               </select>
 
               {matches && (
