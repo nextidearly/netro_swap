@@ -303,6 +303,7 @@ const SwapPage = () => {
           },
         }
       );
+      setallowanceError(false)
       getQuote();
     } catch (error) {
       console.log(error);
