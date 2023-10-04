@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  pageExtensions: ["i18n.js", "page.ts", "page.jsx", "page.js"],
   async rewrites() {
     return [
       {
@@ -28,8 +29,8 @@ const nextConfig = {
         destination: "https://api.1inch.dev/:slug*",
       },
       {
-        source: '/api-llama/:slug*',
-        destination: 'https://api.llama.fi/:slug*',
+        source: "/api-llama/:slug*",
+        destination: "https://api.llama.fi/:slug*",
       },
     ];
   },

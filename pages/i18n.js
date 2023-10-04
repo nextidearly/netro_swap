@@ -29,7 +29,7 @@ const resources = {
       register: "ulr",
       claim: "ulr",
       nds: "nds",
-      finance: 'finance'
+      finance: "finance",
     },
   },
   ru: {
@@ -59,16 +59,17 @@ const resources = {
       register: "регистр",
       claim: "Требовать",
       nds: "Продажи узлов",
-      finance: 'Финансы'
+      finance: "Финансы",
     },
   },
 };
 
 i18n.use(initReactI18next).init({
   resources,
-  fallbackLng: "es", // Set the fallback language
+  len: "en",
+  fallbackLng: "en",
   interpolation: {
-    escapeValue: false, // React already escapes by default
+    escapeValue: false,
   },
 });
 
