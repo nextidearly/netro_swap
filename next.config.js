@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  pageExtensions: ["i18n.js", "page.ts", "page.jsx", "page.js"],
+  pageExtensions: ["i18n.js"],
   async rewrites() {
     return [
       {
