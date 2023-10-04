@@ -30,6 +30,7 @@ const resources = {
       claim: "ulr",
       nds: "nds",
       finance: "finance",
+      approve: "approve",
     },
   },
   ru: {
@@ -60,6 +61,7 @@ const resources = {
       claim: "Требовать",
       nds: "Продажи узлов",
       finance: "Финансы",
+      approve: "Утвердить",
     },
   },
 };

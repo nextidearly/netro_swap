@@ -303,7 +303,7 @@ const SwapPage = () => {
           },
         }
       );
-      setallowanceError(false)
+      setallowanceError(false);
       getQuote();
     } catch (error) {
       console.log(error);
@@ -649,7 +649,7 @@ const SwapPage = () => {
                         fullWidth
                         onClick={callApprove}
                       >
-                        Approve
+                        {t("approve", "Approve")}
                       </LoadingButton>
                     ) : (
                       <>
