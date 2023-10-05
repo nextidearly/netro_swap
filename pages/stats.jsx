@@ -67,7 +67,6 @@ const StatsPage = () => {
       return b.tvl - a.tvl;
     });
     setDexTVLData(dexList);
-    sessionStorage.setItem("asdfasdf", JSON.stringify(dexList));
   };
 
   const convertCurrency = (labelValue) => {
@@ -107,6 +106,7 @@ const StatsPage = () => {
         chain.id === 8453 ||
         chain.id === 42161 ||
         chain.id === 324);
+
     if (network) {
       setDexTVLData(DEX_TVL_RANKINGS[chain.id]);
       getTVL(PROTOCOLS[chain ? chain.id : tradeInfo.chainId]);
@@ -120,12 +120,12 @@ const StatsPage = () => {
       // if (chain) {
       //   initTradeState(1);
       // }
-      initTradeState(chain.id);
-      setDexTVLData([])
-      setTVLhistory([])
+      initTradeState(chain?.id || 1);
+      setDexTVLData([]);
+      setTVLhistory([]);
     }
   }, [chain]);
-  
+
   return (
     <Grid className="page">
       <Header />
