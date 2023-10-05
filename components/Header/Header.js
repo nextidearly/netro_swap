@@ -27,11 +27,11 @@ const Header = () => {
   const { t, i18n } = useTranslation();
   const mobileMenuOpen = Boolean(anchorEl1);
   const matches = useMediaQuery("(min-width: 901px )");
-  const [locale, setLocale] = useState('us')
+  const [locale, setLocale] = useState("us");
 
   const handleChangeLocale = (val) => {
     i18n.changeLanguage(val);
-    setLocale(val)
+    setLocale(val);
   };
 
   useEffect(() => {
@@ -44,15 +44,17 @@ const Header = () => {
       <Container maxWidth={"fixed"}>
         <Grid container className="header" alignItems="center">
           <Grid xs={2} sm={2} md={4} item className="header-logo">
-            <Image
-              src={"/logo.png"}
-              alt="XYXY logo"
-              layout="fixed"
-              className="site-logo"
-              width={70}
-              height={70}
-            />
-            XYXY.IO
+            <Link href={"https://www.xyxy.io/"} className="flex items-center">
+              <Image
+                src={"/logo.png"}
+                alt="XYXY logo"
+                layout="fixed"
+                className="site-logo"
+                width={70}
+                height={70}
+              />
+              XYXY.IO
+            </Link>
           </Grid>
           <Grid
             xs={4}
