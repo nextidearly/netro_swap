@@ -115,14 +115,17 @@ const StatsPage = () => {
         initTradeState(chain.id);
       }
     } else {
-      getTVL(PROTOCOLS[1]);
-      getDexTVL(PROTOCOLS[1].toLowerCase());
-      if (chain) {
-        initTradeState(1);
-      }
+      // getTVL(PROTOCOLS[1]);
+      // getDexTVL(PROTOCOLS[1].toLowerCase());
+      // if (chain) {
+      //   initTradeState(1);
+      // }
+      initTradeState(chain.id);
+      setDexTVLData([])
+      setTVLhistory([])
     }
   }, [chain]);
-
+  
   return (
     <Grid className="page">
       <Header />

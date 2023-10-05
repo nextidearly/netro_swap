@@ -112,6 +112,10 @@ export const PROTOCOLS = {
   1: "Ethereum",
   137: "polygon",
   8453: "base",
+  42220: 'Celo',
+  5000: 'Mantle',
+  167007: 'Taiko',
+  7777777: 'Zora',
 };
 
 export const ROUTER = "0x1111111254eeb25477b68fb85ed929f73a960582";
