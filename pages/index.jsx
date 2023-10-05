@@ -65,6 +65,8 @@ const SwapPage = () => {
   const [protocols, setProtocols] = useState([]);
   const [correctNetwork, setCorrectNetwork] = useState(false);
   const [router, setRouter] = useState(ROUTER);
+  const [timer, setTimer] = useState();
+  const [loadingPrice, setLodadingPrice] = useState(false);
 
   const showModal = (key) => {
     setModalKey(key);
@@ -111,6 +113,77 @@ const SwapPage = () => {
     }
   };
 
+  const clearTimer = () => {
+    clearTimeout(timer);
+  };
+
+  const fetchingPrice = async (
+    fromTokenAddress,
+    toTokenAddress,
+    amount,
+    chain
+  ) => {
+    const pathResponse = await quote(
+      fromTokenAddress,
+      toTokenAddress,
+      amount,
+      chain
+    );
+
+    if (pathResponse.status === 429) {
+      fetchingPrice(fromTokenAddress, toTokenAddress, amount, chain);
+    }
+
+    if (!pathResponse.ok) return;
+
+    const pathResults = await pathResponse.json();
+
+    const toTokenAmount = ethers.utils.formatUnits(
+      pathResults.toAmount,
+      pathResults.toToken.decimals
+    );
+
+    setBuyBalance(toTokenAmount);
+    setEstimatedGas(pathResults.gas);
+
+    const bestProtocol = protocols.filter(
+      (protocol) => protocol.id === pathResults.protocols[0][0][0].name
+    );
+    let paths = [];
+    if (bestProtocol.length > 0) {
+      const pathResult = {
+        id: bestProtocol[0].id,
+        img: bestProtocol[0].img,
+        img_color: bestProtocol[0].img_color,
+        title: bestProtocol[0].title,
+        toTokenAmount: pathResults.toAmount,
+      };
+      paths.push(pathResult);
+    }
+
+    const res = await fetch(
+      `https://api.llama.fi/overview/dexs/${
+        PROTOCOLS[chain ? chain : tradeInfo.chainId]
+      }`
+    );
+    const result = await res.json();
+    const dexList = result.protocols.sort((a, b) => {
+      return a.change_1d - b.change_1d;
+    });
+    dexList.slice(0, 3).forEach((element, index) => {
+      const pathResult = {
+        id: element.defillamaId,
+        img: element.logo,
+        img_color: "red",
+        title: element.displayName,
+        toTokenAmount: pathResults.toAmount,
+      };
+      paths.push(pathResult);
+    });
+    setPathResults(paths);
+    setLodadingPrice(false);
+  };
+
   // const getRouter = async () => {
   //   if (!chain) return;
   //   const response = await get_router(chain.id);
@@ -125,97 +198,55 @@ const SwapPage = () => {
   //   }
   // };
 
-  const getQuote = async () => {
-    if (sellBalance <= 0) return false;
-    if (tradeInfo.to.address === "") return false;
-    setLoading(true);
-    const fromTokenAddress = tradeInfo.from.address;
-    const toTokenAddress = tradeInfo.to.address;
-    const amount = ethers.utils.parseUnits(
-      sellBalance,
-      tradeInfo.from.decimals
-    );
+  const getQuote = () => {
+    clearTimer(timer);
+    setLodadingPrice(true);
+    const timeDuration = setTimeout(async () => {
+      if (sellBalance <= 0) return false;
+      if (tradeInfo.to.address === "") return false;
+      setLoading(true);
+      const fromTokenAddress = tradeInfo.from.address;
+      const toTokenAddress = tradeInfo.to.address;
+      const amount = ethers.utils.parseUnits(
+        sellBalance,
+        tradeInfo.from.decimals
+      );
 
-    const response = await swap(
-      fromTokenAddress,
-      toTokenAddress,
-      amount,
-      chain.id,
-      address
-    );
-
-    if (response.status === 429) {
-      getQuote();
-    } else {
-      const quoteData = await response.json();
-      setLoading(false);
-      if (quoteData.statusCode === 400) {
-        setErrorMsg(quoteData.description);
-        if (quoteData.meta && quoteData?.meta[1]?.type === "allowance")
-          setallowanceError(true);
-        setBuyBalance(0);
-        setEstimatedGas(0);
-      } else {
-        setErrorMsg('')
-        setLiquidityError(false);
-        setUnknownPrice(false);
-        const toTokenAmount = ethers.utils.formatUnits(
-          quoteData.toAmount,
-          quoteData.toToken.decimals
-        );
-        setTxData(quoteData.tx);
-        setBuyBalance(toTokenAmount);
-        setEstimatedGas(quoteData.tx.gas);
-      }
-    }
-
-    setTimeout(async () => {
-      const pathResponse = await quote(
+      const response = await swap(
         fromTokenAddress,
         toTokenAddress,
         amount,
-        chain.id
+        chain.id,
+        address
       );
 
-      if (!pathResponse.ok) return;
-
-      const pathResults = await pathResponse.json();
-
-      const bestProtocol = protocols.filter(
-        (protocol) => protocol.id === pathResults.protocols[0][0][0].name
-      );
-      let paths = [];
-      if (bestProtocol.length > 0) {
-        const pathResult = {
-          id: bestProtocol[0].id,
-          img: bestProtocol[0].img,
-          img_color: bestProtocol[0].img_color,
-          title: bestProtocol[0].title,
-          toTokenAmount: pathResults.toAmount,
-        };
-        paths.push(pathResult);
+      if (response.status === 429) {
+        getQuote();
+      } else {
+        const quoteData = await response.json();
+        setLoading(false);
+        if (quoteData.statusCode === 400) {
+          setErrorMsg(quoteData.description);
+          if (quoteData.meta && quoteData?.meta[1]?.type === "allowance")
+            setallowanceError(true);
+          setBuyBalance(0);
+          setEstimatedGas(0);
+        } else {
+          setErrorMsg("");
+          setLiquidityError(false);
+          setUnknownPrice(false);
+          const toTokenAmount = ethers.utils.formatUnits(
+            quoteData.toAmount,
+            quoteData.toToken.decimals
+          );
+          setTxData(quoteData.tx);
+          setBuyBalance(toTokenAmount);
+          setEstimatedGas(quoteData.tx.gas);
+        }
       }
-      const res = await fetch(
-        `https://api.llama.fi/overview/dexs/${
-          PROTOCOLS[chain ? chain.id : tradeInfo.chainId]
-        }`
-      );
-      const result = await res.json();
-      const dexList = result.protocols.sort((a, b) => {
-        return a.change_1d - b.change_1d;
-      });
-      dexList.slice(0, 3).forEach((element, index) => {
-        const pathResult = {
-          id: element.defillamaId,
-          img: element.logo,
-          img_color: "red",
-          title: element.displayName,
-          toTokenAmount: pathResults.toAmount,
-        };
-        paths.push(pathResult);
-      });
-      setPathResults(paths);
-    }, 500);
+      fetchingPrice(fromTokenAddress, toTokenAddress, amount, chain.id);
+    }, 1000);
+    setTimer(timeDuration);
   };
 
   const getProtocols = async () => {
@@ -306,7 +337,7 @@ const SwapPage = () => {
       );
       setallowanceError(false);
       getQuote();
-      setErrorMsg('')
+      setErrorMsg("");
     } catch (error) {
       console.log(error);
       setLoadingTx(false);
@@ -384,6 +415,7 @@ const SwapPage = () => {
 
   useEffect(() => {
     setallowanceError(false);
+    setErrorMsg("");
     if (sellBalance > 0 && correctNetwork) getQuote();
   }, [sellBalance, tradeInfo, balanceFrom]);
 
@@ -601,6 +633,7 @@ const SwapPage = () => {
                           value={buyBalance}
                           placeholder="0.0000000"
                           className="input-box"
+                          disabled={loadingPrice}
                         />
                       </Grid>
                       <Grid className="balance-text">
@@ -662,7 +695,7 @@ const SwapPage = () => {
                           </Button>
                         ) : (
                           <>
-                            {isConnected ? (
+                            {isConnected || !loadingPrice ? (
                               <>
                                 {balanceError || !Number(sellBalance) ? (
                                   <Button
@@ -684,7 +717,7 @@ const SwapPage = () => {
                                     className="swap-button bg-blue-600"
                                     fullWidth
                                     target={"_blank"}
-                                    disabled={loading}
+                                    disabled={loading || loadingPrice}
                                     onClick={callSwap}
                                   >
                                     {t("swap")}
@@ -694,6 +727,7 @@ const SwapPage = () => {
                             ) : (
                               <>
                                 <Button
+                                  className="swap-button"
                                   variant="contained"
                                   fullWidth
                                   disabled={true}
