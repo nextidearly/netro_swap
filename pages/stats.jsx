@@ -44,6 +44,8 @@ const StatsPage = () => {
     const response = await fetch(`/api-llama/overview/dexs/${protocol}`);
     const result = await response.json();
     let tvlList = [];
+    console.log("-------------");
+
     for (let i = 0; i < result.protocols.length; i++) {
       try {
         const res = await fetch(`/api-llama/tvl/${result.protocols[i].module}`);
@@ -66,7 +68,9 @@ const StatsPage = () => {
     const dexList = tvlList.sort((a, b) => {
       return b.tvl - a.tvl;
     });
-    setDexTVLData(dexList);
+    sessionStorage.setItem("ddd", JSON.stringify(dexList));
+    console.log(dexList, "-------------");
+    // setDexTVLData(dexList);
   };
 
   const convertCurrency = (labelValue) => {
@@ -105,7 +109,9 @@ const StatsPage = () => {
         chain.id === 10 ||
         chain.id === 8453 ||
         chain.id === 42161 ||
-        chain.id === 324);
+        chain.id === 324 ||
+        chain.id === 42220 ||
+        chain.id === 5000);
 
     if (network) {
       setDexTVLData(DEX_TVL_RANKINGS[chain.id]);
@@ -121,8 +127,9 @@ const StatsPage = () => {
       //   initTradeState(1);
       // }
       initTradeState(chain?.id || 1);
-      setDexTVLData([]);
-      setTVLhistory([]);
+      setDexTVLData(DEX_TVL_RANKINGS[1]);
+      getTVL(PROTOCOLS[1]);
+      getDexTVL(PROTOCOLS[1].toLowerCase());
     }
   }, [chain]);
 
