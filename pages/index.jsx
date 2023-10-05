@@ -33,6 +33,7 @@ import {
 import Head from "next/head";
 import Footer from "@/components/Footer/Footer";
 import { useTranslation } from "react-i18next";
+import Skeleton from "@mui/material/Skeleton";
 
 const SwapPage = () => {
   const dispatch = useDispatch();
@@ -573,7 +574,7 @@ const SwapPage = () => {
                       </Grid>
                       <Grid container justifyContent={"space-between"}>
                         <Grid className="balance-text">
-                          Balance:{" "}
+                          {t("balance", "Balance")}:{" "}
                           {tradeInfo.from.address ===
                           "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
                             ? Number(balance).toFixed(5)
@@ -628,16 +629,27 @@ const SwapPage = () => {
 
                           <ArrowDropDownIcon />
                         </Button>
-                        <InputBase
-                          type="number"
-                          value={buyBalance}
-                          placeholder="0.0000000"
-                          className="input-box"
-                          disabled={loadingPrice}
-                        />
+                        {loadingPrice ? (
+                          <div className="w-full">
+                            <Skeleton
+                              variant="rounded"
+                              sx={{ bgcolor: "#2a3454" }}
+                              height={30}
+                              className="w-[150px] rounded-xl  absolute right-3 top-2"
+                            />
+                          </div>
+                        ) : (
+                          <InputBase
+                            type="number"
+                            value={buyBalance}
+                            placeholder="0.0000000"
+                            className="input-box"
+                            disabled={loadingPrice}
+                          />
+                        )}
                       </Grid>
                       <Grid className="balance-text">
-                        Balance:{" "}
+                        {t("balance", "Balance")}:{" "}
                         {tradeInfo.to.address ===
                         "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
                           ? Number(balance).toFixed(5)
@@ -649,7 +661,7 @@ const SwapPage = () => {
                   <Grid>
                     {estimatedGas ? (
                       <Typography color={"#a9b6bf"} textAlign={"right"}>
-                        Estimated Gas: {estimatedGas}
+                        {t("estg", "Estimated Gas")}: {estimatedGas}
                       </Typography>
                     ) : (
                       <></>
@@ -691,7 +703,7 @@ const SwapPage = () => {
                       <>
                         {liquidityError ? (
                           <Button variant="contained" disabled fullWidth>
-                            No liquidity for swap
+                            {t("nlfs", "No liquidity for swap")}
                           </Button>
                         ) : (
                           <>
@@ -707,7 +719,7 @@ const SwapPage = () => {
                                     {!balanceError ? (
                                       <>{t("swap")}</>
                                     ) : (
-                                      "Insufficient balance"
+                                      <>{t("iffb", "Insufficient balance")}</>
                                     )}
                                   </Button>
                                 ) : (
@@ -743,12 +755,14 @@ const SwapPage = () => {
                   </Grid>
                   {pathResults && pathResults.length > 0 && tradeInfo.to && (
                     <Grid className="exchanges">
-                      <Typography variant="h6">Exchanges:</Typography>
+                      <Typography variant="h6">
+                        {t("exchanges", "Exchanges")}:
+                      </Typography>
 
                       <table border="0" cellSpacing="0" cellPadding="0">
                         <thead>
                           <tr>
-                            <th>Name</th>
+                            <th>{t("name", "Name")}</th>
                             <th>
                               {tradeInfo.from.name} / {tradeInfo.to.name}
                             </th>
@@ -791,11 +805,11 @@ const SwapPage = () => {
                               <td>
                                 {index === 0 ? (
                                   <Typography className="badge best">
-                                    Best
+                                    {t("best", "Best")}
                                   </Typography>
                                 ) : (
                                   <Typography className="badge">
-                                    Match
+                                    {t("match", "Match")}
                                   </Typography>
                                 )}
                               </td>

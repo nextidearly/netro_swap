@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   Container,
@@ -7,6 +7,7 @@ import {
   Menu,
   MenuItem,
   useMediaQuery,
+  Select,
 } from "@mui/material";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { useAccount } from "wagmi";
@@ -26,9 +27,11 @@ const Header = () => {
   const { t, i18n } = useTranslation();
   const mobileMenuOpen = Boolean(anchorEl1);
   const matches = useMediaQuery("(min-width: 901px )");
+  const [locale, setLocale] = useState('us')
 
   const handleChangeLocale = (val) => {
     i18n.changeLanguage(val);
+    setLocale(val)
   };
 
   useEffect(() => {
@@ -117,14 +120,39 @@ const Header = () => {
 
           <Grid xs={10} md={4} item>
             <Grid container justifyContent="flex-end" alignItems={"center"}>
-              <select
-                defaultValue={"es"}
-                className="mr-2 p-1.5 rounded-md bg-[#010514] font-semibold text-gray-300 focus-visible:outline-none cursor-pointer"
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={locale}
+                label="Age"
                 onChange={(e) => handleChangeLocale(e.target.value)}
+                className="w-[60px] h-[38px] mt-[1px]  mr-2 p-0  text-white"
               >
-                <option value={"es"}>US</option>
-                <option value={"ru"}>RU</option>
-              </select>
+                <MenuItem
+                  value="us"
+                  className="w-full h-[30px] px-3 my-1 overflow-hidden p-1"
+                >
+                  <img src="/usa.jpg" className="w-full h-full" />
+                </MenuItem>
+                <MenuItem
+                  value="ru"
+                  className="w-full h-[30px] px-3 my-1 overflow-hidden p-1"
+                >
+                  <img src="/russian.png" className="w-full h-full" />
+                </MenuItem>
+                <MenuItem
+                  value="ch"
+                  className="w-full h-[30px] px-3 my-1 overflow-hidden p-1"
+                >
+                  <img src="/china.png" className="w-full h-full" />
+                </MenuItem>
+                <MenuItem
+                  value="ar"
+                  className="w-full h-[30px] px-3 my-1 overflow-hidden p-1"
+                >
+                  <img src="/arbic.png" className="w-full h-full" />
+                </MenuItem>
+              </Select>
 
               {matches && (
                 <HeaderButton

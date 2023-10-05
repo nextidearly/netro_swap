@@ -2319,3 +2319,31 @@ a {
     border-radius: 6px;
   }
 }
+
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+  padding: 4px !important;
+}
+
+.css-6hp17o-MuiList-root-MuiMenu-list {
+  background-color: #010514;
+}
+
+.css-1mtbahd-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
+  border: 1px solid rgba(145, 144, 144, 0.664) !important;
+}
+
+.css-hfutr2-MuiSvgIcon-root-MuiSelect-icon {
+  color: black !important;
+}
+
+.css-1mtbahd-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color: none !important;
+  border-width: none !important;
+}
+
+.css-1mtbahd-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color: #ffffff00 !important;
+  border-width: 0px !important;
+}
