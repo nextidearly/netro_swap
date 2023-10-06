@@ -185,7 +185,7 @@ const LaunchPad = () => {
                             cursor: "pointer",
                           }}
                         >
-                          MAX
+                          {t("max", "MAX")}
                         </span>
                       </Typography>
                     </Grid>
@@ -304,7 +304,7 @@ const LaunchPad = () => {
                             cursor: "pointer",
                           }}
                         >
-                          MAX
+                          {t("max", "MAX")}
                         </span>
                       </Typography>
                     </Grid>
@@ -656,7 +656,7 @@ const LaunchPad = () => {
                               className="action-button bg-blue-600"
                               onClick={handleBuy}
                             >
-                              Approve
+                              {t("approve", "Approve")}
                             </Button>
                           </Grid>
                         </Grid>
@@ -776,7 +776,7 @@ const LaunchPad = () => {
                               className="action-button bg-blue-600"
                               onClick={handleBuy}
                             >
-                              Approve
+                              {t("approve", "Approve")}
                             </Button>
                           </Grid>
                         </Grid>
@@ -824,7 +824,7 @@ const LaunchPad = () => {
                           justifyContent={"space-between"}
                         >
                           <Typography variant="h6">
-                            Total Registered:
+                            {t("ttr", "Total Registered:")}
                           </Typography>
                           <Typography variant="h6">0 /100</Typography>
                         </Grid>
@@ -837,7 +837,7 @@ const LaunchPad = () => {
                           justifyContent={"space-between"}
                         >
                           <Typography variant="h6">
-                            Unclaimed Rewards:
+                            {t("ulr", "Unclaimed Rewards:")}
                           </Typography>
                           <Typography variant="h6">1</Typography>
                         </Grid>
@@ -856,7 +856,7 @@ const LaunchPad = () => {
                               className="action-button bg-blue-600"
                               onClick={handleBuy}
                             >
-                              BUY
+                              {t("buy", "BUY")}
                             </Button>
                           </Grid>
                           <Grid item mt={2} className="action-group">
@@ -866,7 +866,7 @@ const LaunchPad = () => {
                               className="action-button bg-blue-600"
                               onClick={handleClaim}
                             >
-                              CLAIM
+                              {t("claim", "CLAIM")}
                             </Button>
                           </Grid>
                         </Grid>
@@ -909,7 +909,7 @@ const LaunchPad = () => {
                           justifyContent={"space-between"}
                         >
                           <Typography variant="h6">
-                            Total Registered:
+                            {t("ttr", "Total Registered:")}
                           </Typography>
                           <Typography variant="h6">0 /100</Typography>
                         </Grid>
@@ -922,7 +922,7 @@ const LaunchPad = () => {
                           justifyContent={"space-between"}
                         >
                           <Typography variant="h6">
-                            Unclaimed Rewards:
+                            {t("ulr", "Unclaimed Rewards:")}
                           </Typography>
                           <Typography variant="h6">1</Typography>
                         </Grid>
@@ -941,7 +941,7 @@ const LaunchPad = () => {
                               className="action-button bg-blue-600"
                               onClick={handleBuy}
                             >
-                              BUY
+                              {t("buy", "BUY")}
                             </Button>
                           </Grid>
                           <Grid item mt={2} className="action-group">
@@ -951,7 +951,7 @@ const LaunchPad = () => {
                               className="action-button bg-blue-600"
                               onClick={handleClaim}
                             >
-                              CLAIM
+                              {t("claim", "CLAIM")}
                             </Button>
                           </Grid>
                         </Grid>
