@@ -132,25 +132,25 @@ const Header = () => {
               >
                 <MenuItem
                   value="us"
-                  className="w-full max-w-[60px!important]  h-[30px] px-3 my-1 overflow-hidden p-1"
+                  className="w-full max-w-[60px!important]  h-[30px] px-.5 sm:px-1 md:px-3 my-1 overflow-hidden p-1"
                 >
                   <img src="/usa.jpg" className="w-full max-w-[60px!important]  h-full" />
                 </MenuItem>
                 <MenuItem
                   value="ru"
-                  className="w-full max-w-[60px!important]  h-[30px] px-3 my-1 overflow-hidden p-1"
+                  className="w-full max-w-[60px!important]  h-[30px] px-.5 sm:px-1 md:px-3 my-1 overflow-hidden p-1"
                 >
                   <img src="/russian.png" className="w-full max-w-[60px!important]  h-full" />
                 </MenuItem>
                 <MenuItem
                   value="ch"
-                  className="w-full max-w-[60px!important]  h-[30px] px-3 my-1 overflow-hidden p-1"
+                  className="w-full max-w-[60px!important]  h-[30px] px-.5 sm:px-1 md:px-3 my-1 overflow-hidden p-1"
                 >
                   <img src="/china.png" className="w-full max-w-[60px!important]  h-full" />
                 </MenuItem>
                 <MenuItem
                   value="ar"
-                  className="w-full max-w-[60px!important]  h-[30px] px-3 my-1 overflow-hidden p-1"
+                  className="w-full max-w-[60px!important]  h-[30px] px-.5 sm:px-1 md:px-3 my-1 overflow-hidden p-1"
                 >
                   <img src="/arbic.png" className="w-full max-w-[60px!important]  h-full" />
                 </MenuItem>
