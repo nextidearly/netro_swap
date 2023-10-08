@@ -44,7 +44,6 @@ const StatsPage = () => {
     const response = await fetch(`/api-llama/overview/dexs/${protocol}`);
     const result = await response.json();
     let tvlList = [];
-    console.log("-------------");
 
     for (let i = 0; i < result.protocols.length; i++) {
       try {
@@ -69,8 +68,6 @@ const StatsPage = () => {
       return b.tvl - a.tvl;
     });
     sessionStorage.setItem("ddd", JSON.stringify(dexList));
-    console.log(dexList, "-------------");
-    // setDexTVLData(dexList);
   };
 
   const convertCurrency = (labelValue) => {
