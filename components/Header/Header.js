@@ -128,7 +128,7 @@ const Header = () => {
                 value={locale}
                 label="Age"
                 onChange={(e) => handleChangeLocale(e.target.value)}
-                className="w-[60px] h-[38px] mt-[1px]  mr-2 p-0  text-white"
+                className="w-[60px] h-[38px] mt-[1px] max-w-[100px] mr-2 p-0  text-white"
               >
                 <MenuItem
                   value="us"
