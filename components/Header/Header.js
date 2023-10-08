@@ -132,27 +132,27 @@ const Header = () => {
               >
                 <MenuItem
                   value="us"
-                  className="w-full h-[30px] px-3 my-1 overflow-hidden p-1"
+                  className="w-full max-w-[60px!important]  h-[30px] px-3 my-1 overflow-hidden p-1"
                 >
-                  <img src="/usa.jpg" className="w-full h-full" />
+                  <img src="/usa.jpg" className="w-full max-w-[60px!important]  h-full" />
                 </MenuItem>
                 <MenuItem
                   value="ru"
-                  className="w-full h-[30px] px-3 my-1 overflow-hidden p-1"
+                  className="w-full max-w-[60px!important]  h-[30px] px-3 my-1 overflow-hidden p-1"
                 >
-                  <img src="/russian.png" className="w-full h-full" />
+                  <img src="/russian.png" className="w-full max-w-[60px!important]  h-full" />
                 </MenuItem>
                 <MenuItem
                   value="ch"
-                  className="w-full h-[30px] px-3 my-1 overflow-hidden p-1"
+                  className="w-full max-w-[60px!important]  h-[30px] px-3 my-1 overflow-hidden p-1"
                 >
-                  <img src="/china.png" className="w-full h-full" />
+                  <img src="/china.png" className="w-full max-w-[60px!important]  h-full" />
                 </MenuItem>
                 <MenuItem
                   value="ar"
-                  className="w-full h-[30px] px-3 my-1 overflow-hidden p-1"
+                  className="w-full max-w-[60px!important]  h-[30px] px-3 my-1 overflow-hidden p-1"
                 >
-                  <img src="/arbic.png" className="w-full h-full" />
+                  <img src="/arbic.png" className="w-full max-w-[60px!important]  h-full" />
                 </MenuItem>
               </Select>
 
