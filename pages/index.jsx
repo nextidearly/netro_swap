@@ -34,6 +34,7 @@ import Head from "next/head";
 import Footer from "@/components/Footer/Footer";
 import { useTranslation } from "react-i18next";
 import Skeleton from "@mui/material/Skeleton";
+import Image from "next/image";
 
 const SwapPage = () => {
   const dispatch = useDispatch();
@@ -525,7 +526,7 @@ const SwapPage = () => {
             <meta property="og:image:alt" content="Logo"></meta>
           </Head>
 
-          <Container maxWidth="md">
+          <Container maxWidth="lg">
             <Grid className="main-wrapper" container justifyContent="center">
               <Grid className="swap-wrapper">
                 <Grid container justifyContent={"space-between"}>
@@ -658,6 +659,7 @@ const SwapPage = () => {
                       </Grid>
                     </Box>
                   </Grid>
+
                   <Grid>
                     {estimatedGas ? (
                       <Typography color={"#a9b6bf"} textAlign={"right"}>
@@ -822,6 +824,63 @@ const SwapPage = () => {
                 </Grid>
               </Grid>
             </Grid>
+
+            <div className="flex justify-between mt-12">
+              <a
+                href="https://app.bitradio.io"
+                target="_blank"
+                className="hidden sm:inline-flex left-32 rounded-t-full cursor-pointer shadow-lg shadow-gray-900 overflow-hidden p-3"
+              >
+                <Image
+                  className="rounded-t-full left-32 scale-100 hover:scale-110 transition ease-in-out"
+                  src={"/1.jpg"}
+                  width={200}
+                  height={200}
+                  unoptimized
+                />
+              </a>
+              <a
+                href="https://app.bitradio.io"
+                target="_blank"
+                className="hidden sm:inline-flex right-32 rounded-t-full cursor-pointer shadow-lg shadow-gray-900 overflow-hidden p-3"
+              >
+                <Image
+                  className="rounded-t-full left-32 scale-100 hover:scale-110 transition ease-in-out"
+                  src={"/2.jpg"}
+                  width={200}
+                  height={200}
+                  unoptimized
+                />
+              </a>
+            </div>
+            <div className="flex justify-between mt-6 gap-2">
+              <a
+                href="https://app.bitradio.io"
+                target="_blank"
+                className="inline-flex sm:hidden left-32 rounded-lg cursor-pointer shadow-lg shadow-gray-900 overflow-hidden p-3"
+              >
+                <Image
+                  className="rounded-lg left-32 scale-100 hover:scale-110 transition ease-in-out"
+                  src={"/1.jpg"}
+                  width={200}
+                  height={200}
+                  unoptimized
+                />
+              </a>
+              <a
+                href="https://app.bitradio.io"
+                target="_blank"
+                className="inline-flex sm:hidden right-32 rounded-lg cursor-pointer shadow-lg shadow-gray-900 overflow-hidden p-3"
+              >
+                <Image
+                  className="rounded-lg left-32 scale-100 hover:scale-110 transition ease-in-out"
+                  src={"/2.jpg"}
+                  width={200}
+                  height={200}
+                  unoptimized
+                />
+              </a>
+            </div>
           </Container>
         </Grid>
         {tokenList && (
