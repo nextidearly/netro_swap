@@ -5,7 +5,7 @@ export default function index() {
     <div className="bg-white px-4 py-5">
       <div className="flex justify-between pb-1 pt-2">
         <div className="bg-[#5ECFAD] p-1 rounded-[20px] w-[76px] h-[27px] flex justify-between items-center pr-2 pl-0">
-          <img src="/test/group3.png" alt="" />
+          <img src="/test/Group3.png" alt="" />
           <img src="/test/video1.png" alt="" />
         </div>
         <div className="relative pr-1">
@@ -20,7 +20,7 @@ export default function index() {
         <img
           src="/test/image.png"
           alt=""
-          className="scale-120 mint-h-[268px] h-full object-cover object-center "
+          className="scale-120 w-full mint-h-[268px] h-full object-cover object-center "
         />
         <div className="bg-[#252836] flex justify-end absolute py-3 bottom-0 w-full px-4">
           <div className="flex gap-6">
