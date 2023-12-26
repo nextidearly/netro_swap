@@ -183,7 +183,7 @@ const StatsPage = () => {
                 ) : (
                   <Skeleton
                     variant="rounded"
-                    sx={{ bgcolor: "#2a3454" }}
+                    sx={{ bgcolor: "#22475bc9" }}
                     height={200}
                   />
                 )}
@@ -283,7 +283,7 @@ const StatsPage = () => {
                       <td colSpan={6}>
                         <Skeleton
                           variant="rounded"
-                          sx={{ bgcolor: "#2a3454" }}
+                          sx={{ bgcolor: "#22475bc9" }}
                           height={30}
                         />
                       </td>
@@ -292,7 +292,7 @@ const StatsPage = () => {
                       <td colSpan={6}>
                         <Skeleton
                           variant="rounded"
-                          sx={{ bgcolor: "#2a3454" }}
+                          sx={{ bgcolor: "#22475bc9" }}
                           height={30}
                         />
                       </td>
@@ -301,7 +301,7 @@ const StatsPage = () => {
                       <td colSpan={6}>
                         <Skeleton
                           variant="rounded"
-                          sx={{ bgcolor: "#2a3454" }}
+                          sx={{ bgcolor: "#22475bc9" }}
                           height={30}
                         />
                       </td>
@@ -310,7 +310,7 @@ const StatsPage = () => {
                       <td colSpan={6}>
                         <Skeleton
                           variant="rounded"
-                          sx={{ bgcolor: "#2a3454" }}
+                          sx={{ bgcolor: "#22475bc9" }}
                           height={30}
                         />
                       </td>
@@ -319,7 +319,7 @@ const StatsPage = () => {
                       <td colSpan={6}>
                         <Skeleton
                           variant="rounded"
-                          sx={{ bgcolor: "#2a3454" }}
+                          sx={{ bgcolor: "#22475bc9" }}
                           height={30}
                         />
                       </td>
@@ -328,7 +328,7 @@ const StatsPage = () => {
                       <td colSpan={6}>
                         <Skeleton
                           variant="rounded"
-                          sx={{ bgcolor: "#2a3454" }}
+                          sx={{ bgcolor: "#22475bc9" }}
                           height={30}
                         />
                       </td>
@@ -337,7 +337,7 @@ const StatsPage = () => {
                       <td colSpan={6}>
                         <Skeleton
                           variant="rounded"
-                          sx={{ bgcolor: "#2a3454" }}
+                          sx={{ bgcolor: "#22475bc9" }}
                           height={30}
                         />
                       </td>
@@ -365,7 +365,7 @@ const StatsPage = () => {
                       ${convertCurrency(TVLhistory[TVLhistory.length - 1].tvl)}
                     </>
                   ) : (
-                    <Skeleton variant="rounded" sx={{ bgcolor: "#2a3454" }} />
+                    <Skeleton variant="rounded" sx={{ bgcolor: "#22475bc9" }} />
                   )}
                 </Typography>
               </div>
@@ -383,7 +383,7 @@ const StatsPage = () => {
                   </Typography>
                 ) : (
                   <Typography variant="h4">
-                    <Skeleton variant="rounded" sx={{ bgcolor: "#2a3454" }} />
+                    <Skeleton variant="rounded" sx={{ bgcolor: "#22475bc9" }} />
                   </Typography>
                 )}
               </div>
@@ -431,7 +431,7 @@ const StatsPage = () => {
                 ) : (
                   <Skeleton
                     variant="rounded"
-                    sx={{ bgcolor: "#2a3454" }}
+                    sx={{ bgcolor: "#22475bc9" }}
                     height={200}
                   />
                 )}
@@ -439,126 +439,124 @@ const StatsPage = () => {
             </div>
           </div>
           <Typography variant="h6">TVL {t("rankings", "Rankings")}</Typography>
-          <div className="grid-wrapper h-full relative mt-[0px!important]">
-            <div className="h-[calc(100%-32px)] absolute w-[calc(100%-32px)] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-y-scroll">
-              <table
-                className="dex-table"
-                border="0"
-                cellSpacing="0"
-                cellPadding="0"
-              >
-                <thead>
-                  <tr>
-                    <th>{t("Число", "No")}</th>
-                    <th>{t("name", "Name")}</th>
-                    <th>1D {t("change", "Change")}</th>
-                    <th>1w {t("change", "Change")}</th>
-                    <th>1m {t("change", "Change")}</th>
-                    <th>TVL</th>
-                  </tr>
-                </thead>
+          <div className="grid-wrapper">
+            <table
+              className="dex-table"
+              border="0"
+              cellSpacing="0"
+              cellPadding="0"
+            >
+              <thead>
+                <tr>
+                  <th>{t("Число", "No")}</th>
+                  <th>{t("name", "Name")}</th>
+                  <th>1D {t("change", "Change")}</th>
+                  <th>1w {t("change", "Change")}</th>
+                  <th>1m {t("change", "Change")}</th>
+                  <th>TVL</th>
+                </tr>
+              </thead>
 
-                {dexTVLData.length > 0 ? (
-                  <tbody>
-                    {dexTVLData.map((data, index) => {
-                      return (
-                        <tr
-                          key={index}
-                          className={index % 2 === 0 ? "table-hover" : ""}
-                        >
-                          <td>{index + 1}</td>
-                          <td className="dex-name">
-                            <img
-                              src={data.logo}
-                              alt="dex icon"
-                              className="dex-icon"
-                              onError={(e) => addDefaultImg(e)}
-                            />
-                            {data.displayName}
-                          </td>
-                          <td className={data.change_1d > 0 ? "up" : "down"}>
-                            $ {convertCurrency(data.change_1d)}
-                          </td>
-                          <td className={data.change_7d > 0 ? "up" : "down"}>
-                            $ {convertCurrency(data.change_7d)}
-                          </td>
-                          <td className={data.change_1m > 0 ? "up" : "down"}>
-                            $ {convertCurrency(data.change_1m)}
-                          </td>
-                          <td>$ {convertCurrency(data.tvl)}</td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                ) : (
-                  <tbody className="skeleton-table">
-                    <tr>
-                      <td colSpan={6}>
-                        <Skeleton
-                          variant="rounded"
-                          sx={{ bgcolor: "#2a3454" }}
-                          height={30}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colSpan={6}>
-                        <Skeleton
-                          variant="rounded"
-                          sx={{ bgcolor: "#2a3454" }}
-                          height={30}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colSpan={6}>
-                        <Skeleton
-                          variant="rounded"
-                          sx={{ bgcolor: "#2a3454" }}
-                          height={30}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colSpan={6}>
-                        <Skeleton
-                          variant="rounded"
-                          sx={{ bgcolor: "#2a3454" }}
-                          height={30}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colSpan={6}>
-                        <Skeleton
-                          variant="rounded"
-                          sx={{ bgcolor: "#2a3454" }}
-                          height={30}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colSpan={6}>
-                        <Skeleton
-                          variant="rounded"
-                          sx={{ bgcolor: "#2a3454" }}
-                          height={30}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colSpan={6}>
-                        <Skeleton
-                          variant="rounded"
-                          sx={{ bgcolor: "#2a3454" }}
-                          height={30}
-                        />
-                      </td>
-                    </tr>
-                  </tbody>
-                )}
-              </table>
-            </div>
+              {dexTVLData.length > 0 ? (
+                <tbody>
+                  {dexTVLData.map((data, index) => {
+                    return (
+                      <tr
+                        key={index}
+                        className={index % 2 === 0 ? "table-hover" : ""}
+                      >
+                        <td>{index + 1}</td>
+                        <td className="dex-name">
+                          <img
+                            src={data.logo}
+                            alt="dex icon"
+                            className="dex-icon"
+                            onError={(e) => addDefaultImg(e)}
+                          />
+                          {data.displayName}
+                        </td>
+                        <td className={data.change_1d > 0 ? "up" : "down"}>
+                          $ {convertCurrency(data.change_1d)}
+                        </td>
+                        <td className={data.change_7d > 0 ? "up" : "down"}>
+                          $ {convertCurrency(data.change_7d)}
+                        </td>
+                        <td className={data.change_1m > 0 ? "up" : "down"}>
+                          $ {convertCurrency(data.change_1m)}
+                        </td>
+                        <td>$ {convertCurrency(data.tvl)}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              ) : (
+                <tbody className="skeleton-table">
+                  <tr>
+                    <td colSpan={6}>
+                      <Skeleton
+                        variant="rounded"
+                        sx={{ bgcolor: "#22475bc9" }}
+                        height={30}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colSpan={6}>
+                      <Skeleton
+                        variant="rounded"
+                        sx={{ bgcolor: "#22475bc9" }}
+                        height={30}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colSpan={6}>
+                      <Skeleton
+                        variant="rounded"
+                        sx={{ bgcolor: "#22475bc9" }}
+                        height={30}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colSpan={6}>
+                      <Skeleton
+                        variant="rounded"
+                        sx={{ bgcolor: "#22475bc9" }}
+                        height={30}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colSpan={6}>
+                      <Skeleton
+                        variant="rounded"
+                        sx={{ bgcolor: "#22475bc9" }}
+                        height={30}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colSpan={6}>
+                      <Skeleton
+                        variant="rounded"
+                        sx={{ bgcolor: "#22475bc9" }}
+                        height={30}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colSpan={6}>
+                      <Skeleton
+                        variant="rounded"
+                        sx={{ bgcolor: "#22475bc9" }}
+                        height={30}
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              )}
+            </table>
           </div>
         </div>
       </Container>

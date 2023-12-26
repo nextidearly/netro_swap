@@ -39,7 +39,7 @@ export const CustomConnectButton = () => {
                       justifyContent: "center",
                       alignItems: "center",
                     }}
-                    className="custom-button"
+                    className="custom-button snow_effect"
                     onClick={openConnectModal}
                     type="button"
                   >
@@ -55,7 +55,7 @@ export const CustomConnectButton = () => {
                       justifyContent: "center",
                       alignItems: "center",
                     }}
-                    className="custom-button"
+                    className="custom-button snow_effect"
                     onClick={openChainModal}
                     type="button"
                   >
@@ -73,7 +73,7 @@ export const CustomConnectButton = () => {
                       alignItems: "center",
                     }}
                     type="button"
-                    className="custom-button"
+                    className="custom-button snow_effect"
                   >
                     {chain.hasIcon && (
                       <div
@@ -103,7 +103,7 @@ export const CustomConnectButton = () => {
                       justifyContent: "center",
                       alignContent: "center",
                     }}
-                    className="custom-button"
+                    className="custom-button snow_effect"
                     onClick={openAccountModal}
                     type="button"
                   >

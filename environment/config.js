@@ -69,8 +69,8 @@ export const PROTOCOL_LIST = {
 export const TelegramLink = process.env.TELEGRAM || "";
 export const GithubLink = process.env.GITHUB || "";
 export const DiscordLink = process.env.DISCORD || "https://discord.gg/P83xg8YX";
-export const TwitterLink = process.env.TWITTER || "https://twitter.com/xyxy_io";
-export const ZealyLink = process.env.TWITTER || "https://zealy.io/c/xyxyio";
+export const TwitterLink = process.env.TWITTER || "https://twitter.com/SNOW_io";
+export const ZealyLink = process.env.TWITTER || "https://zealy.io/c/SNOWio";
 
 export const TREASURY =
   process.env.NEXT_PUBLIC_TREASURY ||

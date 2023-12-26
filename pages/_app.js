@@ -67,15 +67,7 @@ export default function App({ Component, pageProps }) {
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <WagmiConfig config={wagmiConfig}>
-          <RainbowKitProvider
-            chains={chains}
-            theme={darkTheme({
-              accentColor: "#202946",
-              accentColorForeground: "white",
-              borderRadius: "medium",
-              overlayBlur: "small",
-            })}
-          >
+          <RainbowKitProvider chains={chains}>
             <SnackbarProvider maxSnack={3}>
               <I18nextProvider i18n={i18n}>
                 <Component {...pageProps} />

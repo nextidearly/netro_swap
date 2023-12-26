@@ -122,7 +122,7 @@ const TokenListModal = (props) => {
           />
           <SearchOutlinedIcon className="search-icon" />
         </Grid>
-        <hr />
+        <hr className="border-t border-white/30 mb-1"/>
         <Grid container direction="column">
           <Scrollbars
             style={{ height: 326 }}

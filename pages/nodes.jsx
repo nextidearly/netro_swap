@@ -54,37 +54,37 @@ const LaunchPad = () => {
   };
 
   // useEffect(() => {
-  //   if (provider) getXYXYPresaleStatus();
+  //   if (provider) getSNOWPresaleStatus();
   // }, [provider]);
 
   return (
     <Grid className="page">
       <Header />
       <Head>
-        <title>NodeSale | XYXY Finance</title>
+        <title>NodeSale | SNOW Finance</title>
         <link rel="icon" href="/favicon.ico" />{" "}
         <meta
           name="description"
-          content="XYXY is the leading swap platform on Base"
+          content="SNOW is the leading swap platform on Base"
         />
         <meta
           name="keywords"
-          content="Defi, Base, Dex, Dex Aggregator, XYXY "
+          content="Defi, Base, Dex, Dex Aggregator, SNOW "
         />
-        <meta property="og:title" content={`XYXY | XYXY Finance`} />
+        <meta property="og:title" content={`SNOW | SNOW Finance`} />
         <meta property="og:type" content="website" />
         <meta
           property="og:description"
-          content={`XYXY is the Dex aggregator on Base network`}
+          content={`SNOW is the Dex aggregator on Base network`}
         />
         <meta
           property="og:url"
-          content={`https://xyxybase-swap.netlify.app/`}
+          content={`https://SNOWbase-swap.netlify.app/`}
         />
-        <meta property="og:site_name" content="XYXY Swap Base"></meta>
+        <meta property="og:site_name" content="SNOW Swap Base"></meta>
         <meta
           property="og:image"
-          content="https://xyxybase-swap.netlify.app/logo_new.png"
+          content="https://SNOWbase-swap.netlify.app/logo_new.png"
         ></meta>
         <meta property="og:image:type" content="image/png"></meta>
         <meta property="og:image:width" content="2000"></meta>
@@ -132,7 +132,7 @@ const LaunchPad = () => {
                   <div className="wrapper">
                     <img
                       src="/assets/mint1.png"
-                      alt="XYXY logo"
+                      alt="SNOW logo"
                       className="rounded-lg w-full mx-auto mb-4"
                     />
 
@@ -143,7 +143,7 @@ const LaunchPad = () => {
                       justifyContent={"space-between"}
                     >
                       <Typography>{t("nn", "Node Name:")}</Typography>
-                      <Typography>XYXY1</Typography>
+                      <Typography>SNOW1</Typography>
                     </Grid>
 
                     <Grid
@@ -164,7 +164,7 @@ const LaunchPad = () => {
                     >
                       <Typography>{t("mp", "Mint Price:")}</Typography>
                       <Typography>
-                        400 <span style={{ fontSize: "12px" }}>XYXY</span>{" "}
+                        400 <span style={{ fontSize: "12px" }}>SNOW</span>{" "}
                       </Typography>
                     </Grid>
                     <Grid
@@ -251,7 +251,7 @@ const LaunchPad = () => {
                   <div className="wrapper">
                     <img
                       src="/assets/mint2.png"
-                      alt="XYXY logo"
+                      alt="SNOW logo"
                       className="rounded-lg w-full mx-auto mb-4"
                     />
 
@@ -262,7 +262,7 @@ const LaunchPad = () => {
                       justifyContent={"space-between"}
                     >
                       <Typography>{t("nn", "Node Name:")}</Typography>
-                      <Typography>XYXY2</Typography>
+                      <Typography>SNOW2</Typography>
                     </Grid>
 
                     <Grid
@@ -283,7 +283,7 @@ const LaunchPad = () => {
                     >
                       <Typography>{t("mp", "Mint Price:")}</Typography>
                       <Typography>
-                        250 <span style={{ fontSize: "12px" }}>XYXY</span>{" "}
+                        250 <span style={{ fontSize: "12px" }}>SNOW</span>{" "}
                       </Typography>
                     </Grid>
                     <Grid
@@ -376,7 +376,7 @@ const LaunchPad = () => {
                       </Typography>
                       <img
                         src={"/logo.png"}
-                        alt="XYXY logo"
+                        alt="SNOW logo"
                         className="project-logo"
                       />
                     </Grid>
@@ -459,7 +459,7 @@ const LaunchPad = () => {
 
                       <img
                         src={"/logo.png"}
-                        alt="XYXY logo"
+                        alt="SNOW logo"
                         className="project-logo"
                       />
                     </Grid>
@@ -500,7 +500,7 @@ const LaunchPad = () => {
                         {t("ulr", "Unclaimed Rewards:")}
                       </Typography>
                       <Typography variant="h6">
-                        0<span style={{ fontSize: "12px" }}>XYXY</span>{" "}
+                        0<span style={{ fontSize: "12px" }}>SNOW</span>{" "}
                       </Typography>
                     </Grid>
                     <Grid
@@ -545,7 +545,7 @@ const LaunchPad = () => {
                       <div className="wrapper max-w-[350px] mx-auto each-slide-effect">
                         <img
                           src="/assets/mint1.png"
-                          alt="XYXY logo"
+                          alt="SNOW logo"
                           className="rounded-lg w-full mx-auto mb-4"
                         />
 
@@ -556,7 +556,7 @@ const LaunchPad = () => {
                           justifyContent={"space-between"}
                         >
                           <Typography>{t("nn", "Node Name:")}</Typography>
-                          <Typography>XYXY1</Typography>
+                          <Typography>SNOW1</Typography>
                         </Grid>
 
                         <Grid
@@ -577,7 +577,7 @@ const LaunchPad = () => {
                         >
                           <Typography>{t("mp", "Mint Price:")}</Typography>
                           <Typography>
-                            500 <span style={{ fontSize: "12px" }}>XYXY</span>{" "}
+                            500 <span style={{ fontSize: "12px" }}>SNOW</span>{" "}
                           </Typography>
                         </Grid>
                         <Grid
@@ -666,7 +666,7 @@ const LaunchPad = () => {
                       <div className="wrapper max-w-[350px] mx-auto each-slide-effect">
                         <img
                           src="/assets/mint2.png"
-                          alt="XYXY logo"
+                          alt="SNOW logo"
                           className="rounded-lg w-full mx-auto mb-4"
                         />
 
@@ -677,7 +677,7 @@ const LaunchPad = () => {
                           justifyContent={"space-between"}
                         >
                           <Typography>{t("nn", "Node Name:")}</Typography>
-                          <Typography>XYXY2</Typography>
+                          <Typography>SNOW2</Typography>
                         </Grid>
 
                         <Grid
@@ -698,7 +698,7 @@ const LaunchPad = () => {
                         >
                           <Typography>{t("mp", "Mint Price:")}</Typography>
                           <Typography>
-                            500 <span style={{ fontSize: "12px" }}>XYXY</span>{" "}
+                            500 <span style={{ fontSize: "12px" }}>SNOW</span>{" "}
                           </Typography>
                         </Grid>
                         <Grid
@@ -798,7 +798,7 @@ const LaunchPad = () => {
                           </Typography>
                           <img
                             src={"/logo.png"}
-                            alt="XYXY logo"
+                            alt="SNOW logo"
                             className="project-logo"
                           />
                         </Grid>
@@ -884,7 +884,7 @@ const LaunchPad = () => {
 
                           <img
                             src={"/logo.png"}
-                            alt="XYXY logo"
+                            alt="SNOW logo"
                             className="project-logo"
                           />
                         </Grid>

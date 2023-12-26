@@ -44,16 +44,15 @@ const Header = () => {
       <Container maxWidth={"fixed"}>
         <Grid container className="header" alignItems="center">
           <Grid xs={2} sm={2} md={4} item className="header-logo">
-            <Link href={"https://www.xyxy.io/"} className="flex items-center">
+            <Link href={"/"} className="flex items-center">
               <Image
                 src={"/logo.png"}
-                alt="XYXY logo"
+                alt="SNOW logo"
                 layout="fixed"
                 className="site-logo"
                 width={70}
                 height={70}
               />
-              XYXY.IO
             </Link>
           </Grid>
           <Grid
@@ -82,30 +81,7 @@ const Header = () => {
                 >
                   {t("stats", "Stats")}
                 </Link>
-                <a
-                  href={"https://ido.xyxy.io"}
-                  className={
-                    router.pathname === "/ido"
-                      ? "nav-link active"
-                      : "nav-link image-nav"
-                  }
-                  target="_blank"
-                >
-                  {t("ido", "IDO")}
-                  <img src="/blank.png" alt="" />
-                </a>
-                <a
-                  href={"https://airdrop.xyxy.io/"}
-                  className={
-                    router.pathname === "/ido"
-                      ? "nav-link active"
-                      : "nav-link image-nav"
-                  }
-                  target="_blank"
-                >
-                  {t("airdrop", "Airdrop")}
-                  <img src="/blank.png" alt="" />
-                </a>
+
                 <Link
                   href={"/nodes"}
                   className={
@@ -134,25 +110,37 @@ const Header = () => {
                   value="us"
                   className="w-full max-w-[60px!important]  h-[30px] px-.5 sm:px-1 md:px-3 my-1 overflow-hidden p-1"
                 >
-                  <img src="/usa.jpg" className="w-full max-w-[60px!important]  h-full" />
+                  <img
+                    src="/usa.jpg"
+                    className="w-full max-w-[60px!important]  h-full"
+                  />
                 </MenuItem>
                 <MenuItem
                   value="ru"
                   className="w-full max-w-[60px!important]  h-[30px] px-.5 sm:px-1 md:px-3 my-1 overflow-hidden p-1"
                 >
-                  <img src="/russian.png" className="w-full max-w-[60px!important]  h-full" />
+                  <img
+                    src="/russian.png"
+                    className="w-full max-w-[60px!important]  h-full"
+                  />
                 </MenuItem>
                 <MenuItem
                   value="ch"
                   className="w-full max-w-[60px!important]  h-[30px] px-.5 sm:px-1 md:px-3 my-1 overflow-hidden p-1"
                 >
-                  <img src="/china.png" className="w-full max-w-[60px!important]  h-full" />
+                  <img
+                    src="/china.png"
+                    className="w-full max-w-[60px!important]  h-full"
+                  />
                 </MenuItem>
                 <MenuItem
                   value="ar"
                   className="w-full max-w-[60px!important]  h-[30px] px-.5 sm:px-1 md:px-3 my-1 overflow-hidden p-1"
                 >
-                  <img src="/arbic.png" className="w-full max-w-[60px!important]  h-full" />
+                  <img
+                    src="/arbic.png"
+                    className="w-full max-w-[60px!important]  h-full"
+                  />
                 </MenuItem>
               </Select>
 
@@ -205,7 +193,7 @@ const Header = () => {
                 </MenuItem>
                 <MenuItem>
                   <a
-                    href={"https://xyxy-presale.vercel.app/"}
+                    href={"https://SNOW-presale.vercel.app/"}
                     className={
                       router.pathname === "/ido"
                         ? "nav-link-mobile active"
@@ -219,7 +207,7 @@ const Header = () => {
                 </MenuItem>
                 <MenuItem>
                   <a
-                    href={"https://xyxy-presale.vercel.app/airdrop"}
+                    href={"https://SNOW-presale.vercel.app/airdrop"}
                     className={
                       router.pathname === "/ido"
                         ? "nav-link-mobile active"

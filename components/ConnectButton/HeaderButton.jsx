@@ -39,7 +39,7 @@ export const HeaderButton = () => {
                   <button
                     onClick={openConnectModal}
                     type="button"
-                    className="bg-[#010514] py-2 px-3 rounded-md hover:text-gray-400 transition ease-in-out hover:scale-105"
+                    className="snow_effect py-2 px-3 rounded-md hover:text-gray-400 transition ease-in-out hover:scale-105"
                   >
                     Connect Wallet
                   </button>
@@ -50,7 +50,7 @@ export const HeaderButton = () => {
                   <button
                     onClick={openChainModal}
                     type="button"
-                    className="bg-[#010514] py-2 px-3 rounded-md hover:text-gray-400 transition ease-in-out hover:scale-105"
+                    className="snow_effect py-2 px-3 rounded-md hover:text-gray-400 transition ease-in-out hover:scale-105"
                   >
                     Wrong network
                   </button>
@@ -62,7 +62,7 @@ export const HeaderButton = () => {
                     onClick={openChainModal}
                     style={{ display: "flex", alignItems: "center" }}
                     type="button"
-                    className="bg-[#010514] py-2 px-3 rounded-md hover:text-gray-400 transition ease-in-out hover:scale-105"
+                    className="snow_effect py-2 px-3 rounded-md hover:text-gray-400 transition ease-in-out hover:scale-105"
                   >
                     {chain.hasIcon && (
                       <div
@@ -91,7 +91,7 @@ export const HeaderButton = () => {
                   <button
                     onClick={openAccountModal}
                     type="button"
-                    className="bg-[#010514] py-2 px-3 rounded-md hover:text-gray-400 transition ease-in-out hover:scale-105 flex items-center"
+                    className="snow_effect py-2 px-3 rounded-md hover:text-gray-400 transition ease-in-out hover:scale-105 flex items-center"
                   >
                     <span className="hidden lg:flex">
                       {account.displayName}
